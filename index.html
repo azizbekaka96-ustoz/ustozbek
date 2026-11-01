@@ -29,3 +29,660 @@
   --ict:#4fd1a5;--math:#ff9a6b;--accent-ink:#0c1a17;--bad:#ff8a7d;color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0e1819;--surface:#152325;--fg:#e6efec;--muted:#9fb2ae;--line:#274044;
+  --ict:#4fd1a5;--math:#ff9a6b;--accent-ink:#0c1a17;--bad:#ff8a7d;color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font:400 16px/1.6 var(--f-body);margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:20}
+.wrap{max-width:1080px;margin:0 auto}
+a{color:inherit}
+button{font-family:inherit}
+code{font-family:var(--f-mono);font-size:.9em;background:var(--bg);border:1px solid var(--line);border-radius:5px;padding:1px 5px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+[data-div="ict"]{--accent:var(--ict)}
+[data-div="math"]{--accent:var(--math)}
+
+header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:19;background:var(--bg);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0}
+.logo{font:800 22px/1 var(--f-display);letter-spacing:-.02em;text-decoration:none;white-space:nowrap}
+.logo span{color:var(--ict)}
+.nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0;min-width:0;overflow-x:auto}
+.nav a.l{display:block;padding:8px 12px;border-radius:8px;text-decoration:none;font:500 14px/1 var(--f-mono);color:var(--muted);white-space:nowrap}
+.nav a.l:hover{background:var(--surface);color:var(--fg)}
+.nav a.l.on{background:var(--surface);color:var(--fg);box-shadow:inset 0 -2px 0 var(--accent)}
+
+.eyebrow{font:500 13px/1 var(--f-mono);color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin:0 0 14px}
+h1{font:800 clamp(38px,7vw,64px)/1.03 var(--f-display);letter-spacing:-.03em;margin:0 0 18px;text-wrap:balance}
+h1 em{font-style:normal;background:linear-gradient(transparent 62%,var(--mark) 62% 92%,transparent 92%)}
+h2{font:800 clamp(26px,4.2vw,36px)/1.1 var(--f-display);letter-spacing:-.02em;margin:0;text-wrap:balance}
+h3{font:600 20px/1.2 var(--f-display);margin:0}
+.lead{font-size:18px;color:var(--muted);max-width:52ch;margin:0}
+.sub{color:var(--muted);margin:0;max-width:60ch}
+.head{display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
+section{padding-block:32px}
+.page{padding-block:36px 48px}
+.crumbs{font:400 13px/1.5 var(--f-mono);color:var(--muted);margin:0 0 24px;display:flex;flex-wrap:wrap;gap:6px}
+.crumbs a{text-decoration:none}.crumbs a:hover{color:var(--fg)}
+
+.btn{display:inline-block;padding:13px 20px;border-radius:10px;font:600 15px/1 var(--f-body);text-decoration:none;border:2px solid var(--fg);background:transparent;color:var(--fg);cursor:pointer}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.sm{padding:10px 14px;font-size:14px}
+.btn:hover{transform:translateY(-1px)}
+.row{display:flex;flex-wrap:wrap;gap:12px}
+
+.divs{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding-bottom:24px}
+.divs>*{min-width:0}
+.panel{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--accent);border-radius:14px;padding:26px;display:flex;flex-direction:column;gap:14px}
+.panel .big{font:800 clamp(34px,6vw,48px)/1 var(--f-display);letter-spacing:-.03em;color:var(--accent)}
+.panel p{margin:0;color:var(--muted)}
+.panel .row{margin-top:auto;padding-top:8px}
+.hero{padding-block:48px 36px;display:grid;gap:18px}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.two>*{min-width:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:10px;min-width:0;text-decoration:none}
+a.card:hover{border-color:var(--accent)}
+.card .path{font:500 13px/1 var(--f-mono);color:var(--accent)}
+.card p{margin:0;color:var(--muted);font-size:15px}
+.card ul{margin:0;padding-left:18px;color:var(--muted);font-size:15px}
+
+/* Hub: outer card + tiles, like a section index */
+.hub{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:22px}
+.hub-h{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-bottom:18px}
+.hub-h .big{font:800 clamp(34px,7vw,52px)/1 var(--f-display);letter-spacing:-.03em;color:var(--accent)}
+.pill{font:500 13px/1 var(--f-mono);padding:8px 12px;border-radius:999px;background:var(--bg);border:1px solid var(--line);color:var(--accent)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.tile{display:flex;flex-direction:column;gap:12px;padding:18px;border-radius:16px;background:var(--bg);border:1px solid transparent;text-decoration:none;min-width:0}
+.tile:hover{border-color:var(--accent)}
+.tile svg{width:28px;height:28px;stroke:var(--accent);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.tile b{font:600 18px/1.25 var(--f-display)}
+.tile span.d{font-size:14px;color:var(--muted);line-height:1.4}
+.tile .soon-t{align-self:flex-start;font:400 11px/1 var(--f-mono);padding:4px 7px;border-radius:5px;border:1px dashed var(--line);color:var(--muted)}
+@media (max-width:520px){.tiles{grid-template-columns:1fr 1fr}.tile{padding:14px}.hub{padding:16px}}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{min-width:48px;height:48px;padding:0 10px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);color:var(--fg);font:800 18px/1 var(--f-display);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.lbl{font:500 12px/1 var(--f-mono);color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin:0 0 10px}
+
+.topics{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.topics li{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:8px;font-weight:500}
+.tag{align-self:flex-start;font:400 12px/1 var(--f-mono);padding:5px 8px;border-radius:6px;background:var(--bg);border:1px solid var(--line);color:var(--muted)}
+.note{font:400 12px/1.5 var(--f-mono);color:var(--muted);margin:16px 0 0}
+
+.q{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;max-width:640px}
+.qt{font:600 20px/1.35 var(--f-display);margin:0 0 16px}
+.opts{display:grid;gap:8px}
+.opt{text-align:left;padding:12px 14px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);font:500 15px/1.3 var(--f-body);cursor:pointer}
+.opt:hover{border-color:var(--accent)}
+.opt.ok{border-color:var(--accent);background:var(--accent);color:var(--accent-ink)}
+.opt.no{border-color:var(--bad);color:var(--bad)}
+.fb{min-height:24px;margin:14px 0 0;font-size:14px;color:var(--muted)}
+.big-score{font:800 56px/1 var(--f-display);color:var(--accent);margin:8px 0 14px}
+
+.game{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;max-width:640px;display:flex;flex-direction:column;gap:14px}
+.game .stat{display:flex;gap:18px;font:500 14px/1 var(--f-mono);color:var(--muted);flex-wrap:wrap}
+.game .stat b{color:var(--fg);font-weight:500}
+.target{font:800 clamp(48px,12vw,72px)/1 var(--f-display);color:var(--accent);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.bits{display:grid;grid-template-columns:repeat(8,1fr);gap:6px}
+.bit{display:flex;flex-direction:column;align-items:center;gap:4px;font:400 11px/1 var(--f-mono);color:var(--muted)}
+.bit button{width:100%;aspect-ratio:1;max-height:56px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);font:800 20px/1 var(--f-display);cursor:pointer}
+.bit button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.mq{font:800 clamp(36px,9vw,56px)/1 var(--f-display);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.inp{font:600 24px/1 var(--f-mono);width:100%;max-width:220px;padding:12px 14px;border-radius:10px;border:2px solid var(--line);background:var(--bg);color:var(--fg)}
+.bar{height:8px;background:var(--bg);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent);width:0}
+
+.tool{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:14px}
+.sel{display:grid;grid-template-columns:140px 1fr;gap:12px}
+.sel>*{min-width:0}
+select{font:500 15px/1.3 var(--f-body);padding:11px 12px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);width:100%}
+pre.plan{margin:0;padding:16px;background:var(--bg);border:1px solid var(--line);border-radius:10px;font:400 13px/1.7 var(--f-mono);white-space:pre-wrap;overflow-wrap:anywhere}
+pre.code{margin:10px 0 0;padding:14px;background:var(--bg);border:1px solid var(--line);border-radius:10px;font:400 13px/1.6 var(--f-mono);overflow-x:auto;color:var(--fg)}
+details{background:var(--surface);border:1px solid var(--line);border-radius:12px}
+details+details{margin-top:10px}
+summary{cursor:pointer;padding:14px 16px;font:600 17px/1.3 var(--f-display);list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--accent);font-family:var(--f-mono)}
+details[open] summary::after{content:"−"}
+details>div{padding:0 16px 16px;color:var(--muted);font-size:15px}
+details>div p{margin:0 0 8px}
+details>div ul,details>div ol{margin:0;padding-left:20px;display:grid;gap:4px}
+details>div b{color:var(--fg);font-weight:600}
+.check{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--bg);cursor:pointer;font-size:15px}
+.check input{width:20px;height:20px;margin-top:2px;accent-color:var(--accent);flex:none}
+.checks{display:grid;gap:8px}
+.soon{display:flex;flex-wrap:wrap;gap:8px}
+.soon span{font:400 13px/1 var(--f-mono);padding:8px 10px;border:1px dashed var(--line);border-radius:8px;color:var(--muted)}
+
+footer{border-top:1px solid var(--line);padding-block:28px 36px;color:var(--muted);font-size:14px;margin-top:24px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+
+@media (max-width:760px){
+  .divs,.two{grid-template-columns:1fr}
+  .hero{padding-block:32px 24px}
+  .sel{grid-template-columns:1fr}
+  .nav .wrap{flex-direction:column;align-items:flex-start;gap:6px;padding:10px 0 6px}
+  .nav ul{width:100%}
+  section{padding-block:24px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn:hover{transform:none}}
+</style>
+
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#home">Ustoz<span>bek</span></a>
+    <nav aria-label="Asosiy menyu">
+      <ul>
+        <li><a class="l" href="#home" data-nav="home">Bosh sahifa</a></li>
+        <li><a class="l" href="#ictbek" data-nav="ict">ICTBEK</a></li>
+        <li><a class="l" href="#mathbek" data-nav="math">MATHBEK</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="app" class="wrap"></main>
+
+<footer>
+  <div class="wrap">
+    <span><strong>ustozbek.uz</strong> · ICTBEK va MATHBEK</span>
+    <span>O‘quvchi va o‘qituvchi uchun bir joyda</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var app=document.getElementById("app"),timer=null,S={};
+
+  var IC={
+    book:'<path d="M2 4h7a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H2z"/><path d="M22 4h-7a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h8z"/>',
+    monitor:'<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/>',
+    code:'<path d="M8 8l-5 4 5 4M16 8l5 4-5 4M14 5l-4 14"/>',
+    clip:'<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9zM9 14l2 2 4-4"/>',
+    flask:'<path d="M9 3h6M10 3v6L4 19a2 2 0 0 0 2 3h12a2 2 0 0 0 2-3l-6-10V3"/>',
+    news:'<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/>',
+    game:'<rect x="2" y="7" width="20" height="11" rx="4"/><path d="M7 10v5M4.5 12.5h5M16 11h.01M18 14h.01"/>',
+    cap:'<path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2.5 9 2.5 12 0v-5"/>',
+    slides:'<path d="M3 4h18M5 4v10h14V4M12 14v5M8 20l4-1 4 1"/>',
+    doc:'<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/>',
+    bulb:'<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/>',
+    award:'<circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/>',
+    star:'<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',
+    eye:'<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+    calc:'<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h.01M12 12h.01M16 12h.01M8 16h.01M12 16h.01M16 16h.01"/>',
+    sigma:'<path d="M18 5H6l6 7-6 7h12"/>',
+    spark:'<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M18 6l-2.5 2.5M8.5 15.5L6 18"/>'
+  };
+  function icon(n){return '<svg viewBox="0 0 24 24" aria-hidden="true">'+IC[n]+'</svg>'}
+
+  var SOON={
+    taqdimotlar:["Mavzu bo‘yicha tayyor taqdimotlar","Tarqatma materiallar va ish varaqlari","Ko‘rgazmali qurollar"],
+    mezonlar:["Og‘zaki javob va amaliy ish mezonlari","Test baholash shkalasi","O‘quvchi yutuqlari daftari"],
+    ochiqdars:["Ochiq dars ssenariylari","Dars tahlili shakllari","Tajriba almashish"],
+    malaka:["Kurslar va treninglar ro‘yxati","Metodik seminarlar","Sertifikatlar bilan ishlash"]
+  };
+  var TEA=[
+    {id:"reja",t:"Dars rejasi",i:"doc",k:"plan",d:"45 daqiqalik reja yaratuvchi"},
+    {id:"metodlar",t:"Interfaol metodlar",i:"bulb",k:"methods",d:"Misollar bilan"},
+    {id:"attestatsiya",t:"Attestatsiyaga tayyorlov",i:"award",k:"attest",d:"Tayyorgarlik rejasi"},
+    {id:"taqdimotlar",t:"Taqdimotlar va tarqatma",i:"slides",k:"soon",d:"Tayyor materiallar"},
+    {id:"mezonlar",t:"Baholash mezonlari",i:"star",k:"soon",d:"Mezonlar va shkalalar"},
+    {id:"ochiqdars",t:"Ochiq dars namunalari",i:"eye",k:"soon",d:"Ssenariy va tahlil"},
+    {id:"malaka",t:"Malaka oshirish",i:"cap",k:"soon",d:"Kurslar va seminarlar"}
+  ];
+
+  var D={
+    ict:{key:"ict",name:"ICTBEK",path:"ictbek",fan:"Informatika",full:"Informatika va axborot texnologiyalari",
+      intro:"Kompyuter savodxonligi, dasturlash va raqamli ko‘nikmalar bo‘yicha darslar, testlar va o‘yinlar.",
+      stu:[
+        {id:"darslar",t:"Informatika darslari",i:"book",k:"grade",d:"1–11-sinf mavzulari"},
+        {id:"savodxonlik",t:"Kompyuter savodxonligi",i:"monitor",k:"acc",d:"Word, Excel, PowerPoint",
+          intro:"Har kuni kerak bo‘ladigan ofis dasturlari va xavfsiz ishlash qoidalari.",
+          items:[
+            {t:"Word",b:"<p>Matn yozish, shaklini o‘zgartirish va hujjat tayyorlash dasturi.</p><ul><li>Shrift, o‘lcham va rangni tanlash</li><li>Abzats va qator oralig‘i</li><li>Jadval va rasm qo‘yish</li><li>Hujjatni saqlash: <code>Ctrl + S</code></li></ul>"},
+            {t:"Excel",b:"<p>Sonlar bilan ishlash va hisob-kitob uchun elektron jadval.</p><ul><li>Katak, qator va ustun tushunchasi</li><li>Formula <code>=</code> belgisi bilan boshlanadi: <code>=A1+B1</code></li><li>Yig‘indi: <code>=SUM(A1:A10)</code></li><li>Ma’lumotdan diagramma yasash</li></ul>"},
+            {t:"PowerPoint",b:"<p>Taqdimot tayyorlash dasturi.</p><ul><li>Bitta slaydda bitta asosiy fikr</li><li>Matn kam, shrift katta</li><li>Rasm va diagramma matndan tushunarliroq</li><li>O‘tish effektlarini me’yorida ishlatish</li></ul>"},
+            {t:"Klaviatura qisqa tugmalari",b:"<ul><li><code>Ctrl + C</code> nusxa olish</li><li><code>Ctrl + V</code> qo‘yish</li><li><code>Ctrl + X</code> kesib olish</li><li><code>Ctrl + Z</code> oxirgi amalni bekor qilish</li><li><code>Ctrl + S</code> saqlash</li></ul>"},
+            {t:"Internetda xavfsizlik",b:"<ul><li>Parol uzun bo‘lsin va har saytda boshqacha bo‘lsin</li><li>Begona havola va fayllarni ochmang</li><li>Shaxsiy ma’lumotni notanish odamlarga bermang</li><li>Shubhali xabar haqida kattalarga ayting</li></ul>"}
+          ]},
+        {id:"dasturlash",t:"Dasturlash",i:"code",k:"acc",d:"Scratch, Python, HTML, CSS, JavaScript",
+          intro:"Beshta til, har biri o‘z bosqichida. Kichik namunalar bilan tanishing.",
+          items:[
+            {t:"Scratch · boshlang‘ich",b:"<p>Bloklarni ulab dastur tuziladi. Qahramon harakati, tovush va oddiy o‘yin yaratishni o‘rgatadi, algoritm tushunchasini tushuntiradi.</p>"},
+            {t:"Python · asosiy",b:"<p>O‘zgaruvchilar, shartlar, sikllar va funksiyalar.</p><pre class='code'>ism = input(\"Ismingiz: \")\nprint(\"Salom,\", ism)</pre>"},
+            {t:"HTML · veb",b:"<p>Sahifa tuzilishi: sarlavha, matn, rasm va havolalar.</p><pre class='code'>&lt;h1&gt;Mening sahifam&lt;/h1&gt;\n&lt;p&gt;Salom, dunyo!&lt;/p&gt;</pre>"},
+            {t:"CSS · veb",b:"<p>Ranglar, shriftlar va sahifa maketi.</p><pre class='code'>h1 {\n  color: teal;\n  font-size: 32px;\n}</pre>"},
+            {t:"JavaScript · veb",b:"<p>Sahifani jonlantirish: tugmalar, hodisalar, oddiy o‘yinlar.</p><pre class='code'>let a = 5;\nlet b = 3;\nconsole.log(a + b);</pre>"}
+          ]},
+        {id:"testlar",t:"Testlar",i:"clip",k:"quiz",d:"Mavzulashtirilgan testlar"},
+        {id:"amaliyot",t:"Amaliy topshiriqlar",i:"flask",k:"acc",d:"Laboratoriya ishlari",
+          intro:"Har bir topshiriqda bajarish tartibi va baholash mezoni berilgan.",
+          items:[
+            {t:"Word: “Mening maktabim” hujjati · 7-sinf",b:"<ol><li>Yangi hujjat oching va sarlavha yozing (shrift 18).</li><li>Maktab haqida 3 ta abzats matn yozing.</li><li>1 ta rasm va 1 ta jadval qo‘ying.</li><li>Faylni “Familiya_maktab” nomi bilan saqlang.</li></ol><p style='margin-top:8px'><b>Baholash:</b> tuzilishi, formatlash, tozaligi.</p>"},
+            {t:"Excel: oilaviy xarajatlar jadvali · 8-sinf",b:"<ol><li>“Xarajat turi” va “Summa” ustunlarini yarating.</li><li>Kamida 6 ta xarajat kiriting.</li><li>Jami summani <code>=SUM()</code> bilan hisoblang.</li><li>Xarajatlar bo‘yicha diagramma yasang.</li></ol><p style='margin-top:8px'><b>Baholash:</b> formula to‘g‘riligi, diagramma, jadval ko‘rinishi.</p>"},
+            {t:"PowerPoint: 5 slaydli taqdimot · 6-sinf",b:"<ol><li>Mavzu tanlang (masalan, “Ona yurtim”).</li><li>1-slayd sarlavha, 2–4-slayd asosiy fikrlar, 5-slayd xulosa.</li><li>Har slaydda kamida bitta rasm bo‘lsin.</li><li>Taqdimotni sinfga 2 daqiqada tushuntiring.</li></ol><p style='margin-top:8px'><b>Baholash:</b> mazmun, dizayn, nutq.</p>"},
+            {t:"Scratch: qahramonni harakatlantirish · 7-sinf",b:"<ol><li>Qahramonni tanlang.</li><li>Strelka tugmalari bilan to‘rt yo‘nalishda harakatlantiring.</li><li>Chetga tegsa, orqaga qaytsin.</li><li>Ball hisoblagich qo‘shing.</li></ol><p style='margin-top:8px'><b>Baholash:</b> dastur ishlashi, g‘oya, qo‘shimcha imkoniyatlar.</p>"},
+            {t:"Python: ikki son yig‘indisi · 8-sinf",b:"<ol><li>Ikkita sonni <code>input()</code> bilan so‘rang.</li><li><code>int()</code> yordamida butun songa o‘tkazing.</li><li>Yig‘indini <code>print()</code> bilan chiqaring.</li><li>Ayirma va ko‘paytmani ham qo‘shing.</li></ol><p style='margin-top:8px'><b>Baholash:</b> to‘g‘ri natija, kod tartibi.</p>"}
+          ]},
+        {id:"yangiliklar",t:"IT yangiliklari",i:"news",k:"acc",d:"Yangi texnologiyalar",
+          intro:"Tushuntiruvchi maqolalar. Eng so‘nggi yangiliklar keyinroq qo‘shiladi.",
+          items:[
+            {t:"Sun’iy intellekt nima?",b:"<p>Sun’iy intellekt kompyuterga odamdek o‘rganish, matnni tushunish va rasmni tanish imkonini beradi. U katta hajmdagi ma’lumotlardan o‘rganadi. Xato qilishi mumkin, shuning uchun natijani tekshirib ko‘rish kerak.</p>"},
+            {t:"Bulutli xizmatlar nima?",b:"<p>Fayllar internet orqali serverlarda saqlanadi va istalgan qurilmadan ochiladi. Qulayligi: ma’lumot yo‘qolmaydi. Kamchiligi: internet kerak va ma’lumot xavfsizligiga e’tibor berish lozim.</p>"},
+            {t:"Kuchli parol qanday bo‘ladi?",b:"<ul><li>Kamida 12 belgi</li><li>Harf, raqam va belgilar aralash</li><li>Har sayt uchun alohida parol</li><li>Imkon bo‘lsa, ikki bosqichli tasdiqlashni yoqing</li></ul>"},
+            {t:"Dasturlashni qayerdan boshlash kerak?",b:"<p>Avval Scratch bilan algoritm fikrlashni o‘rganing, keyin Python’ga o‘ting. Veb yaratmoqchi bo‘lsangiz HTML va CSS, so‘ng JavaScript yaxshi yo‘l.</p>"}
+          ]},
+        {id:"oyinlar",t:"O‘yinlar",i:"game",k:"games",d:"Ikkilik kod o‘yini"}
+      ],
+      quiz:[
+        {g:[1,4],q:"Matn terish uchun qaysi qurilmadan foydalaniladi?",o:["Sichqoncha","Klaviatura","Monitor","Karnay"],a:1,e:"Matn klaviatura yordamida kiritiladi."},
+        {g:[1,4],q:"Fayllarni tartib bilan saqlash uchun nima yaratiladi?",o:["Papka","Rasm","Tugma","Oyna"],a:0,e:"Papka ichida fayllar guruhlab saqlanadi."},
+        {g:[3,6],q:"Kompyuterning “miyasi” deb qaysi qism aytiladi?",o:["Monitor","Klaviatura","Protsessor","Printer"],a:2,e:"Protsessor barcha hisob-kitoblarni bajaradi."},
+        {g:[5,8],q:"1 bayt necha bitga teng?",o:["4","8","16","1024"],a:1,e:"1 bayt = 8 bit. 1 Kbayt esa 1024 bayt."},
+        {g:[5,8],q:"Quyidagilardan qaysi biri axborotni saqlash qurilmasi?",o:["Flesh-xotira","Sichqoncha","Veb-kamera","Karnay"],a:0,e:"Flesh-xotira ma’lumotni saqlaydi."},
+        {g:[8,10],q:"Ikkilik sanoq sistemasidagi 101 soni o‘nlikda nechaga teng?",o:["3","4","5","6"],a:2,e:"1·4 + 0·2 + 1·1 = 5."},
+        {g:[8,11],q:"Python’da print(2 + 3 * 2) nimani chiqaradi?",o:["10","8","12","7"],a:1,e:"Avval ko‘paytirish: 3 * 2 = 6, keyin 2 + 6 = 8."},
+        {g:[9,11],q:"HTML’da eng katta sarlavha qaysi teg bilan yoziladi?",o:["<h6>","<head>","<h1>","<title>"],a:2,e:"<h1> eng katta, <h6> eng kichik sarlavha."},
+        {g:[10,11],q:"IP-manzil nima uchun kerak?",o:["Faylni arxivlash uchun","Tarmoqdagi qurilmani aniqlash uchun","Rasmni siqish uchun","Tovushni yozish uchun"],a:1,e:"IP-manzil tarmoqdagi har bir qurilmani ajratib turadi."},
+        {g:[10,11],q:"Python’da ro‘yxat (list) qaysi qavs bilan yoziladi?",o:["( )","{ }","[ ]","< >"],a:2,e:"Ro‘yxat kvadrat qavsda yoziladi: [1, 2, 3]."}
+      ],
+      gameName:"Ikkilik kod",
+      gameText:"Berilgan sonni ikkilik ko‘rinishda hosil qiling: bitlarni bosib 0 va 1 ni almashtiring.",
+      methodEx:{
+        "Aqliy hujum":"“Kompyuter xavfsizligini qanday ta’minlash mumkin?” savoliga 2 daqiqada iloji boricha ko‘p g‘oya yozdiriladi.",
+        "Klaster":"“Internet” so‘zi markazga yoziladi, atrofiga unga aloqador tushunchalar (sayt, brauzer, qidiruv) ulanadi.",
+        "Venn diagrammasi":"RAM va ROM xotirasini solishtirish: umumiy va farqli jihatlar ikki doirada yoziladi.",
+        "Zig-zag (jigsaw)":"Guruhlar Word, Excel yoki PowerPoint’dan birini o‘rganib, keyin boshqa guruhlarga o‘rgatadi.",
+        "T-jadval":"Bulutli xizmatlarning afzalliklari va kamchiliklari ikki ustunda yoziladi."
+      }
+    },
+    math:{key:"math",name:"MATHBEK",path:"mathbek",fan:"Matematika",full:"Matematika",
+      intro:"Sanoqdan hosilagacha: tushunarli darslar, mashq testlari va tezkor hisob o‘yinlari.",
+      stu:[
+        {id:"darslar",t:"Matematika darslari",i:"book",k:"grade",d:"1–11-sinf mavzulari"},
+        {id:"hisoblash",t:"Hisoblash ko‘nikmalari",i:"calc",k:"acc",d:"Tezkor hisoblash usullari",
+          intro:"Sonlarni tez va xatosiz hisoblash uchun amaliy usullar.",
+          items:[
+            {t:"Ikki xonali sonni 11 ga ko‘paytirish",b:"<p>Sonning raqamlari orasiga ularning yig‘indisini qo‘ying.</p><p><b>Misol:</b> 35 × 11 = 3 (3+5) 5 = 385.</p><p>Yig‘indi 10 dan oshsa, birlikni chap raqamga qo‘shing: 78 × 11 = 7 (15) 8 = 858.</p>"},
+            {t:"5 bilan tugaydigan sonning kvadrati",b:"<p>Birlar xonasidan oldingi qismni keyingi son bilan ko‘paytiring va oxiriga 25 yozing.</p><p><b>Misol:</b> 35² uchun 3 × 4 = 12, natija 1225.</p>"},
+            {t:"25 ga ko‘paytirish",b:"<p>Sonni 100 ga ko‘paytirib, 4 ga bo‘ling.</p><p><b>Misol:</b> 36 × 25 = 3600 : 4 = 900.</p>"},
+            {t:"9 ga ko‘paytirish",b:"<p>Sonni 10 ga ko‘paytirib, o‘zini ayiring.</p><p><b>Misol:</b> 7 × 9 = 70 − 7 = 63.</p>"},
+            {t:"Foizni tez topish",b:"<p>Avval 10 foizni toping, keyin kerakli qismlarga bo‘ling.</p><p><b>Misol:</b> 80 ning 15 foizi: 10% = 8, 5% = 4, jami 12.</p>"}
+          ]},
+        {id:"formulalar",t:"Formulalar",i:"sigma",k:"acc",d:"Algebra va geometriya",
+          intro:"Eng ko‘p kerak bo‘ladigan formulalar bir joyda.",
+          items:[
+            {t:"Qisqa ko‘paytirish formulalari",b:"<ul><li>(a + b)² = a² + 2ab + b²</li><li>(a − b)² = a² − 2ab + b²</li><li>a² − b² = (a − b)(a + b)</li></ul>"},
+            {t:"Yuza va perimetr",b:"<ul><li>To‘g‘ri to‘rtburchak: S = a·b, P = 2(a + b)</li><li>Kvadrat: S = a², P = 4a</li><li>Uchburchak: S = ½·a·h</li><li>Trapesiya: S = ½(a + b)·h</li><li>Doira: S = πr², aylana uzunligi C = 2πr</li></ul>"},
+            {t:"Kvadrat tenglama",b:"<p>ax² + bx + c = 0 uchun diskriminant D = b² − 4ac.</p><ul><li>D &gt; 0: ikkita ildiz, x = (−b ± √D) / 2a</li><li>D = 0: bitta ildiz, x = −b / 2a</li><li>D &lt; 0: haqiqiy ildiz yo‘q</li></ul>"},
+            {t:"Progressiyalar",b:"<ul><li>Arifmetik: aₙ = a₁ + (n − 1)d, Sₙ = (a₁ + aₙ)·n / 2</li><li>Geometrik: bₙ = b₁·qⁿ⁻¹</li></ul>"},
+            {t:"Pifagor teoremasi va trigonometriya",b:"<ul><li>To‘g‘ri burchakli uchburchakda c² = a² + b²</li><li>sin²α + cos²α = 1</li></ul>"}
+          ]},
+        {id:"testlar",t:"Testlar",i:"clip",k:"quiz",d:"Mavzulashtirilgan testlar"},
+        {id:"amaliyot",t:"Amaliy topshiriqlar",i:"flask",k:"acc",d:"Hayotiy masalalar",
+          intro:"Matematikani o‘lchash va hisoblash orqali hayotda qo‘llash.",
+          items:[
+            {t:"Sinf xonasi yuzini o‘lchash · 5–6-sinf",b:"<ol><li>Ruletka bilan xonaning uzunligi va kengligini o‘lchang.</li><li>Yuzani S = a·b formulasi bilan hisoblang.</li><li>Perimetrni ham toping.</li><li>Natijani jadvalga yozing.</li></ol>"},
+            {t:"Oilaviy xarajatlar foizi · 6–7-sinf",b:"<ol><li>Oy davomidagi asosiy xarajatlarni yozing.</li><li>Har bir xarajatning jami summadagi foizini hisoblang.</li><li>Eng katta xarajat qaysi ekanini aniqlang.</li></ol>"},
+            {t:"π ni o‘zingiz toping · 6–7-sinf",b:"<ol><li>Bir nechta dumaloq buyum (qopqoq, krujka) tanlang.</li><li>Ip bilan aylana uzunligini, o‘lchagich bilan diametrni o‘lchang.</li><li>Aylana uzunligini diametrga bo‘ling.</li><li>Natijalar taxminan 3,14 ga yaqin bo‘lishini tekshiring.</li></ol>"},
+            {t:"Sinfdagi bo‘ylarning o‘rtachasi · 7–8-sinf",b:"<ol><li>Kamida 10 ta o‘quvchining bo‘yini yozing.</li><li>O‘rta arifmetik qiymatni hisoblang.</li><li>Eng baland va eng past bo‘yning farqini toping.</li></ol>"}
+          ]},
+        {id:"oyinlar",t:"O‘yinlar",i:"game",k:"games",d:"Tezkor hisob o‘yini"},
+        {id:"qiziqarli",t:"Qiziqarli matematika",i:"spark",k:"acc",d:"Tarix va qiziq faktlar",
+          intro:"Matematika tarixidan va sonlar olamidan qiziqarli ma’lumotlar.",
+          items:[
+            {t:"Al-Xorazmiy va “algoritm” so‘zi",b:"<p>“Algoritm” so‘zi buyuk bobokalonimiz Al-Xorazmiy ismining lotincha shaklidan kelib chiqqan. “Algebra” so‘zi esa uning “al-jabr” asariga borib taqaladi.</p>"},
+            {t:"π soni",b:"<p>Har qanday aylana uzunligining diametriga nisbati bir xil, bu π ≈ 3,14159. U cheksiz va takrorlanmaydigan o‘nli kasr, ya’ni irratsional son.</p>"},
+            {t:"Fibonachchi ketma-ketligi",b:"<p>1, 1, 2, 3, 5, 8, 13, 21… Har bir keyingi son oldingi ikkitasining yig‘indisiga teng.</p>"},
+            {t:"Mirzo Ulug‘bek",b:"<p>Mirzo Ulug‘bek Samarqandda rasadxona qurdi va yulduzlar jadvalini tuzdi. U astronomiya va matematikada katta ahamiyatga ega.</p>"}
+          ]}
+      ],
+      quiz:[
+        {g:[1,2],q:"8 + 5 nechaga teng?",o:["12","13","14","15"],a:1,e:"8 + 2 = 10, yana 3 qo‘shsak 13."},
+        {g:[1,4],q:"6 × 4 nechaga teng?",o:["20","22","24","28"],a:2,e:"6 × 4 = 24."},
+        {g:[3,5],q:"Tomoni 5 sm bo‘lgan kvadratning perimetri qancha?",o:["10 sm","15 sm","20 sm","25 sm"],a:2,e:"Perimetr = 4 · 5 = 20 sm."},
+        {g:[5,6],q:"1/2 + 1/4 nechaga teng?",o:["2/6","3/4","1/6","2/4"],a:1,e:"1/2 = 2/4, shuning uchun 2/4 + 1/4 = 3/4."},
+        {g:[6,8],q:"3x + 2 = 11 tenglamada x nechaga teng?",o:["2","3","4","5"],a:1,e:"3x = 9, demak x = 3."},
+        {g:[7,9],q:"Katetlari 3 va 4 bo‘lgan to‘g‘ri burchakli uchburchakning gipotenuzasi nechaga teng?",o:["5","6","7","12"],a:0,e:"3² + 4² = 25, ildizi 5."},
+        {g:[8,10],q:"x² = 49 tenglamaning musbat yechimi qaysi?",o:["6","7","8","9"],a:1,e:"7 · 7 = 49."},
+        {g:[9,11],q:"Arifmetik progressiyada a₁ = 2, d = 3 bo‘lsa, a₄ nechaga teng?",o:["8","9","11","14"],a:2,e:"a₄ = 2 + 3·3 = 11."},
+        {g:[10,11],q:"sin 30° nechaga teng?",o:["1/2","√3/2","1","0"],a:0,e:"sin 30° = 1/2."},
+        {g:[11,11],q:"f(x) = x² funksiyaning hosilasi qaysi?",o:["x","2x","x²","2"],a:1,e:"(xⁿ)′ = n·xⁿ⁻¹, shuning uchun (x²)′ = 2x."}
+      ],
+      gameName:"Tezkor hisob",
+      gameText:"30 soniya ichida iloji boricha ko‘p misolni yeching. Savollar sinfingizga moslanadi.",
+      methodEx:{
+        "Aqliy hujum":"“Bu masalani necha xil usulda yechish mumkin?” savoliga guruhlar tez g‘oyalar yozadi.",
+        "Klaster":"“Kasr” so‘zi markazga yoziladi, atrofiga surat, maxraj, qisqartirish, taqqoslash ulanadi.",
+        "Venn diagrammasi":"Kvadrat va to‘g‘ri to‘rtburchakning umumiy va farqli xossalari doiralarda yoziladi.",
+        "Zig-zag (jigsaw)":"Har guruh bitta teorema isbotini o‘rganib, keyin boshqa guruhlarga tushuntiradi.",
+        "T-jadval":"Tenglamani yechishning grafik va algebraik usullari ikki ustunda solishtiriladi."
+      }
+    }
+  };
+  D.ict.tea=TEA;D.math.tea=TEA;
+  D.ict.topics={
+    1:["Kompyuter bilan tanishuv","Sichqoncha bilan ishlash","Kompyuter oldida xavfsiz o‘tirish","Oddiy rasm chizish"],
+    2:["Klaviatura tugmalari","Fayl va papka nima","Matn terish","Kompyuter o‘yinlarida xavfsizlik"],
+    3:["Axborot nima","Kompyuterning qismlari","Chizma dasturi","Oddiy algoritm"],
+    4:["Matn muharriri","Jadval yaratish","Taqdimot bilan tanishuv","Scratch’ga kirish"],
+    5:["Axborot turlari","Fayl va papkalar","Matn muharriri","Scratch loyihasi"],
+    6:["Grafik muharrir","Taqdimot yaratish","Algoritm tushunchasi","Internetda xavfsizlik"],
+    7:["Axborot o‘lchov birliklari","Matn protsessori (Word)","Internet va ma’lumot qidirish","Scratch’da o‘yin yaratish"],
+    8:["Sanoq sistemalari","Elektron jadvallar (Excel)","Algoritm turlari","Python asoslari"],
+    9:["Mantiq algebrasi","Ma’lumotlar bazasi","Python: sikllar va massivlar","Veb-sahifa: HTML va CSS"],
+    10:["Kompyuter tarmoqlari","Axborot xavfsizligi","Funksiyalar va murakkab dasturlar","JavaScript asoslari"],
+    11:["Algoritmlash va dasturlash","Ma’lumotlar bazasi bilan ishlash","Sun’iy intellekt asoslari","Yakuniy testga tayyorgarlik"]
+  };
+  D.math.topics={
+    1:["1 dan 20 gacha sanoq","Qo‘shish va ayirish","Geometrik shakllar","Uzunlik o‘lchovlari"],
+    2:["100 ichida amallar","Ko‘paytirish jadvali","Masala yechish","Vaqt va pul"],
+    3:["Ko‘paytirish va bo‘lish","Ko‘p xonali sonlar","Perimetr","Kasr tushunchasi"],
+    4:["Katta sonlar","Burchaklar","Yuza","Tezlik, vaqt va masofa"],
+    5:["Natural sonlar","Oddiy kasrlar","O‘nli kasrlar","Burchak o‘lchash"],
+    6:["Bo‘linish belgilari","Proporsiya","Butun sonlar","Koordinatalar tekisligi"],
+    7:["Algebraik ifodalar","Chiziqli tenglama","Funksiya grafigi","Uchburchaklar"],
+    8:["Kvadrat ildiz","Kvadrat tenglama","To‘rtburchaklar","Pifagor teoremasi"],
+    9:["Tengsizliklar","Progressiyalar","Aylana va doira","Ehtimollik asoslari"],
+    10:["Trigonometriya","Daraja va logarifm","Vektorlar","Stereometriya asoslari"],
+    11:["Hosila","Integral","Ko‘pyoqlar va aylanish jismlari","Yakuniy imtihonga tayyorgarlik"]
+  };
+
+  var METHODS={
+    "Aqliy hujum":"Qisqa vaqtda ko‘p g‘oya to‘plash usuli. Baho berish keyinroq, avval g‘oyalar yig‘iladi.",
+    "Klaster":"Markaziy tushuncha atrofida bog‘liq tushunchalarni shoxlantirib yozish.",
+    "Venn diagrammasi":"Ikki yoki uch tushunchaning umumiy va farqli tomonlarini kesishuvchi doiralarda ko‘rsatish.",
+    "Zig-zag (jigsaw)":"Mavzu qismlarga bo‘linadi, har guruh o‘z qismini o‘rganib, boshqalarga o‘rgatadi.",
+    "T-jadval":"Ikki tomonlama taqqoslash: afzallik va kamchilik, sabab va oqibat."
+  };
+  var ATT=[
+    "Amaldagi attestatsiya tartibi va muddatlarini rasmiy hujjatdan o‘qib chiqish",
+    "Fan bo‘yicha nazariy savollarni takrorlash",
+    "Pedagogika va psixologiya asoslarini takrorlash",
+    "Metodik savollarga javob rejasini tayyorlash",
+    "Portfolioni yig‘ish: yutuqlar, sertifikatlar, dars ishlanmalari",
+    "Ochiq dars rejasini tayyorlab, sinab ko‘rish",
+    "Sinov testlarini yechib, xatolar ustida ishlash"
+  ];
+
+  function store(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+  function rnd(a,b){return a+Math.floor(Math.random()*(b-a+1))}
+  function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=rnd(0,i),t=a[i];a[i]=a[j];a[j]=t}return a}
+  function $(s,r){return (r||app).querySelector(s)}
+  function $$(s,r){return Array.prototype.slice.call((r||app).querySelectorAll(s))}
+  function stopTimer(){if(timer){clearInterval(timer);timer=null}}
+  function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+  var AUD={oquvchi:"O‘quvchi",oqituvchi:"O‘qituvchi"};
+
+  /* ---------- Pages ---------- */
+  function home(){
+    app.removeAttribute("data-div");
+    function panel(d){return '<div class="panel" data-div="'+d.key+'">'+
+      '<span class="big">'+d.name+'</span><h3>'+d.full+'</h3><p>'+d.intro+'</p>'+
+      '<div class="row"><a class="btn primary sm" href="#'+d.path+'-oquvchi">O‘quvchi bo‘limi</a>'+
+      '<a class="btn sm" href="#'+d.path+'-oqituvchi">O‘qituvchi bo‘limi</a></div></div>'}
+    app.innerHTML='<div class="hero"><p class="eyebrow" style="color:var(--ict)">ustozbek.uz</p>'+
+      '<h1>Dars, test va o‘yin <em>bir joyda</em></h1>'+
+      '<p class="lead">Informatika va matematika bo‘yicha 1–11-sinf o‘quvchilari hamda o‘qituvchilari uchun ta’lim platformasi.</p></div>'+
+      '<div class="divs">'+panel(D.ict)+panel(D.math)+'</div>'+
+      '<section><div class="head"><h2>Kim nimani topadi</h2></div><div class="two">'+
+      '<div class="card" data-div="ict"><span class="path">/oquvchi</span><h3>O‘quvchilar uchun</h3><ul><li>1–11-sinf mavzulari bo‘yicha darslar</li><li>Sinfga mos testlar</li><li>Amaliy topshiriqlar va o‘yinlar</li></ul></div>'+
+      '<div class="card" data-div="math"><span class="path">/oqituvchi</span><h3>O‘qituvchilar uchun</h3><ul><li>Dars rejasi yaratuvchi</li><li>Interfaol metodlar</li><li>Attestatsiyaga tayyorlov</li></ul></div>'+
+      '</div></section>';
+  }
+
+  function division(d){
+    app.setAttribute("data-div",d.key);
+    function aud(a,title,txt,list,primary){
+      var h='<a class="card" href="#'+d.path+'-'+a+'"><span class="path">/'+a+'</span><h3>'+title+'</h3><p>'+txt+'</p><div class="soon" style="margin-top:4px">';
+      list.forEach(function(s){h+='<span>'+s.t+'</span>'});
+      return h+'</div><span class="btn'+(primary?' primary':'')+' sm" style="align-self:flex-start;margin-top:8px">Kirish</span></a>';
+    }
+    app.innerHTML='<div class="page"><p class="crumbs"><a href="#home">Bosh sahifa</a><span>/</span><span>'+d.name+'</span></p>'+
+      '<p class="eyebrow">'+d.fan+'</p><h1>'+d.name+'</h1><p class="lead" style="margin-bottom:32px">'+d.intro+'</p>'+
+      '<div class="two">'+aud("oquvchi","O‘quvchi bo‘limi","1–11-sinf uchun darslar, testlar va o‘yinlar.",d.stu,true)+
+      aud("oqituvchi","O‘qituvchi bo‘limi","Dars rejasi, metodlar va attestatsiyaga tayyorlov.",d.tea,false)+'</div></div>';
+  }
+
+  function hub(d,a){
+    app.setAttribute("data-div",d.key);
+    var list=a==="oquvchi"?d.stu:d.tea,t="";
+    list.forEach(function(s){
+      t+='<a class="tile" href="#'+d.path+'-'+a+'-'+s.id+'">'+icon(s.i)+'<b>'+s.t+'</b><span class="d">'+s.d+'</span>'+(s.k==="soon"?'<span class="soon-t">Tez orada</span>':'')+'</a>';
+    });
+    app.innerHTML='<div class="page"><p class="crumbs"><a href="#home">Bosh sahifa</a><span>/</span><a href="#'+d.path+'">'+d.name+'</a><span>/</span><span>'+AUD[a]+'</span></p>'+
+      '<div class="hub"><div class="hub-h"><span class="big">'+d.name+'</span><span class="pill">'+AUD[a]+' bo‘limi</span></div>'+
+      '<div class="tiles">'+t+'</div></div></div>';
+  }
+
+  function sectionPage(d,a,sec){
+    app.setAttribute("data-div",d.key);
+    app.innerHTML='<div class="page"><p class="crumbs"><a href="#home">Bosh sahifa</a><span>/</span><a href="#'+d.path+'">'+d.name+'</a><span>/</span><a href="#'+d.path+'-'+a+'">'+AUD[a]+'</a><span>/</span><span>'+sec.t+'</span></p>'+
+      '<p class="eyebrow">'+d.name+' · '+AUD[a].toLowerCase()+'</p><h2 style="margin-bottom:24px">'+sec.t+'</h2><div id="body"></div></div>';
+    var b=$("#body"),st=S[d.key]||(S[d.key]={grade:5});
+    if(sec.k==="grade")withGrade(b,st,function(p,g){guide(d,g,p)});
+    else if(sec.k==="quiz")withGrade(b,st,function(p,g){quiz(d,g,p)});
+    else if(sec.k==="games")withGrade(b,st,function(p,g){games(d,g,p)});
+    else if(sec.k==="acc")accordion(sec,b);
+    else if(sec.k==="plan")planTool(d,b);
+    else if(sec.k==="methods")methods(d,b);
+    else if(sec.k==="attest")attest(d,b);
+    else soon(sec,b);
+  }
+
+  function withGrade(b,st,fn){
+    b.innerHTML='<p class="lbl">Sinfni tanlang</p><div class="chips" id="chips" role="group" aria-label="Sinf"></div><div id="pnl" style="margin-top:28px"></div>';
+    var chips=$("#chips",b);
+    for(var g=1;g<=11;g++){(function(g){
+      var x=document.createElement("button");x.className="chip";x.type="button";x.textContent=g;x.dataset.g=g;
+      x.setAttribute("aria-label",g+"-sinf");
+      x.addEventListener("click",function(){st.grade=g;draw()});chips.appendChild(x)})(g)}
+    function draw(){
+      stopTimer();
+      $$(".chip",b).forEach(function(x){x.setAttribute("aria-pressed",String(+x.dataset.g===st.grade))});
+      fn($("#pnl",b),st.grade);
+    }
+    draw();
+  }
+
+  function guide(d,g,p){
+    var h='<p class="lbl">'+g+'-sinf · '+d.fan.toLowerCase()+' mavzulari</p><ul class="topics">';
+    d.topics[g].forEach(function(t){h+='<li>'+t+'<span class="tag">dars qo‘llanma</span></li>'});
+    p.innerHTML=h+'</ul><p class="note">Mavzular ro‘yxati namuna sifatida berilgan. Joriy o‘quv dasturiga qarab to‘ldiriladi.</p>';
+  }
+
+  function accordion(sec,b){
+    var h=sec.intro?'<p class="sub" style="margin-bottom:20px">'+sec.intro+'</p>':'';
+    sec.items.forEach(function(it){h+='<details><summary>'+it.t+'</summary><div>'+it.b+'</div></details>'});
+    b.innerHTML=h;
+  }
+
+  function soon(sec,b){
+    var h='<p class="sub" style="margin-bottom:20px">Bu bo‘lim tayyorlanmoqda. Unda quyidagilar bo‘ladi:</p><div class="soon">';
+    (SOON[sec.id]||[]).forEach(function(s){h+='<span>'+s+'</span>'});
+    b.innerHTML=h+'</div>';
+  }
+
+  function quiz(d,g,p){
+    var pool=d.quiz.filter(function(q){return g>=q.g[0]&&g<=q.g[1]});
+    if(pool.length<3)pool=d.quiz.filter(function(q){return Math.abs(g-(q.g[0]+q.g[1])/2)<=3});
+    var qs=shuffle(pool).slice(0,5),i=0,score=0,done=false;
+    function render(){
+      if(i>=qs.length){
+        p.innerHTML='<div class="q"><p class="lbl">Natija</p><div class="big-score">'+score+' / '+qs.length+'</div>'+
+          '<p class="sub" style="margin-bottom:16px">'+(score===qs.length?"Ajoyib natija!":score>=qs.length/2?"Yaxshi, yana mashq qiling.":"Mavzularni takrorlab, qayta urinib ko‘ring.")+'</p>'+
+          '<button class="btn primary sm" id="again">Qayta boshlash</button></div>';
+        $("#again",p).addEventListener("click",function(){quiz(d,g,p)});return;
+      }
+      var c=qs[i];done=false;
+      var h='<div class="q"><p class="lbl">'+g+'-sinf · savol '+(i+1)+' / '+qs.length+'</p><p class="qt">'+esc(c.q)+'</p><div class="opts">';
+      c.o.forEach(function(t,k){h+='<button class="opt" type="button" data-k="'+k+'">'+esc(t)+'</button>'});
+      p.innerHTML=h+'</div><p class="fb" aria-live="polite"></p><button class="btn primary sm" id="nx" hidden>Keyingi</button></div>';
+      $$(".opt",p).forEach(function(x){x.addEventListener("click",function(){
+        if(done)return;done=true;var k=+x.dataset.k;
+        $$(".opt",p)[c.a].classList.add("ok");
+        if(k!==c.a)x.classList.add("no");else score++;
+        $(".fb",p).textContent=(k===c.a?"To‘g‘ri. ":"Noto‘g‘ri. ")+c.e;
+        var nx=$("#nx",p);nx.textContent=i===qs.length-1?"Natijani ko‘rish":"Keyingi";nx.hidden=false;
+      })});
+      $("#nx",p).addEventListener("click",function(){i++;render()});
+    }
+    render();
+  }
+
+  function games(d,g,p){
+    p.innerHTML='<p class="lbl">'+d.gameName+'</p><p class="sub" style="margin-bottom:16px">'+d.gameText+'</p><div class="game" id="g"></div>'+
+      '<p class="lbl" style="margin-top:28px">Tez orada</p><div class="soon"><span>Xotira kartalari</span><span>Krossvord</span><span>'+(d.key==="ict"?"Klaviatura tezligi":"Sonlar jumbog‘i")+'</span></div>';
+    if(d.key==="ict")binaryGame($("#g",p),g);else mathGame($("#g",p),g);
+  }
+
+  function binaryGame(el,grade){
+    var max=grade<=5?15:grade<=8?63:255,target,bits,score=0;
+    function newRound(){target=rnd(1,max);bits=[0,0,0,0,0,0,0,0];draw()}
+    function val(){var s=0;for(var i=0;i<8;i++)s+=bits[i]*(128>>i);return s}
+    function draw(){
+      var h='<div class="stat"><span>Ball: <b>'+score+'</b></span><span>Hozir: <b id="cur">'+val()+'</b></span></div>'+
+        '<div class="target" aria-label="Berilgan son">'+target+'</div><div class="bits">';
+      for(var i=0;i<8;i++)h+='<div class="bit"><button type="button" data-i="'+i+'" aria-pressed="'+(bits[i]?"true":"false")+'" aria-label="'+(128>>i)+' o‘rni">'+bits[i]+'</button><span>'+(128>>i)+'</span></div>';
+      h+='</div><p class="fb" id="gfb" aria-live="polite">Bitlarning yig‘indisi berilgan songa teng bo‘lsin.</p><div class="row"><button class="btn sm" id="skip" type="button">Boshqa son</button></div>';
+      el.innerHTML=h;
+      $$("[data-i]",el).forEach(function(x){x.addEventListener("click",function(){
+        var i=+x.dataset.i;bits[i]=bits[i]?0:1;
+        x.textContent=bits[i];x.setAttribute("aria-pressed",String(!!bits[i]));
+        $("#cur",el).textContent=val();
+        if(val()===target){score++;$("#gfb",el).textContent="To‘g‘ri! "+target+" = "+bits.join("");setTimeout(newRound,900)}
+      })});
+      $("#skip",el).addEventListener("click",newRound);
+    }
+    newRound();
+  }
+
+  function mathGame(el,grade){
+    var key="ustozbek-best-"+grade,best=+store(key)||0,score=0,left=30,cur=null;
+    function make(){
+      var a,b,c,q,ans;
+      if(grade<=2){a=rnd(1,grade===1?10:50);b=rnd(1,grade===1?10:30);if(Math.random()<.5||a<b){q=a+" + "+b;ans=a+b}else{q=a+" − "+b;ans=a-b}}
+      else if(grade<=4){if(Math.random()<.6){a=rnd(2,9);b=rnd(2,9);q=a+" × "+b;ans=a*b}else{a=rnd(10,99);b=rnd(10,99);q=a+" + "+b;ans=a+b}}
+      else if(grade<=8){if(Math.random()<.5){a=rnd(6,15);b=rnd(6,15);q=a+" × "+b;ans=a*b}else{a=rnd(3,12);b=rnd(3,12);c=rnd(1,30);q=a+" × "+b+" + "+c;ans=a*b+c}}
+      else{if(Math.random()<.5){a=rnd(11,25);q=a+"²";ans=a*a}else{a=rnd(3,15);b=rnd(3,15);c=rnd(2,9);var e=rnd(2,9);q=a+" × "+b+" − "+c+" × "+e;ans=a*b-c*e}}
+      return {q:q,a:ans};
+    }
+    function intro(){
+      el.innerHTML='<div class="stat"><span>Eng yaxshi natija ('+grade+'-sinf): <b>'+best+'</b></span></div><div class="row"><button class="btn primary" id="go" type="button">Boshlash</button></div>';
+      $("#go",el).addEventListener("click",start);
+    }
+    function start(){
+      score=0;left=30;
+      el.innerHTML='<div class="stat"><span>Ball: <b id="sc">0</b></span><span>Vaqt: <b id="tm">30</b> s</span></div><div class="bar"><i id="pb" style="width:100%"></i></div>'+
+        '<div class="mq" id="mq"></div><input class="inp" id="in" inputmode="numeric" autocomplete="off" aria-label="Javob"><p class="fb" id="gfb" aria-live="polite">Javobni yozib Enter bosing.</p>';
+      var inp=$("#in",el);
+      function nextQ(){cur=make();$("#mq",el).textContent=cur.q+" = ?";inp.value="";}
+      nextQ();inp.focus();
+      inp.addEventListener("keydown",function(ev){
+        if(ev.key!=="Enter")return;
+        var v=parseInt(inp.value,10);
+        if(v===cur.a){score++;$("#sc",el).textContent=score;$("#gfb",el).textContent="To‘g‘ri!"}
+        else $("#gfb",el).textContent="Noto‘g‘ri edi: "+cur.q+" = "+cur.a;
+        nextQ();
+      });
+      stopTimer();
+      timer=setInterval(function(){
+        left--;$("#tm",el).textContent=left;$("#pb",el).style.width=(left/30*100)+"%";
+        if(left<=0){stopTimer();finish()}
+      },1000);
+    }
+    function finish(){
+      var rec=score>best;if(rec){best=score;store(key,String(best))}
+      el.innerHTML='<p class="lbl">Vaqt tugadi</p><div class="big-score">'+score+'</div><p class="sub">'+(rec?"Yangi rekord!":"Eng yaxshi natija: "+best)+'</p><div class="row"><button class="btn primary" id="go" type="button">Yana o‘ynash</button></div>';
+      $("#go",el).addEventListener("click",start);
+    }
+    intro();
+  }
+
+  function planTool(d,b){
+    var gopts="";for(var g=1;g<=11;g++)gopts+='<option value="'+g+'">'+g+'-sinf</option>';
+    b.innerHTML='<p class="sub" style="margin-bottom:20px">Sinf va mavzuni tanlang, 45 daqiqalik dars rejasi shabloni tayyor bo‘ladi.</p>'+
+      '<div class="tool"><div class="sel"><select id="sg" aria-label="Sinf">'+gopts+'</select><select id="st" aria-label="Mavzu"></select></div>'+
+      '<pre class="plan" id="plan"></pre><div class="row"><button class="btn primary sm" id="cp" type="button">Nusxa olish</button><span class="fb" id="cpf" style="margin:0;align-self:center"></span></div></div>';
+    var sg=$("#sg",b),stp=$("#st",b);
+    function topics(){
+      var g=+sg.value;stp.innerHTML="";
+      d.topics[g].forEach(function(t,i){var o=document.createElement("option");o.value=i;o.textContent=t;stp.appendChild(o)});
+      plan();
+    }
+    function plan(){
+      var g=+sg.value,t=d.topics[g][+stp.value||0];
+      $("#plan",b).textContent=
+"Fan: "+d.fan+"\nSinf: "+g+"-sinf\nMavzu: "+t+"\nDavomiyligi: 45 daqiqa\n\n"+
+"Maqsad:\n- Ta’limiy: mavzu bo‘yicha asosiy tushunchalarni o‘zlashtirish\n- Rivojlantiruvchi: mustaqil fikrlash va amaliy ko‘nikma\n- Tarbiyaviy: mas’uliyat va hamkorlik\n\n"+
+"Jihozlar: doska, proyektor, tarqatma materiallar\n\n"+
+"Dars bosqichlari:\n1. Tashkiliy qism — 3 daqiqa\n2. O‘tilganlarni takrorlash — 7 daqiqa\n3. Yangi mavzu bayoni — 15 daqiqa\n4. Mustahkamlash (amaliy mashq yoki guruh ishi) — 14 daqiqa\n5. Baholash va uy vazifasi — 6 daqiqa";
+    }
+    sg.value=5;sg.addEventListener("change",topics);stp.addEventListener("change",plan);topics();
+    $("#cp",b).addEventListener("click",function(){
+      var f=$("#cpf",b),txt=$("#plan",b).textContent;
+      function sel(){var r=document.createRange();r.selectNodeContents($("#plan",b));var s=getSelection();s.removeAllRanges();s.addRange(r);f.textContent="Belgilandi, nusxa oling."}
+      try{navigator.clipboard.writeText(txt).then(function(){f.textContent="Nusxa olindi."},sel)}catch(e){sel()}
+    });
+  }
+
+  function methods(d,b){
+    var h='<p class="sub" style="margin-bottom:20px">Har bir metod uchun '+d.fan.toLowerCase()+' fanidan misol keltirilgan.</p>';
+    Object.keys(METHODS).forEach(function(k){
+      h+='<details><summary>'+k+'</summary><div><p><b>Mohiyati:</b> '+METHODS[k]+'</p><p style="margin:0"><b>'+d.fan+'da:</b> '+d.methodEx[k]+'</p></div></details>';
+    });
+    b.innerHTML=h;
+  }
+
+  function attest(d,b){
+    var ck="";ATT.forEach(function(t,i){ck+='<label class="check"><input type="checkbox" data-i="'+i+'"><span>'+t+'</span></label>'});
+    b.innerHTML='<p class="sub" style="margin-bottom:20px">Namunaviy tayyorgarlik rejasi. Belgilangan bandlar shu qurilmada saqlanadi.</p>'+
+      '<div class="tool"><div class="bar"><i id="ap"></i></div><p class="lbl" id="al" style="margin:0"></p><div class="checks">'+ck+'</div>'+
+      '<p class="note" style="margin:0">Attestatsiya tartibi o‘zgarishi mumkin, amaldagi qoidalarni rasmiy hujjatlardan tekshiring.</p></div>';
+    var key="ustozbek-att-"+d.key,saved={};
+    try{saved=JSON.parse(store(key)||"{}")||{}}catch(e){saved={}}
+    var boxes=$$(".check input",b);
+    function prog(){
+      var n=boxes.filter(function(x){return x.checked}).length;
+      $("#ap",b).style.width=(n/boxes.length*100)+"%";
+      $("#al",b).textContent=n+" / "+boxes.length+" band bajarildi";
+    }
+    boxes.forEach(function(x){
+      x.checked=!!saved[x.dataset.i];
+      x.addEventListener("change",function(){saved[x.dataset.i]=x.checked?1:0;store(key,JSON.stringify(saved));prog()});
+    });
+    prog();
+  }
+
+  /* ---------- Router ---------- */
+  function route(){
+    stopTimer();
+    var h=(location.hash||"#home").slice(1),
+        m=h.match(/^(ict|math)bek(?:-(oquvchi|oqituvchi)(?:-([a-z]+))?)?$/),cur="home";
+    if(m){
+      var d=D[m[1]];cur=m[1];
+      if(!m[2])division(d);
+      else if(!m[3])hub(d,m[2]);
+      else{
+        var list=m[2]==="oquvchi"?d.stu:d.tea,sec=null;
+        list.forEach(function(s){if(s.id===m[3])sec=s});
+        if(sec)sectionPage(d,m[2],sec);else hub(d,m[2]);
+      }
+    }else home();
+    $$("[data-nav]",document).forEach(function(a){a.classList.toggle("on",a.dataset.nav===cur);
+      if(a.dataset.nav===cur)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
+    window.scrollTo(0,0);
+  }
+  window.addEventListener("hashchange",route);
+  route();
+})();
+</script>
+</body>
+</html>
