@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Ustozbek</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20512%20512%22%3E%3Crect%20width%3D%22512%22%20height%3D%22512%22%20rx%3D%2296%22%20fill%3D%22%2312212b%22/%3E%3Cpath%20d%3D%22M168%20136V280a88%2088%200%200%200%2088%2088%22%20fill%3D%22none%22%20stroke%3D%22%234fd1a5%22%20stroke-width%3D%2248%22%20stroke-linecap%3D%22round%22/%3E%3Cpath%20d%3D%22M344%20136V280a88%2088%200%200%201-88%2088%22%20fill%3D%22none%22%20stroke%3D%22%23ff9a6b%22%20stroke-width%3D%2248%22%20stroke-linecap%3D%22round%22/%3E%3Ccircle%20cx%3D%22256%22%20cy%3D%22150%22%20r%3D%2222%22%20fill%3D%22%23f2b632%22/%3E%3C/svg%3E">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#12212b">
+<link rel="apple-touch-icon" href="icon-192.png">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
@@ -49,6 +53,9 @@ code{font-family:var(--f-mono);font-size:.9em;background:var(--bg);border:1px so
 header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:19;background:var(--bg);border-bottom:1px solid var(--line)}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0}
 .logo{font:800 22px/1 var(--f-display);letter-spacing:-.02em;text-decoration:none;white-space:nowrap}
+.logo{display:flex;align-items:center;gap:10px}
+.logo b{font-weight:800}
+.logo .mark{width:30px;height:30px;flex:none}
 .logo span{color:var(--ict)}
 .nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0;min-width:0;overflow-x:auto}
 .nav a.l{display:block;padding:8px 12px;border-radius:8px;text-decoration:none;font:500 14px/1 var(--f-mono);color:var(--muted);white-space:nowrap}
@@ -159,6 +166,22 @@ details>div b{color:var(--fg);font-weight:600}
 .soon{display:flex;flex-wrap:wrap;gap:8px}
 .soon span{font:400 13px/1 var(--f-mono);padding:8px 10px;border:1px dashed var(--line);border-radius:8px;color:var(--muted)}
 
+
+.tl{all:unset;cursor:pointer;font-weight:600;color:var(--fg);line-height:1.35;display:block}
+.tl:hover{color:var(--accent)}
+.tl:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+.tag.ok{color:var(--accent);border-color:var(--accent)}
+.lesson{margin-top:20px;max-width:68ch}
+.lesson h3.lt{font:800 clamp(24px,4vw,32px)/1.15 var(--f-display);margin:0 0 14px;letter-spacing:-.02em}
+.lesson h4{font:600 19px/1.25 var(--f-display);margin:24px 0 8px}
+.lesson p{margin:0 0 12px}
+.lesson ul,.lesson ol{margin:0 0 12px;padding-left:22px;display:grid;gap:4px}
+.lesson .ex{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:0 0 14px}
+.lesson .ex b{color:var(--accent)}
+.lesson .tw{overflow-x:auto;margin-bottom:14px}
+.lesson table{border-collapse:collapse;width:100%;font-size:15px}
+.lesson th,.lesson td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+.lesson th{background:var(--surface);font-weight:600}
 footer{border-top:1px solid var(--line);padding-block:28px 36px;color:var(--muted);font-size:14px;margin-top:24px}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 
@@ -177,7 +200,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 <body>
 <header class="nav">
   <div class="wrap">
-    <a class="logo" href="#home">Ustoz<span>bek</span></a>
+    <a class="logo" href="#home"><svg class="mark" viewBox="120 110 272 280" aria-hidden="true"><path d="M168 136V280a88 88 0 0 0 88 88" fill="none" stroke="#4fd1a5" stroke-width="44" stroke-linecap="round"/><path d="M344 136V280a88 88 0 0 1-88 88" fill="none" stroke="#ff9a6b" stroke-width="44" stroke-linecap="round"/><circle cx="256" cy="150" r="20" fill="#f2b632"/></svg><b>Ustoz<span>bek</span></b></a>
     <nav aria-label="Asosiy menyu">
       <ul>
         <li><a class="l" href="#home" data-nav="home">Bosh sahifa</a></li>
@@ -197,6 +220,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
   </div>
 </footer>
 
+<script src="content.js"></script>
 <script>
 (function(){
   var app=document.getElementById("app"),timer=null,S={};
@@ -492,10 +516,29 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
     draw();
   }
 
+  function topicData(d,g){var c=window.CONTENT&&window.CONTENT[d.key]&&window.CONTENT[d.key][g];return c||[]}
+  function findTopic(d,g,name){var a=topicData(d,g);for(var i=0;i<a.length;i++)if(a[i].t===name)return a[i];return null}
+
   function guide(d,g,p){
-    var h='<p class="lbl">'+g+'-sinf · '+d.fan.toLowerCase()+' mavzulari</p><ul class="topics">';
-    d.topics[g].forEach(function(t){h+='<li>'+t+'<span class="tag">dars qo‘llanma</span></li>'});
-    p.innerHTML=h+'</ul><p class="note">Mavzular ro‘yxati namuna sifatida berilgan. Joriy o‘quv dasturiga qarab to‘ldiriladi.</p>';
+    var h='<p class="lbl">'+g+'-sinf · '+d.fan.toLowerCase()+' mavzulari</p><ul class="topics">',ready=0;
+    d.topics[g].forEach(function(t,i){
+      var c=findTopic(d,g,t);
+      if(c){ready++;h+='<li><button type="button" class="tl" data-i="'+i+'">'+t+'</button><span class="tag ok">dars va test</span></li>'}
+      else h+='<li>'+t+'<span class="tag">tez orada</span></li>';
+    });
+    p.innerHTML=h+'</ul><p class="note">'+(ready?'Mavzuni bosib, darsni oching.':'Bu sinf uchun darslar tayyorlanmoqda.')+'</p>';
+    $$(".tl",p).forEach(function(b){b.addEventListener("click",function(){lesson(d,g,findTopic(d,g,d.topics[g][+b.dataset.i]),p)})});
+  }
+
+  function lesson(d,g,c,p){
+    p.innerHTML='<button class="btn sm" type="button" id="bk">← Mavzular</button>'+
+      '<div class="lesson"><p class="lbl">'+g+'-sinf · '+d.fan.toLowerCase()+' darsi</p><h3 class="lt">'+c.t+'</h3>'+c.lesson+
+      '<div class="row" style="margin-top:24px"><button class="btn primary" type="button" id="tt">Mavzu testini boshlash ('+c.quiz.length+' savol)</button></div></div>';
+    $("#bk",p).addEventListener("click",function(){guide(d,g,p)});
+    $("#tt",p).addEventListener("click",function(){
+      runQuiz(shuffle(c.quiz),g+'-sinf · '+c.t,p,function(){lesson(d,g,c,p)},function(){lesson(d,g,c,p)},"Darsga qaytish");
+    });
+    window.scrollTo(0,0);
   }
 
   function accordion(sec,b){
@@ -510,21 +553,20 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
     b.innerHTML=h+'</div>';
   }
 
-  function quiz(d,g,p){
-    var pool=d.quiz.filter(function(q){return g>=q.g[0]&&g<=q.g[1]});
-    if(pool.length<3)pool=d.quiz.filter(function(q){return Math.abs(g-(q.g[0]+q.g[1])/2)<=3});
-    var qs=shuffle(pool).slice(0,5),i=0,score=0,done=false;
+  function runQuiz(qs,label,p,onAgain,onBack,backText){
+    var i=0,score=0,done=false;
     function render(){
       if(i>=qs.length){
-        p.innerHTML='<div class="q"><p class="lbl">Natija</p><div class="big-score">'+score+' / '+qs.length+'</div>'+
-          '<p class="sub" style="margin-bottom:16px">'+(score===qs.length?"Ajoyib natija!":score>=qs.length/2?"Yaxshi, yana mashq qiling.":"Mavzularni takrorlab, qayta urinib ko‘ring.")+'</p>'+
-          '<button class="btn primary sm" id="again">Qayta boshlash</button></div>';
-        $("#again",p).addEventListener("click",function(){quiz(d,g,p)});return;
+        p.innerHTML='<div class="q"><p class="lbl">Natija · '+esc(label)+'</p><div class="big-score">'+score+' / '+qs.length+'</div>'+
+          '<p class="sub" style="margin-bottom:16px">'+(score===qs.length?"Ajoyib natija!":score>=qs.length/2?"Yaxshi, yana mashq qiling.":"Mavzuni takrorlab, qayta urinib ko‘ring.")+'</p>'+
+          '<div class="row"><button class="btn primary sm" id="again" type="button">Qayta boshlash</button><button class="btn sm" id="back" type="button">'+(backText||"Orqaga")+'</button></div></div>';
+        $("#again",p).addEventListener("click",function(){runQuiz(shuffle(qs),label,p,onAgain,onBack,backText)});
+        $("#back",p).addEventListener("click",onBack);return;
       }
       var c=qs[i];done=false;
-      var h='<div class="q"><p class="lbl">'+g+'-sinf · savol '+(i+1)+' / '+qs.length+'</p><p class="qt">'+esc(c.q)+'</p><div class="opts">';
+      var h='<div class="q"><p class="lbl">'+esc(label)+' · savol '+(i+1)+' / '+qs.length+'</p><p class="qt">'+esc(c.q)+'</p><div class="opts">';
       c.o.forEach(function(t,k){h+='<button class="opt" type="button" data-k="'+k+'">'+esc(t)+'</button>'});
-      p.innerHTML=h+'</div><p class="fb" aria-live="polite"></p><button class="btn primary sm" id="nx" hidden>Keyingi</button></div>';
+      p.innerHTML=h+'</div><p class="fb" aria-live="polite"></p><button class="btn primary sm" id="nx" type="button" hidden>Keyingi</button></div>';
       $$(".opt",p).forEach(function(x){x.addEventListener("click",function(){
         if(done)return;done=true;var k=+x.dataset.k;
         $$(".opt",p)[c.a].classList.add("ok");
@@ -535,6 +577,27 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
       $("#nx",p).addEventListener("click",function(){i++;render()});
     }
     render();
+  }
+
+  function quiz(d,g,p){
+    var tp=topicData(d,g);
+    var pool=d.quiz.filter(function(q){return g>=q.g[0]&&g<=q.g[1]});
+    if(pool.length<3)pool=d.quiz.filter(function(q){return Math.abs(g-(q.g[0]+q.g[1])/2)<=3});
+    tp.forEach(function(c){pool=pool.concat(c.quiz)});
+    function menu(){
+      var h='<p class="lbl">'+g+'-sinf · test turini tanlang</p><ul class="topics">'+
+        '<li><button type="button" class="tl" id="mix">Aralash test</button><span class="tag">10 savol</span></li>';
+      tp.forEach(function(c,i){h+='<li><button type="button" class="tl" data-i="'+i+'">'+c.t+'</button><span class="tag ok">'+c.quiz.length+' savol</span></li>'});
+      p.innerHTML=h+'</ul>'+(tp.length?'':'<p class="note">Mavzu testlari tayyorlanmoqda. Hozircha aralash test mavjud.</p>');
+      $("#mix",p).addEventListener("click",function(){
+        runQuiz(shuffle(pool).slice(0,10),g+'-sinf · aralash test',p,menu,menu,"Testlar ro‘yxati");
+      });
+      $$("[data-i]",p).forEach(function(b){b.addEventListener("click",function(){
+        var c=tp[+b.dataset.i];
+        runQuiz(shuffle(c.quiz),g+'-sinf · '+c.t,p,menu,menu,"Testlar ro‘yxati");
+      })});
+    }
+    menu();
   }
 
   function games(d,g,p){
@@ -684,5 +747,6 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
   route();
 })();
 </script>
+<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}</script>
 </body>
 </html>
