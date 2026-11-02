@@ -194,8 +194,39 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
   section{padding-block:24px}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn:hover{transform:none}}
+
+/* === Full-width + polish === */
+html{zoom:var(--z,1);min-height:100%}
+body{padding-left:max(clamp(14px,3vw,56px),env(safe-area-inset-left,0px));padding-right:max(clamp(14px,3vw,56px),env(safe-area-inset-right,0px));min-height:100vh;
+  background:radial-gradient(1200px 500px at 85% -10%,color-mix(in srgb,var(--math) 14%,transparent),transparent 60%),radial-gradient(1000px 500px at 5% -5%,color-mix(in srgb,var(--ict) 14%,transparent),transparent 60%),var(--bg);background-attachment:fixed}
+.wrap{max-width:none;width:100%}
+.lesson{max-width:84ch}.q,.game{max-width:760px}
+header.nav{background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.zoom{display:flex;align-items:center;gap:2px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:3px;flex:none}
+.zoom button{border:0;background:transparent;color:var(--fg);font:700 15px/1 var(--f-mono);min-width:34px;height:32px;border-radius:999px;cursor:pointer}
+.zoom button:hover{background:var(--bg)}
+.zoom .zv{font:500 12px/1 var(--f-mono);color:var(--muted);min-width:42px;text-align:center;cursor:pointer;border:0;background:transparent}
+.panel,.card,.hub,.topics li,.q,.game{box-shadow:0 1px 2px rgba(18,33,43,.05),0 8px 24px -12px rgba(18,33,43,.18)}
+.panel{border-radius:20px;transition:transform .2s,box-shadow .2s}
+.panel:hover{transform:translateY(-3px);box-shadow:0 14px 34px -14px color-mix(in srgb,var(--accent) 45%,transparent)}
+.hub{border-radius:26px}
+.tile{background:color-mix(in srgb,var(--accent) 7%,var(--surface));border:1px solid var(--line);transition:transform .18s,border-color .18s,box-shadow .18s}
+.tile:hover{transform:translateY(-3px);box-shadow:0 12px 26px -14px color-mix(in srgb,var(--accent) 55%,transparent)}
+.tile svg{width:34px;height:34px;padding:7px;box-sizing:content-box;background:color-mix(in srgb,var(--accent) 14%,transparent);border-radius:12px}
+.tiles{grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+.topics{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+.topics li{border-radius:14px;transition:transform .15s,border-color .15s}
+.topics li:hover{transform:translateY(-2px);border-color:var(--accent)}
+.btn{border-radius:12px;transition:transform .15s,box-shadow .15s}
+.btn.primary{box-shadow:0 8px 20px -10px var(--accent)}
+.chip{border-radius:12px;transition:transform .12s}.chip:hover{transform:translateY(-1px)}
+h1{font-size:clamp(38px,6vw,76px)}
+@media (min-width:1400px){body{font-size:17px}}
+@media (max-width:760px){.zoom{order:3}.nav .wrap{flex-direction:row;flex-wrap:wrap;align-items:center}.nav nav{order:5;width:100%}}
+@media print{.zoom{display:none}}
 </style>
 
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
 <header class="nav">
@@ -208,6 +239,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
         <li><a class="l" href="#mathbek" data-nav="math">MATHBEK</a></li>
       </ul>
     </nav>
+  <div class="zoom" role="group" aria-label="Masshtab"><button type="button" id="zm" aria-label="Kichiklashtirish">−</button><button type="button" class="zv" id="zv" aria-label="Asl o‘lcham">100%</button><button type="button" id="zp" aria-label="Kattalashtirish">+</button></div>
   </div>
 </header>
 
@@ -749,5 +781,18 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 })();
 </script>
 <script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}</script>
+<script>
+(function(){
+  var z=1,K='ub_zoom';
+  try{var s=parseFloat(localStorage.getItem(K));if(s>=.7&&s<=1.8)z=s}catch(e){}
+  function ap(){document.documentElement.style.setProperty('--z',z);var v=document.getElementById('zv');if(v)v.textContent=Math.round(z*100)+'%';try{localStorage.setItem(K,z)}catch(e){}}
+  function set(n){z=Math.min(1.8,Math.max(.7,Math.round(n*10)/10));ap()}
+  document.getElementById('zm').onclick=function(){set(z-.1)};
+  document.getElementById('zp').onclick=function(){set(z+.1)};
+  document.getElementById('zv').onclick=function(){set(1)};
+  ap();
+  try{var t=window.Telegram&&Telegram.WebApp;if(t){t.ready();t.expand();if(t.disableVerticalSwipes)t.disableVerticalSwipes()}}catch(e){}
+})();
+</script>
 </body>
 </html>
