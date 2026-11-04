@@ -241,6 +241,32 @@ details.key[open] summary{border-bottom:1px solid var(--line);margin-bottom:12px
 .ko li{padding:6px 10px;border-radius:8px;background:var(--bg)}
 .ko li.kok{background:color-mix(in srgb,var(--accent) 16%,transparent);border:1px solid var(--accent)}
 .ke{margin:6px 0 0;color:var(--muted);font-size:14px}
+
+.thes h5{font:600 13px/1 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:14px 0 8px}
+.thes p,.thes ul,.thes ol{margin:0 0 8px}.thes ul,.thes ol{padding-left:22px;display:grid;gap:5px}
+.thes .terms{display:flex;flex-wrap:wrap;gap:6px}
+.deck{position:fixed;inset:0;z-index:100;background:var(--bg);display:grid;grid-template-rows:auto 1fr auto;color:var(--fg);padding-top:env(safe-area-inset-top,0px)}
+.dbar{display:flex;align-items:center;gap:10px;padding:10px clamp(12px,3vw,28px);border-bottom:1px solid var(--line);background:var(--surface)}
+.dtt{font:600 14px/1.3 var(--f-display);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dct{font:500 13px/1 var(--f-mono);color:var(--muted)}
+.dstage{overflow:auto;padding:clamp(18px,4vw,56px) clamp(16px,6vw,96px);border-top:8px solid var(--accent);background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 7%,var(--bg)),var(--bg))}
+.dstage.cover{display:flex;flex-direction:column;justify-content:center;gap:18px;text-align:left}
+.dh{font:800 clamp(30px,6vw,72px)/1.08 var(--f-display);letter-spacing:-.03em;margin:0}
+.dsub{font:500 clamp(14px,2vw,20px)/1.3 var(--f-mono);color:var(--accent);margin:0;letter-spacing:.06em;text-transform:uppercase}
+.dh2{font:800 clamp(24px,4.4vw,48px)/1.12 var(--f-display);letter-spacing:-.02em;margin:0 0 clamp(14px,2.4vw,28px);color:var(--accent)}
+.dbody{font-size:clamp(18px,2.5vw,32px);line-height:1.5;max-width:1200px}
+.dbody p,.dbody ul,.dbody ol{margin:0 0 .6em}.dbody ul,.dbody ol{padding-left:1.2em;display:grid;gap:.3em}
+.dbody .ex{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--accent);border-radius:14px;padding:.6em .9em;margin:0 0 .7em}
+.dbody .ex b{color:var(--accent)}
+.dbody table{border-collapse:collapse;font-size:.8em}.dbody th,.dbody td{border:1px solid var(--line);padding:.3em .6em;text-align:left}
+.dbody .tw{overflow-x:auto}
+.dl{list-style:none;padding-left:0!important;font-size:.85em}
+.da{color:var(--accent)}.de{color:var(--muted);font-size:.8em}.dhw{margin-top:1em}
+.dnav{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px clamp(12px,3vw,28px) max(10px,env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);background:var(--surface)}
+.ddots{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;min-width:0}
+.ddots i{width:10px;height:10px;border-radius:50%;background:var(--line);cursor:pointer}.ddots i.on{background:var(--accent);transform:scale(1.25)}
+.dnav button:disabled{opacity:.4;cursor:default}
+@media (max-width:600px){#dfs{display:none}}
 </style>
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -314,7 +340,7 @@ details.key[open] summary{border-bottom:1px solid var(--line);margin-bottom:12px
     {id:"kalit",t:"Test savollari va javoblari",i:"doc",k:"key",d:"Har mavzu testi, to‘g‘ri javoblari bilan"},
     {id:"metodlar",t:"Interfaol metodlar",i:"bulb",k:"methods",d:"Misollar bilan"},
     {id:"attestatsiya",t:"Attestatsiyaga tayyorlov",i:"award",k:"attest",d:"Tayyorgarlik rejasi"},
-    {id:"taqdimotlar",t:"Taqdimotlar va tarqatma",i:"slides",k:"soon",d:"Tayyor materiallar"},
+    {id:"taqdimotlar",t:"Tezislar va taqdimotlar",i:"slides",k:"deck",d:"Har mavzu uchun tezis va slaydlar"},
     {id:"mezonlar",t:"Baholash mezonlari",i:"star",k:"soon",d:"Mezonlar va shkalalar"},
     {id:"ochiqdars",t:"Ochiq dars namunalari",i:"eye",k:"soon",d:"Ssenariy va tahlil"},
     {id:"malaka",t:"Malaka oshirish",i:"cap",k:"soon",d:"Kurslar va seminarlar"}
@@ -556,6 +582,7 @@ details.key[open] summary{border-bottom:1px solid var(--line);margin-bottom:12px
     else if(sec.k==="games")withGrade(b,st,function(p,g){games(d,g,p)});
     else if(sec.k==="acc")accordion(sec,b);
     else if(sec.k==="key")answerKey(d,b);
+    else if(sec.k==="deck")deckPage(d,b);
     else if(sec.k==="plan")planTool(d,b);
     else if(sec.k==="methods")methods(d,b);
     else if(sec.k==="attest")attest(d,b);
@@ -580,6 +607,123 @@ details.key[open] summary{border-bottom:1px solid var(--line);margin-bottom:12px
       p.innerHTML=h+'</div>';
       $("#ako",p).addEventListener("click",function(){$$("details.key",p).forEach(function(x){x.open=true})});
       $("#akc",p).addEventListener("click",function(){$$("details.key",p).forEach(function(x){x.open=false})});
+    });
+  }
+
+
+  /* ---------- Tezislar va taqdimotlar (darslardan avtomatik tuziladi) ---------- */
+  function lessonSecs(html){
+    var w=document.createElement("div");w.innerHTML=html;
+    var secs=[],cur={h:null,blocks:[]};
+    Array.prototype.slice.call(w.children).forEach(function(el){
+      if(el.tagName==="H4"){secs.push(cur);cur={h:el.textContent.trim(),blocks:[]}}else cur.blocks.push(el)});
+    secs.push(cur);
+    return secs.filter(function(s,i){return s.blocks.length||s.h});
+  }
+  function isRecap(h){return h&&/eslab qoling/i.test(h)}
+  function chunk(arr,n){var o=[];for(var i=0;i<arr.length;i+=n)o.push(arr.slice(i,i+n));return o}
+  function blk(el){return el.tagName==="TABLE"?'<div class="tw">'+el.outerHTML+'</div>':el.outerHTML}
+  function firstSentence(t){t=t.replace(/\s+/g," ").trim();var m=t.match(/^.{20,}?[.!?](\s|$)/);t=m?m[0].trim():t;return t.length>190?t.slice(0,187)+"…":t}
+  function makeSlides(d,g,c){
+    var secs=lessonSecs(c.lesson),sl=[],content=[],recap=null,names=[];
+    secs.forEach(function(s){
+      if(isRecap(s.h)){recap=s;return}
+      var hasOl=s.blocks.some(function(b){return b.tagName==="OL"});
+      var title=s.h||(content.length?"Davomi":"Asosiy tushuncha");
+      if(hasOl&&!/amaliy/i.test(title))title="Amaliy ish: "+title.toLowerCase();
+      var parts=chunk(s.blocks,hasOl?4:3);
+      parts.forEach(function(p,i){content.push({title:title+(parts.length>1?" ("+(i+1)+"/"+parts.length+")":""),html:p.map(blk).join("")})});
+      if(s.h)names.push(s.h);
+    });
+    if(!content.length)content.push({title:"Mavzu",html:"<p>"+esc(c.t)+"</p>"});
+    var plan=["Mavzuni tushuntirish"].concat(names.slice(0,5)).concat(["Savollar bilan mustahkamlash","Xulosa va uyga vazifa"]);
+    sl.push({cover:true,title:c.t,sub:d.fan+" · "+g+"-sinf"});
+    sl.push({title:"Dars rejasi",html:"<ol>"+plan.map(function(x){return"<li>"+esc(x)+"</li>"}).join("")+"</ol>"});
+    content.forEach(function(x){sl.push(x)});
+    var qs=c.quiz.filter(function(q,i){return i%3===0}).slice(0,3);
+    if(qs.length<3)qs=c.quiz.slice(0,3);
+    sl.push({title:"Mustahkamlash savollari",html:'<ol class="dq">'+qs.map(function(q){return'<li><p>'+efr(q.q)+'</p><ul class="dl">'+q.o.map(function(t,k){return'<li><b>'+"ABCD"[k]+')</b> '+efr(t)+'</li>'}).join("")+'</ul></li>'}).join("")+"</ol>"});
+    sl.push({title:"Javoblar va izohlar",html:'<ol class="dq">'+qs.map(function(q){return'<li><p>'+efr(q.q)+'</p><p class="da"><b>Javob: '+"ABCD"[q.a]+') '+efr(q.o[q.a])+'</b></p><p class="de">'+efr(q.e)+'</p></li>'}).join("")+"</ol>"});
+    var xh=recap?recap.blocks.map(blk).join(""):"<ul>"+(names.length?names:[c.t]).slice(0,6).map(function(x){return"<li>"+esc(x)+"</li>"}).join("")+"</ul>";
+    sl.push({title:"Xulosa"+(recap?": eslab qoling":""),html:xh+'<p class="dhw"><b>Uyga vazifa:</b> mavzuni takrorlang va saytdagi mavzu testini ishlang ('+c.quiz.length+' savol).</p>'});
+    return sl;
+  }
+  function makeTheses(c){
+    var secs=lessonSecs(c.lesson),h="",recap=null,steps=null,intro="",terms=[];
+    secs.forEach(function(s){
+      if(isRecap(s.h))recap=s;
+      s.blocks.forEach(function(b){if(b.tagName==="OL"&&!steps)steps=b});
+    });
+    var f=secs[0]&&secs[0].blocks.filter(function(b){return b.tagName==="P"})[0];
+    if(f)intro=firstSentence(f.textContent);
+    var th=[];
+    secs.forEach(function(s){
+      if(!s.h||isRecap(s.h))return;
+      var p=s.blocks.filter(function(b){return b.tagName==="P"})[0],li=s.blocks.filter(function(b){return b.tagName==="UL"})[0];
+      var tx=p?firstSentence(p.textContent):(li?firstSentence(li.textContent):"");
+      th.push("<li><b>"+esc(s.h)+".</b> "+esc(tx)+"</li>");
+    });
+    var w=document.createElement("div");w.innerHTML=c.lesson;
+    Array.prototype.slice.call(w.querySelectorAll("b")).forEach(function(b){
+      var t=b.textContent.trim().replace(/[.:]$/,"");
+      if(t.length>2&&t.length<42&&!/^(masala|misol|javob|eslab|maslahat|nazorat)/i.test(t)&&terms.indexOf(t)<0&&!/^\d+$/.test(t))terms.push(t)});
+    if(intro)h+='<h5>Asosiy g‘oya</h5><p>'+esc(intro)+'</p>';
+    if(th.length)h+='<h5>Tezislar</h5><ul>'+th.join("")+'</ul>';
+    if(terms.length)h+='<h5>Kalit atamalar</h5><p class="terms">'+terms.slice(0,12).map(function(t){return'<span class="tag">'+esc(t)+'</span>'}).join(" ")+'</p>';
+    if(steps)h+='<h5>Amaliy ish qadamlari</h5>'+steps.outerHTML;
+    if(recap)h+='<h5>Eslab qoling</h5>'+recap.blocks.map(blk).join("");
+    return fr(h||"<p>"+esc(c.t)+"</p>");
+  }
+  window.__makeSlides=function(g,i,key){var d=D[key||"math"];return makeSlides(d,g,topicData(d,g)[i])};
+  function openDeck(d,g,c){
+    var sl=makeSlides(d,g,c),i=0,ov=document.createElement("div");
+    ov.className="deck";ov.setAttribute("role","dialog");ov.setAttribute("aria-label","Taqdimot");
+    ov.setAttribute("data-div",d.key);
+    ov.innerHTML='<div class="dbar"><span class="dtt"></span><span class="dct"></span><button type="button" class="btn sm" id="dfs">To‘liq ekran</button><button type="button" class="btn sm" id="dx" aria-label="Yopish">✕ Yopish</button></div><div class="dstage"></div><div class="dnav"><button type="button" class="btn sm" id="dp">← Oldingi</button><div class="ddots"></div><button type="button" class="btn primary sm" id="dn">Keyingi →</button></div>';
+    document.body.appendChild(ov);document.body.style.overflow="hidden";
+    var st=ov.querySelector(".dstage");
+    ov.querySelector(".ddots").innerHTML=sl.map(function(_,k){return'<i data-k="'+k+'"></i>'}).join("");
+    function show(){
+      var s=sl[i];
+      st.className="dstage"+(s.cover?" cover":"");
+      st.innerHTML=s.cover?'<p class="dsub">'+esc(s.sub)+'</p><h2 class="dh">'+fr(esc(s.title))+'</h2><p class="dsub">Ustozbek.uz</p>':'<h3 class="dh2">'+fr(esc(s.title))+'</h3><div class="dbody">'+fr(s.html)+'</div>';
+      ov.querySelector(".dct").textContent=(i+1)+" / "+sl.length;
+      ov.querySelector(".dtt").textContent=c.t;
+      Array.prototype.forEach.call(ov.querySelectorAll(".ddots i"),function(x,k){x.className=k===i?"on":""});
+      ov.querySelector("#dp").disabled=i===0;ov.querySelector("#dn").disabled=i===sl.length-1;
+      st.scrollTop=0;
+    }
+    function go(n){i=Math.max(0,Math.min(sl.length-1,n));show()}
+    function close(){document.removeEventListener("keydown",key);document.body.style.overflow="";try{if(document.fullscreenElement)document.exitFullscreen()}catch(e){}ov.remove()}
+    function key(e){
+      if(e.key==="ArrowRight"||e.key==="PageDown"||e.key===" "){e.preventDefault();go(i+1)}
+      else if(e.key==="ArrowLeft"||e.key==="PageUp"){e.preventDefault();go(i-1)}
+      else if(e.key==="Escape")close();
+      else if(e.key==="Home")go(0);else if(e.key==="End")go(sl.length-1);
+    }
+    document.addEventListener("keydown",key);
+    ov.querySelector("#dp").addEventListener("click",function(){go(i-1)});
+    ov.querySelector("#dn").addEventListener("click",function(){go(i+1)});
+    ov.querySelector("#dx").addEventListener("click",close);
+    ov.querySelector("#dfs").addEventListener("click",function(){try{if(document.fullscreenElement)document.exitFullscreen();else ov.requestFullscreen()}catch(e){}});
+    ov.querySelector(".ddots").addEventListener("click",function(e){var k=e.target.getAttribute&&e.target.getAttribute("data-k");if(k!=null)go(+k)});
+    var tx=0;ov.addEventListener("touchstart",function(e){tx=e.touches[0].clientX},{passive:true});
+    ov.addEventListener("touchend",function(e){var dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>60)go(i+(dx<0?1:-1))},{passive:true});
+    show();ov.querySelector("#dn").focus();
+  }
+  function deckPage(d,b){
+    var st=S[d.key]||(S[d.key]={grade:5});
+    withGrade(b,st,function(p,g){
+      var tp=topicData(d,g);
+      if(!tp.length){p.innerHTML='<p class="note">Bu sinf uchun darslar hali tayyorlanmagan, shuning uchun tezis va taqdimotlar ham yo‘q.</p>';return}
+      var h='<p class="sub" style="margin-bottom:14px">'+g+'-sinf: '+tp.length+' ta mavzu. Har mavzu uchun tezislar va kamida 5 slaydli taqdimot (nazariya, amaliy ish, mustahkamlash savollari va javoblari) bor. Taqdimotda ← → tugmalari yoki barmoq bilan siljitish ishlaydi.</p><div class="keys">';
+      tp.forEach(function(c,i){
+        h+='<details class="key" data-i="'+i+'"><summary><b>'+esc(c.t)+'</b><span class="tag">tezis + taqdimot</span></summary><div class="thes" data-lz="1"></div><div class="row" style="margin:8px 0 14px"><button class="btn primary sm" type="button" data-deck="'+i+'">▶ Taqdimotni ochish</button></div></details>';
+      });
+      p.innerHTML=h+'</div>';
+      $$("details.key",p).forEach(function(x){x.addEventListener("toggle",function(){
+        if(!x.open)return;var z=$(".thes",x);if(z.dataset.lz){z.innerHTML=makeTheses(tp[+x.dataset.i]);delete z.dataset.lz}})});
+      $$("[data-deck]",p).forEach(function(x){x.addEventListener("click",function(){openDeck(d,g,tp[+x.dataset.deck])})});
     });
   }
 
