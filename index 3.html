@@ -1,0 +1,1314 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Ustozbek</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20512%20512%22%3E%3Crect%20width%3D%22512%22%20height%3D%22512%22%20rx%3D%2296%22%20fill%3D%22%2312212b%22/%3E%3Cpath%20d%3D%22M168%20136V280a88%2088%200%200%200%2088%2088%22%20fill%3D%22none%22%20stroke%3D%22%234fd1a5%22%20stroke-width%3D%2248%22%20stroke-linecap%3D%22round%22/%3E%3Cpath%20d%3D%22M344%20136V280a88%2088%200%200%201-88%2088%22%20fill%3D%22none%22%20stroke%3D%22%23ff9a6b%22%20stroke-width%3D%2248%22%20stroke-linecap%3D%22round%22/%3E%3Ccircle%20cx%3D%22256%22%20cy%3D%22150%22%20r%3D%2222%22%20fill%3D%22%23f2b632%22/%3E%3C/svg%3E">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#12212b">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: hash-routed site. Home -> division -> audience hub (tile grid of sections) -> section page. */
+:root{
+  --bg:#f1f4f3;
+  --surface:#ffffff;
+  --fg:#12212b;
+  --muted:#52646e;
+  --line:#d3dcda;
+  --ict:#0b7a5c;
+  --math:#b8431a;
+  --accent-ink:#ffffff;
+  --mark:#f2b632;
+  --bad:#c4473a;
+  --accent:var(--ict);
+  --f-display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0e1819;--surface:#152325;--fg:#e6efec;--muted:#9fb2ae;--line:#274044;
+  --ict:#4fd1a5;--math:#ff9a6b;--accent-ink:#0c1a17;--bad:#ff8a7d;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e1819;--surface:#152325;--fg:#e6efec;--muted:#9fb2ae;--line:#274044;
+  --ict:#4fd1a5;--math:#ff9a6b;--accent-ink:#0c1a17;--bad:#ff8a7d;color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font:400 16px/1.6 var(--f-body);margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:20}
+.wrap{max-width:1080px;margin:0 auto}
+a{color:inherit}
+button{font-family:inherit}
+code{font-family:var(--f-mono);font-size:.9em;background:var(--bg);border:1px solid var(--line);border-radius:5px;padding:1px 5px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+[data-div="ict"]{--accent:var(--ict)}
+[data-div="math"]{--accent:var(--math)}
+
+header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:19;background:var(--bg);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0}
+.logo{font:800 22px/1 var(--f-display);letter-spacing:-.02em;text-decoration:none;white-space:nowrap}
+.logo{display:flex;align-items:center;gap:10px}
+.logo b{font-weight:800}
+.logo .mark{width:30px;height:30px;flex:none}
+.logo span{color:var(--ict)}
+.nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0;min-width:0;overflow-x:auto}
+.nav a.l{display:block;padding:8px 12px;border-radius:8px;text-decoration:none;font:500 14px/1 var(--f-mono);color:var(--muted);white-space:nowrap}
+.nav a.l:hover{background:var(--surface);color:var(--fg)}
+.nav a.l.on{background:var(--surface);color:var(--fg);box-shadow:inset 0 -2px 0 var(--accent)}
+
+.eyebrow{font:500 13px/1 var(--f-mono);color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin:0 0 14px}
+h1{font:800 clamp(38px,7vw,64px)/1.03 var(--f-display);letter-spacing:-.03em;margin:0 0 18px;text-wrap:balance}
+h1 em{font-style:normal;background:linear-gradient(transparent 62%,var(--mark) 62% 92%,transparent 92%)}
+h2{font:800 clamp(26px,4.2vw,36px)/1.1 var(--f-display);letter-spacing:-.02em;margin:0;text-wrap:balance}
+h3{font:600 20px/1.2 var(--f-display);margin:0}
+.lead{font-size:18px;color:var(--muted);max-width:52ch;margin:0}
+.sub{color:var(--muted);margin:0;max-width:60ch}
+.head{display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
+section{padding-block:32px}
+.page{padding-block:36px 48px}
+.crumbs{font:400 13px/1.5 var(--f-mono);color:var(--muted);margin:0 0 24px;display:flex;flex-wrap:wrap;gap:6px}
+.crumbs a{text-decoration:none}.crumbs a:hover{color:var(--fg)}
+
+.btn{display:inline-block;padding:13px 20px;border-radius:10px;font:600 15px/1 var(--f-body);text-decoration:none;border:2px solid var(--fg);background:transparent;color:var(--fg);cursor:pointer}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.sm{padding:10px 14px;font-size:14px}
+.btn:hover{transform:translateY(-1px)}
+.row{display:flex;flex-wrap:wrap;gap:12px}
+
+.divs{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding-bottom:24px}
+.divs>*{min-width:0}
+.panel{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--accent);border-radius:14px;padding:26px;display:flex;flex-direction:column;gap:14px}
+.panel .big{font:800 clamp(34px,6vw,48px)/1 var(--f-display);letter-spacing:-.03em;color:var(--accent)}
+.panel p{margin:0;color:var(--muted)}
+.panel .row{margin-top:auto;padding-top:8px}
+.hero{padding-block:48px 36px;display:grid;gap:18px}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.two>*{min-width:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:10px;min-width:0;text-decoration:none}
+a.card:hover{border-color:var(--accent)}
+.card .path{font:500 13px/1 var(--f-mono);color:var(--accent)}
+.card p{margin:0;color:var(--muted);font-size:15px}
+.card ul{margin:0;padding-left:18px;color:var(--muted);font-size:15px}
+
+/* Hub: outer card + tiles, like a section index */
+.hub{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:22px}
+.hub-h{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-bottom:18px}
+.hub-h .big{font:800 clamp(34px,7vw,52px)/1 var(--f-display);letter-spacing:-.03em;color:var(--accent)}
+.pill{font:500 13px/1 var(--f-mono);padding:8px 12px;border-radius:999px;background:var(--bg);border:1px solid var(--line);color:var(--accent)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.tile{display:flex;flex-direction:column;gap:12px;padding:18px;border-radius:16px;background:var(--bg);border:1px solid transparent;text-decoration:none;min-width:0}
+.tile:hover{border-color:var(--accent)}
+.tile svg{width:28px;height:28px;stroke:var(--accent);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.tile b{font:600 18px/1.25 var(--f-display)}
+.tile span.d{font-size:14px;color:var(--muted);line-height:1.4}
+.tile .soon-t{align-self:flex-start;font:400 11px/1 var(--f-mono);padding:4px 7px;border-radius:5px;border:1px dashed var(--line);color:var(--muted)}
+@media (max-width:520px){.tiles{grid-template-columns:1fr 1fr}.tile{padding:14px}.hub{padding:16px}}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{min-width:48px;height:48px;padding:0 10px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);color:var(--fg);font:800 18px/1 var(--f-display);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.lbl{font:500 12px/1 var(--f-mono);color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin:0 0 10px}
+
+.topics{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.topics li{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:8px;font-weight:500}
+.tag{align-self:flex-start;font:400 12px/1 var(--f-mono);padding:5px 8px;border-radius:6px;background:var(--bg);border:1px solid var(--line);color:var(--muted)}
+.note{font:400 12px/1.5 var(--f-mono);color:var(--muted);margin:16px 0 0}
+
+.q{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;max-width:640px}
+.qt{font:600 20px/1.35 var(--f-display);margin:0 0 16px}
+.opts{display:grid;gap:8px}
+.opt{text-align:left;padding:12px 14px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);font:500 15px/1.3 var(--f-body);cursor:pointer}
+.opt:hover{border-color:var(--accent)}
+.opt.ok{border-color:var(--accent);background:var(--accent);color:var(--accent-ink)}
+.opt.no{border-color:var(--bad);color:var(--bad)}
+.fb{min-height:24px;margin:14px 0 0;font-size:14px;color:var(--muted)}
+.big-score{font:800 56px/1 var(--f-display);color:var(--accent);margin:8px 0 14px}
+
+.game{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;max-width:640px;display:flex;flex-direction:column;gap:14px}
+.game .stat{display:flex;gap:18px;font:500 14px/1 var(--f-mono);color:var(--muted);flex-wrap:wrap}
+.game .stat b{color:var(--fg);font-weight:500}
+.target{font:800 clamp(48px,12vw,72px)/1 var(--f-display);color:var(--accent);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.bits{display:grid;grid-template-columns:repeat(8,1fr);gap:6px}
+.bit{display:flex;flex-direction:column;align-items:center;gap:4px;font:400 11px/1 var(--f-mono);color:var(--muted)}
+.bit button{width:100%;aspect-ratio:1;max-height:56px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);font:800 20px/1 var(--f-display);cursor:pointer}
+.bit button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.mq{font:800 clamp(36px,9vw,56px)/1 var(--f-display);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.inp{font:600 24px/1 var(--f-mono);width:100%;max-width:220px;padding:12px 14px;border-radius:10px;border:2px solid var(--line);background:var(--bg);color:var(--fg)}
+.bar{height:8px;background:var(--bg);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent);width:0}
+
+.tool{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:14px}
+.sel{display:grid;grid-template-columns:140px 1fr;gap:12px}
+.sel>*{min-width:0}
+select{font:500 15px/1.3 var(--f-body);padding:11px 12px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);width:100%}
+pre.plan{margin:0;padding:16px;background:var(--bg);border:1px solid var(--line);border-radius:10px;font:400 13px/1.7 var(--f-mono);white-space:pre-wrap;overflow-wrap:anywhere}
+pre.code{margin:10px 0 0;padding:14px;background:var(--bg);border:1px solid var(--line);border-radius:10px;font:400 13px/1.6 var(--f-mono);overflow-x:auto;color:var(--fg)}
+details{background:var(--surface);border:1px solid var(--line);border-radius:12px}
+details+details{margin-top:10px}
+summary{cursor:pointer;padding:14px 16px;font:600 17px/1.3 var(--f-display);list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--accent);font-family:var(--f-mono)}
+details[open] summary::after{content:"−"}
+details>div{padding:0 16px 16px;color:var(--muted);font-size:15px}
+details>div p{margin:0 0 8px}
+details>div ul,details>div ol{margin:0;padding-left:20px;display:grid;gap:4px}
+details>div b{color:var(--fg);font-weight:600}
+.check{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--bg);cursor:pointer;font-size:15px}
+.check input{width:20px;height:20px;margin-top:2px;accent-color:var(--accent);flex:none}
+.checks{display:grid;gap:8px}
+.soon{display:flex;flex-wrap:wrap;gap:8px}
+.soon span{font:400 13px/1 var(--f-mono);padding:8px 10px;border:1px dashed var(--line);border-radius:8px;color:var(--muted)}
+
+
+.tl{all:unset;cursor:pointer;font-weight:600;color:var(--fg);line-height:1.35;display:block}
+.tl:hover{color:var(--accent)}
+.tl:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+.tag.ok{color:var(--accent);border-color:var(--accent)}
+.lesson{margin-top:20px;max-width:68ch}
+.lesson h3.lt{font:800 clamp(24px,4vw,32px)/1.15 var(--f-display);margin:0 0 14px;letter-spacing:-.02em}
+.lesson h4{font:600 19px/1.25 var(--f-display);margin:24px 0 8px}
+.lesson p{margin:0 0 12px}
+.lesson ul,.lesson ol{margin:0 0 12px;padding-left:22px;display:grid;gap:4px}
+.lesson .ex{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:0 0 14px}
+.lesson .ex b{color:var(--accent)}
+.lesson .tw{overflow-x:auto;margin-bottom:14px}
+.lesson table{border-collapse:collapse;width:100%;font-size:15px}
+.lesson th,.lesson td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+.lesson th{background:var(--surface);font-weight:600}
+
+.sum{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:20px;max-width:520px}
+.sum b{font:800 20px/1 var(--f-display);justify-self:end}
+.sum .bar{grid-column:1/-1}
+.okm{color:var(--accent);font-weight:600}
+.topics li.lk{opacity:.75}
+.topics .lkt{color:var(--muted);font-weight:500}
+.demo{border:1px dashed var(--mark);background:var(--surface);border-radius:10px;padding:10px 14px;font-size:14px;color:var(--muted);margin:0 0 20px;max-width:520px}
+.form{display:grid;gap:14px;max-width:460px}
+.fld{display:grid;gap:6px}
+.fld label{font:500 13px/1.2 var(--f-mono);color:var(--muted);letter-spacing:.04em}
+.fld input,.fld select{font:500 16px/1.3 var(--f-body);padding:13px 14px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);color:var(--fg);width:100%;min-width:0}
+.fld input.up{text-transform:uppercase;letter-spacing:.12em;font-family:var(--f-mono)}
+.err{color:var(--bad);font-size:14px;min-height:20px;margin:0}
+.cred{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;display:grid;gap:14px;max-width:460px}
+.cred .kv{display:flex;justify-content:space-between;gap:12px;align-items:baseline;flex-wrap:wrap}
+.cred .kv span{font:500 13px/1 var(--f-mono);color:var(--muted);letter-spacing:.06em}
+.cred .kv b{font:600 22px/1.2 var(--f-mono);overflow-wrap:anywhere}
+.me-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 20px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:center;margin-bottom:20px}
+.me-card h2{font-size:clamp(22px,4vw,30px)}
+.me-card p{margin:4px 0 0;color:var(--muted);font-size:14px}
+.ptabs{display:flex;gap:6px;border-bottom:1px solid var(--line);margin:8px 0 22px;overflow-x:auto}
+.ptab{padding:12px 16px;border:0;background:transparent;color:var(--muted);font:600 15px/1 var(--f-body);cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap}
+.ptab[aria-selected="true"]{color:var(--fg);border-bottom-color:var(--ict)}
+.frow{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin-bottom:16px}
+.frow .fld{min-width:110px;flex:1 1 130px}
+.twx{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table.tbl{border-collapse:collapse;width:100%;font-size:14px;min-width:560px}
+.tbl th,.tbl td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl th{font:500 12px/1 var(--f-mono);color:var(--muted);letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
+.tbl tr:last-child td{border-bottom:0}
+.tbl .mono{font-family:var(--f-mono)}
+.chipst{font:400 12px/1 var(--f-mono);padding:4px 7px;border-radius:6px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.chipst.on{color:var(--accent);border-color:var(--accent)}
+.codes-new{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:18px;font:500 15px/1.8 var(--f-mono);display:flex;flex-wrap:wrap;gap:6px 18px}
+.btn.xs{padding:7px 10px;font-size:13px;border-width:1.5px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:14px;z-index:30;max-width:90vw}
+footer{border-top:1px solid var(--line);padding-block:28px 36px;color:var(--muted);font-size:14px;margin-top:24px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+
+@media (max-width:760px){
+  .divs,.two{grid-template-columns:1fr}
+  .hero{padding-block:32px 24px}
+  .sel{grid-template-columns:1fr}
+  .nav .wrap{flex-direction:column;align-items:flex-start;gap:6px;padding:10px 0 6px}
+  .nav ul{width:100%}
+  section{padding-block:24px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn:hover{transform:none}}
+
+/* === Full-width + polish === */
+html{zoom:var(--z,1);min-height:100%}
+body{padding-left:max(clamp(14px,3vw,56px),env(safe-area-inset-left,0px));padding-right:max(clamp(14px,3vw,56px),env(safe-area-inset-right,0px));min-height:100vh;
+  background:radial-gradient(1200px 500px at 85% -10%,color-mix(in srgb,var(--math) 14%,transparent),transparent 60%),radial-gradient(1000px 500px at 5% -5%,color-mix(in srgb,var(--ict) 14%,transparent),transparent 60%),var(--bg);background-attachment:fixed}
+.wrap{max-width:none;width:100%}
+.lesson{max-width:84ch}.q,.game{max-width:760px}
+header.nav{background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.zoom{display:flex;align-items:center;gap:2px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:3px;flex:none}
+.zoom button{border:0;background:transparent;color:var(--fg);font:700 15px/1 var(--f-mono);min-width:34px;height:32px;border-radius:999px;cursor:pointer}
+.zoom button:hover{background:var(--bg)}
+.zoom .zv{font:500 12px/1 var(--f-mono);color:var(--muted);min-width:42px;text-align:center;cursor:pointer;border:0;background:transparent}
+.panel,.card,.hub,.topics li,.q,.game{box-shadow:0 1px 2px rgba(18,33,43,.05),0 8px 24px -12px rgba(18,33,43,.18)}
+.panel{border-radius:20px;transition:transform .2s,box-shadow .2s}
+.panel:hover{transform:translateY(-3px);box-shadow:0 14px 34px -14px color-mix(in srgb,var(--accent) 45%,transparent)}
+.hub{border-radius:26px}
+.tile{background:color-mix(in srgb,var(--accent) 7%,var(--surface));border:1px solid var(--line);transition:transform .18s,border-color .18s,box-shadow .18s}
+.tile:hover{transform:translateY(-3px);box-shadow:0 12px 26px -14px color-mix(in srgb,var(--accent) 55%,transparent)}
+.tile svg{width:34px;height:34px;padding:7px;box-sizing:content-box;background:color-mix(in srgb,var(--accent) 14%,transparent);border-radius:12px}
+.tiles{grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+.topics{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+.topics li{border-radius:14px;transition:transform .15s,border-color .15s}
+.topics li:hover{transform:translateY(-2px);border-color:var(--accent)}
+.btn{border-radius:12px;transition:transform .15s,box-shadow .15s}
+.btn.primary{box-shadow:0 8px 20px -10px var(--accent)}
+.chip{border-radius:12px;transition:transform .12s}.chip:hover{transform:translateY(-1px)}
+h1{font-size:clamp(38px,6vw,76px)}
+@media (min-width:1400px){body{font-size:17px}}
+@media (max-width:760px){.zoom{order:3}.nav .wrap{flex-direction:row;flex-wrap:wrap;align-items:center}.nav nav{order:5;width:100%}}
+@media print{.zoom{display:none}}
+
+.fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;margin:0 .15em;line-height:1.1;font-size:.92em;white-space:nowrap}
+.fr>span:first-child{border-bottom:.09em solid currentColor;padding:0 .18em .04em}
+.fr>span:last-child{padding:.04em .18em 0}
+.mx{font-size:1em;margin-right:.1em}
+
+.keys{display:grid;gap:10px}
+details.key{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:4px 16px}
+details.key summary{cursor:pointer;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;padding:12px 0;list-style:none}
+details.key summary::-webkit-details-marker{display:none}
+details.key[open] summary{border-bottom:1px solid var(--line);margin-bottom:12px}
+.kq{margin:0 0 12px;padding-left:22px;display:grid;gap:16px}
+.kqt{margin:0 0 6px;font-weight:600}
+.ko{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.ko li{padding:6px 10px;border-radius:8px;background:var(--bg)}
+.ko li.kok{background:color-mix(in srgb,var(--accent) 16%,transparent);border:1px solid var(--accent)}
+.ke{margin:6px 0 0;color:var(--muted);font-size:14px}
+
+.thes h5{font:600 13px/1 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:14px 0 8px}
+.thes p,.thes ul,.thes ol{margin:0 0 8px}.thes ul,.thes ol{padding-left:22px;display:grid;gap:5px}
+.thes .terms{display:flex;flex-wrap:wrap;gap:6px}
+.deck{position:fixed;inset:0;z-index:100;background:var(--bg);display:grid;grid-template-rows:auto 1fr auto;color:var(--fg);padding-top:env(safe-area-inset-top,0px)}
+.dbar{display:flex;align-items:center;gap:10px;padding:10px clamp(12px,3vw,28px);border-bottom:1px solid var(--line);background:var(--surface)}
+.dtt{font:600 14px/1.3 var(--f-display);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dct{font:500 13px/1 var(--f-mono);color:var(--muted)}
+.dstage{overflow:auto;padding:clamp(18px,4vw,56px) clamp(16px,6vw,96px);border-top:8px solid var(--accent);background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 7%,var(--bg)),var(--bg))}
+.dstage.cover{display:flex;flex-direction:column;justify-content:center;gap:18px;text-align:left}
+.dh{font:800 clamp(30px,6vw,72px)/1.08 var(--f-display);letter-spacing:-.03em;margin:0}
+.dsub{font:500 clamp(14px,2vw,20px)/1.3 var(--f-mono);color:var(--accent);margin:0;letter-spacing:.06em;text-transform:uppercase}
+.dh2{font:800 clamp(24px,4.4vw,48px)/1.12 var(--f-display);letter-spacing:-.02em;margin:0 0 clamp(14px,2.4vw,28px);color:var(--accent)}
+.dbody{font-size:clamp(18px,2.5vw,32px);line-height:1.5;max-width:1200px}
+.dbody p,.dbody ul,.dbody ol{margin:0 0 .6em}.dbody ul,.dbody ol{padding-left:1.2em;display:grid;gap:.3em}
+.dbody .ex{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--accent);border-radius:14px;padding:.6em .9em;margin:0 0 .7em}
+.dbody .ex b{color:var(--accent)}
+.dbody table{border-collapse:collapse;font-size:.8em}.dbody th,.dbody td{border:1px solid var(--line);padding:.3em .6em;text-align:left}
+.dbody .tw{overflow-x:auto}
+.dl{list-style:none;padding-left:0!important;font-size:.85em}
+.da{color:var(--accent)}.de{color:var(--muted);font-size:.8em}.dhw{margin-top:1em}
+.dnav{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px clamp(12px,3vw,28px) max(10px,env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);background:var(--surface)}
+.ddots{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;min-width:0}
+.ddots i{width:10px;height:10px;border-radius:50%;background:var(--line);cursor:pointer}.ddots i.on{background:var(--accent);transform:scale(1.25)}
+.dnav button:disabled{opacity:.4;cursor:default}
+@media (max-width:600px){#dfs{display:none}}
+.unl{margin-top:28px;padding:18px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+</style>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#home"><svg class="mark" viewBox="120 110 272 280" aria-hidden="true"><path d="M168 136V280a88 88 0 0 0 88 88" fill="none" stroke="#4fd1a5" stroke-width="44" stroke-linecap="round"/><path d="M344 136V280a88 88 0 0 1-88 88" fill="none" stroke="#ff9a6b" stroke-width="44" stroke-linecap="round"/><circle cx="256" cy="150" r="20" fill="#f2b632"/></svg><b>Ustoz<span>bek</span></b></a>
+    <nav aria-label="Asosiy menyu">
+      <ul>
+        <li><a class="l" href="#home" data-nav="home">Bosh sahifa</a></li>
+        <li><a class="l" href="#ictbek" data-nav="ict">ICTBEK</a></li>
+        <li><a class="l" href="#mathbek" data-nav="math">MATHBEK</a></li>
+        <li><a class="l" id="acctlink" href="#kirish" data-nav="acct">Kirish</a></li>
+      </ul>
+    </nav>
+  <div class="zoom" role="group" aria-label="Masshtab"><button type="button" id="zm" aria-label="Kichiklashtirish">−</button><button type="button" class="zv" id="zv" aria-label="Asl o‘lcham">100%</button><button type="button" id="zp" aria-label="Kattalashtirish">+</button></div>
+  </div>
+</header>
+
+<main id="app" class="wrap"></main>
+
+<footer>
+  <div class="wrap">
+    <span><strong>ustozbek.uz</strong> · ICTBEK va MATHBEK</span>
+    <span>O‘quvchi va o‘qituvchi uchun bir joyda</span>
+  </div>
+</footer>
+
+<script src="firebase-config.js"></script>
+<script src="backend.js"></script>
+<script src="content.js"></script>
+<script src="content-math5.js"></script>
+<script src="content-ict11.js"></script>
+<script src="content-ict10.js"></script>
+<script src="content-ict9.js"></script>
+<script src="content-ict8.js"></script>
+<script src="content-ict7.js"></script>
+<script src="content-ict6.js"></script>
+<script src="content-ict5.js"></script>
+<script>
+(function(){
+  var app=document.getElementById("app"),timer=null,S={};
+
+  var IC={
+    book:'<path d="M2 4h7a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H2z"/><path d="M22 4h-7a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h8z"/>',
+    monitor:'<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/>',
+    code:'<path d="M8 8l-5 4 5 4M16 8l5 4-5 4M14 5l-4 14"/>',
+    clip:'<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9zM9 14l2 2 4-4"/>',
+    flask:'<path d="M9 3h6M10 3v6L4 19a2 2 0 0 0 2 3h12a2 2 0 0 0 2-3l-6-10V3"/>',
+    news:'<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/>',
+    game:'<rect x="2" y="7" width="20" height="11" rx="4"/><path d="M7 10v5M4.5 12.5h5M16 11h.01M18 14h.01"/>',
+    cap:'<path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2.5 9 2.5 12 0v-5"/>',
+    slides:'<path d="M3 4h18M5 4v10h14V4M12 14v5M8 20l4-1 4 1"/>',
+    doc:'<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/>',
+    bulb:'<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/>',
+    award:'<circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/>',
+    star:'<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',
+    eye:'<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+    calc:'<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h.01M12 12h.01M16 12h.01M8 16h.01M12 16h.01M16 16h.01"/>',
+    sigma:'<path d="M18 5H6l6 7-6 7h12"/>',
+    spark:'<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M18 6l-2.5 2.5M8.5 15.5L6 18"/>'
+  };
+  function icon(n){return '<svg viewBox="0 0 24 24" aria-hidden="true">'+IC[n]+'</svg>'}
+
+  var SOON={
+    taqdimotlar:["Mavzu bo‘yicha tayyor taqdimotlar","Tarqatma materiallar va ish varaqlari","Ko‘rgazmali qurollar"],
+    mezonlar:["Og‘zaki javob va amaliy ish mezonlari","Test baholash shkalasi","O‘quvchi yutuqlari daftari"],
+    ochiqdars:["Ochiq dars ssenariylari","Dars tahlili shakllari","Tajriba almashish"],
+    malaka:["Kurslar va treninglar ro‘yxati","Metodik seminarlar","Sertifikatlar bilan ishlash"]
+  };
+  var TEA=[
+    {id:"reja",t:"Dars rejasi",i:"doc",k:"plan",d:"45 daqiqalik reja yaratuvchi"},
+    {id:"kalit",t:"Test savollari va javoblari",i:"doc",k:"key",d:"Har mavzu testi, to‘g‘ri javoblari bilan"},
+    {id:"metodlar",t:"Interfaol metodlar",i:"bulb",k:"methods",d:"Misollar bilan"},
+    {id:"attestatsiya",t:"Attestatsiyaga tayyorlov",i:"award",k:"attest",d:"Tayyorgarlik rejasi"},
+    {id:"taqdimotlar",t:"Tezislar va taqdimotlar",i:"slides",k:"deck",d:"Har mavzu uchun tezis va slaydlar"},
+    {id:"mezonlar",t:"Baholash mezonlari",i:"star",k:"soon",d:"Mezonlar va shkalalar"},
+    {id:"ochiqdars",t:"Ochiq dars namunalari",i:"eye",k:"soon",d:"Ssenariy va tahlil"},
+    {id:"malaka",t:"Malaka oshirish",i:"cap",k:"soon",d:"Kurslar va seminarlar"}
+  ];
+
+  var D={
+    ict:{key:"ict",name:"ICTBEK",path:"ictbek",fan:"Informatika",full:"Informatika va axborot texnologiyalari",
+      intro:"Kompyuter savodxonligi, dasturlash va raqamli ko‘nikmalar bo‘yicha darslar, testlar va o‘yinlar.",
+      stu:[
+        {id:"darslar",t:"Informatika darslari",i:"book",k:"grade",d:"1–11-sinf mavzulari"},
+        {id:"savodxonlik",t:"Kompyuter savodxonligi",i:"monitor",k:"acc",d:"Word, Excel, PowerPoint",
+          intro:"Har kuni kerak bo‘ladigan ofis dasturlari va xavfsiz ishlash qoidalari.",
+          items:[
+            {t:"Word",b:"<p>Matn yozish, shaklini o‘zgartirish va hujjat tayyorlash dasturi.</p><ul><li>Shrift, o‘lcham va rangni tanlash</li><li>Abzats va qator oralig‘i</li><li>Jadval va rasm qo‘yish</li><li>Hujjatni saqlash: <code>Ctrl + S</code></li></ul>"},
+            {t:"Excel",b:"<p>Sonlar bilan ishlash va hisob-kitob uchun elektron jadval.</p><ul><li>Katak, qator va ustun tushunchasi</li><li>Formula <code>=</code> belgisi bilan boshlanadi: <code>=A1+B1</code></li><li>Yig‘indi: <code>=SUM(A1:A10)</code></li><li>Ma’lumotdan diagramma yasash</li></ul>"},
+            {t:"PowerPoint",b:"<p>Taqdimot tayyorlash dasturi.</p><ul><li>Bitta slaydda bitta asosiy fikr</li><li>Matn kam, shrift katta</li><li>Rasm va diagramma matndan tushunarliroq</li><li>O‘tish effektlarini me’yorida ishlatish</li></ul>"},
+            {t:"Klaviatura qisqa tugmalari",b:"<ul><li><code>Ctrl + C</code> nusxa olish</li><li><code>Ctrl + V</code> qo‘yish</li><li><code>Ctrl + X</code> kesib olish</li><li><code>Ctrl + Z</code> oxirgi amalni bekor qilish</li><li><code>Ctrl + S</code> saqlash</li></ul>"},
+            {t:"Internetda xavfsizlik",b:"<ul><li>Parol uzun bo‘lsin va har saytda boshqacha bo‘lsin</li><li>Begona havola va fayllarni ochmang</li><li>Shaxsiy ma’lumotni notanish odamlarga bermang</li><li>Shubhali xabar haqida kattalarga ayting</li></ul>"}
+          ]},
+        {id:"dasturlash",t:"Dasturlash",i:"code",k:"acc",d:"Scratch, Python, HTML, CSS, JavaScript",
+          intro:"Beshta til, har biri o‘z bosqichida. Kichik namunalar bilan tanishing.",
+          items:[
+            {t:"Scratch · boshlang‘ich",b:"<p>Bloklarni ulab dastur tuziladi. Qahramon harakati, tovush va oddiy o‘yin yaratishni o‘rgatadi, algoritm tushunchasini tushuntiradi.</p>"},
+            {t:"Python · asosiy",b:"<p>O‘zgaruvchilar, shartlar, sikllar va funksiyalar.</p><pre class='code'>ism = input(\"Ismingiz: \")\nprint(\"Salom,\", ism)</pre>"},
+            {t:"HTML · veb",b:"<p>Sahifa tuzilishi: sarlavha, matn, rasm va havolalar.</p><pre class='code'>&lt;h1&gt;Mening sahifam&lt;/h1&gt;\n&lt;p&gt;Salom, dunyo!&lt;/p&gt;</pre>"},
+            {t:"CSS · veb",b:"<p>Ranglar, shriftlar va sahifa maketi.</p><pre class='code'>h1 {\n  color: teal;\n  font-size: 32px;\n}</pre>"},
+            {t:"JavaScript · veb",b:"<p>Sahifani jonlantirish: tugmalar, hodisalar, oddiy o‘yinlar.</p><pre class='code'>let a = 5;\nlet b = 3;\nconsole.log(a + b);</pre>"}
+          ]},
+        {id:"testlar",t:"Testlar",i:"clip",k:"quiz",d:"Mavzulashtirilgan testlar"},
+        {id:"amaliyot",t:"Amaliy topshiriqlar",i:"flask",k:"acc",d:"Laboratoriya ishlari",
+          intro:"Har bir topshiriqda bajarish tartibi va baholash mezoni berilgan.",
+          items:[
+            {t:"Word: “Mening maktabim” hujjati · 7-sinf",b:"<ol><li>Yangi hujjat oching va sarlavha yozing (shrift 18).</li><li>Maktab haqida 3 ta abzats matn yozing.</li><li>1 ta rasm va 1 ta jadval qo‘ying.</li><li>Faylni “Familiya_maktab” nomi bilan saqlang.</li></ol><p style='margin-top:8px'><b>Baholash:</b> tuzilishi, formatlash, tozaligi.</p>"},
+            {t:"Excel: oilaviy xarajatlar jadvali · 8-sinf",b:"<ol><li>“Xarajat turi” va “Summa” ustunlarini yarating.</li><li>Kamida 6 ta xarajat kiriting.</li><li>Jami summani <code>=SUM()</code> bilan hisoblang.</li><li>Xarajatlar bo‘yicha diagramma yasang.</li></ol><p style='margin-top:8px'><b>Baholash:</b> formula to‘g‘riligi, diagramma, jadval ko‘rinishi.</p>"},
+            {t:"PowerPoint: 5 slaydli taqdimot · 6-sinf",b:"<ol><li>Mavzu tanlang (masalan, “Ona yurtim”).</li><li>1-slayd sarlavha, 2–4-slayd asosiy fikrlar, 5-slayd xulosa.</li><li>Har slaydda kamida bitta rasm bo‘lsin.</li><li>Taqdimotni sinfga 2 daqiqada tushuntiring.</li></ol><p style='margin-top:8px'><b>Baholash:</b> mazmun, dizayn, nutq.</p>"},
+            {t:"Scratch: qahramonni harakatlantirish · 7-sinf",b:"<ol><li>Qahramonni tanlang.</li><li>Strelka tugmalari bilan to‘rt yo‘nalishda harakatlantiring.</li><li>Chetga tegsa, orqaga qaytsin.</li><li>Ball hisoblagich qo‘shing.</li></ol><p style='margin-top:8px'><b>Baholash:</b> dastur ishlashi, g‘oya, qo‘shimcha imkoniyatlar.</p>"},
+            {t:"Python: ikki son yig‘indisi · 8-sinf",b:"<ol><li>Ikkita sonni <code>input()</code> bilan so‘rang.</li><li><code>int()</code> yordamida butun songa o‘tkazing.</li><li>Yig‘indini <code>print()</code> bilan chiqaring.</li><li>Ayirma va ko‘paytmani ham qo‘shing.</li></ol><p style='margin-top:8px'><b>Baholash:</b> to‘g‘ri natija, kod tartibi.</p>"}
+          ]},
+        {id:"yangiliklar",t:"IT yangiliklari",i:"news",k:"acc",d:"Yangi texnologiyalar",
+          intro:"Tushuntiruvchi maqolalar. Eng so‘nggi yangiliklar keyinroq qo‘shiladi.",
+          items:[
+            {t:"Sun’iy intellekt nima?",b:"<p>Sun’iy intellekt kompyuterga odamdek o‘rganish, matnni tushunish va rasmni tanish imkonini beradi. U katta hajmdagi ma’lumotlardan o‘rganadi. Xato qilishi mumkin, shuning uchun natijani tekshirib ko‘rish kerak.</p>"},
+            {t:"Bulutli xizmatlar nima?",b:"<p>Fayllar internet orqali serverlarda saqlanadi va istalgan qurilmadan ochiladi. Qulayligi: ma’lumot yo‘qolmaydi. Kamchiligi: internet kerak va ma’lumot xavfsizligiga e’tibor berish lozim.</p>"},
+            {t:"Kuchli parol qanday bo‘ladi?",b:"<ul><li>Kamida 12 belgi</li><li>Harf, raqam va belgilar aralash</li><li>Har sayt uchun alohida parol</li><li>Imkon bo‘lsa, ikki bosqichli tasdiqlashni yoqing</li></ul>"},
+            {t:"Dasturlashni qayerdan boshlash kerak?",b:"<p>Avval Scratch bilan algoritm fikrlashni o‘rganing, keyin Python’ga o‘ting. Veb yaratmoqchi bo‘lsangiz HTML va CSS, so‘ng JavaScript yaxshi yo‘l.</p>"}
+          ]},
+        {id:"oyinlar",t:"O‘yinlar",i:"game",k:"games",d:"Ikkilik kod o‘yini"}
+      ],
+      quiz:[
+        {g:[1,4],q:"Matn terish uchun qaysi qurilmadan foydalaniladi?",o:["Sichqoncha","Klaviatura","Monitor","Karnay"],a:1,e:"Matn klaviatura yordamida kiritiladi."},
+        {g:[1,4],q:"Fayllarni tartib bilan saqlash uchun nima yaratiladi?",o:["Papka","Rasm","Tugma","Oyna"],a:0,e:"Papka ichida fayllar guruhlab saqlanadi."},
+        {g:[3,6],q:"Kompyuterning “miyasi” deb qaysi qism aytiladi?",o:["Monitor","Klaviatura","Protsessor","Printer"],a:2,e:"Protsessor barcha hisob-kitoblarni bajaradi."},
+        {g:[5,8],q:"1 bayt necha bitga teng?",o:["4","8","16","1024"],a:1,e:"1 bayt = 8 bit. 1 Kbayt esa 1024 bayt."},
+        {g:[5,8],q:"Quyidagilardan qaysi biri axborotni saqlash qurilmasi?",o:["Flesh-xotira","Sichqoncha","Veb-kamera","Karnay"],a:0,e:"Flesh-xotira ma’lumotni saqlaydi."},
+        {g:[8,10],q:"Ikkilik sanoq sistemasidagi 101 soni o‘nlikda nechaga teng?",o:["3","4","5","6"],a:2,e:"1·4 + 0·2 + 1·1 = 5."},
+        {g:[8,11],q:"Python’da print(2 + 3 * 2) nimani chiqaradi?",o:["10","8","12","7"],a:1,e:"Avval ko‘paytirish: 3 * 2 = 6, keyin 2 + 6 = 8."},
+        {g:[9,11],q:"HTML’da eng katta sarlavha qaysi teg bilan yoziladi?",o:["<h6>","<head>","<h1>","<title>"],a:2,e:"<h1> eng katta, <h6> eng kichik sarlavha."},
+        {g:[10,11],q:"IP-manzil nima uchun kerak?",o:["Faylni arxivlash uchun","Tarmoqdagi qurilmani aniqlash uchun","Rasmni siqish uchun","Tovushni yozish uchun"],a:1,e:"IP-manzil tarmoqdagi har bir qurilmani ajratib turadi."},
+        {g:[10,11],q:"Python’da ro‘yxat (list) qaysi qavs bilan yoziladi?",o:["( )","{ }","[ ]","< >"],a:2,e:"Ro‘yxat kvadrat qavsda yoziladi: [1, 2, 3]."}
+      ],
+      gameName:"Ikkilik kod",
+      gameText:"Berilgan sonni ikkilik ko‘rinishda hosil qiling: bitlarni bosib 0 va 1 ni almashtiring.",
+      methodEx:{
+        "Aqliy hujum":"“Kompyuter xavfsizligini qanday ta’minlash mumkin?” savoliga 2 daqiqada iloji boricha ko‘p g‘oya yozdiriladi.",
+        "Klaster":"“Internet” so‘zi markazga yoziladi, atrofiga unga aloqador tushunchalar (sayt, brauzer, qidiruv) ulanadi.",
+        "Venn diagrammasi":"RAM va ROM xotirasini solishtirish: umumiy va farqli jihatlar ikki doirada yoziladi.",
+        "Zig-zag (jigsaw)":"Guruhlar Word, Excel yoki PowerPoint’dan birini o‘rganib, keyin boshqa guruhlarga o‘rgatadi.",
+        "T-jadval":"Bulutli xizmatlarning afzalliklari va kamchiliklari ikki ustunda yoziladi."
+      }
+    },
+    math:{key:"math",name:"MATHBEK",path:"mathbek",fan:"Matematika",full:"Matematika",
+      intro:"Sanoqdan hosilagacha: tushunarli darslar, mashq testlari va tezkor hisob o‘yinlari.",
+      stu:[
+        {id:"darslar",t:"Matematika darslari",i:"book",k:"grade",d:"1–11-sinf mavzulari"},
+        {id:"hisoblash",t:"Hisoblash ko‘nikmalari",i:"calc",k:"acc",d:"Tezkor hisoblash usullari",
+          intro:"Sonlarni tez va xatosiz hisoblash uchun amaliy usullar.",
+          items:[
+            {t:"Ikki xonali sonni 11 ga ko‘paytirish",b:"<p>Sonning raqamlari orasiga ularning yig‘indisini qo‘ying.</p><p><b>Misol:</b> 35 × 11 = 3 (3+5) 5 = 385.</p><p>Yig‘indi 10 dan oshsa, birlikni chap raqamga qo‘shing: 78 × 11 = 7 (15) 8 = 858.</p>"},
+            {t:"5 bilan tugaydigan sonning kvadrati",b:"<p>Birlar xonasidan oldingi qismni keyingi son bilan ko‘paytiring va oxiriga 25 yozing.</p><p><b>Misol:</b> 35² uchun 3 × 4 = 12, natija 1225.</p>"},
+            {t:"25 ga ko‘paytirish",b:"<p>Sonni 100 ga ko‘paytirib, 4 ga bo‘ling.</p><p><b>Misol:</b> 36 × 25 = 3600 : 4 = 900.</p>"},
+            {t:"9 ga ko‘paytirish",b:"<p>Sonni 10 ga ko‘paytirib, o‘zini ayiring.</p><p><b>Misol:</b> 7 × 9 = 70 − 7 = 63.</p>"},
+            {t:"Foizni tez topish",b:"<p>Avval 10 foizni toping, keyin kerakli qismlarga bo‘ling.</p><p><b>Misol:</b> 80 ning 15 foizi: 10% = 8, 5% = 4, jami 12.</p>"}
+          ]},
+        {id:"formulalar",t:"Formulalar",i:"sigma",k:"acc",d:"Algebra va geometriya",
+          intro:"Eng ko‘p kerak bo‘ladigan formulalar bir joyda.",
+          items:[
+            {t:"Qisqa ko‘paytirish formulalari",b:"<ul><li>(a + b)² = a² + 2ab + b²</li><li>(a − b)² = a² − 2ab + b²</li><li>a² − b² = (a − b)(a + b)</li></ul>"},
+            {t:"Yuza va perimetr",b:"<ul><li>To‘g‘ri to‘rtburchak: S = a·b, P = 2(a + b)</li><li>Kvadrat: S = a², P = 4a</li><li>Uchburchak: S = ½·a·h</li><li>Trapesiya: S = ½(a + b)·h</li><li>Doira: S = πr², aylana uzunligi C = 2πr</li></ul>"},
+            {t:"Kvadrat tenglama",b:"<p>ax² + bx + c = 0 uchun diskriminant D = b² − 4ac.</p><ul><li>D &gt; 0: ikkita ildiz, x = (−b ± √D) / 2a</li><li>D = 0: bitta ildiz, x = −b / 2a</li><li>D &lt; 0: haqiqiy ildiz yo‘q</li></ul>"},
+            {t:"Progressiyalar",b:"<ul><li>Arifmetik: aₙ = a₁ + (n − 1)d, Sₙ = (a₁ + aₙ)·n / 2</li><li>Geometrik: bₙ = b₁·qⁿ⁻¹</li></ul>"},
+            {t:"Pifagor teoremasi va trigonometriya",b:"<ul><li>To‘g‘ri burchakli uchburchakda c² = a² + b²</li><li>sin²α + cos²α = 1</li></ul>"}
+          ]},
+        {id:"testlar",t:"Testlar",i:"clip",k:"quiz",d:"Mavzulashtirilgan testlar"},
+        {id:"amaliyot",t:"Amaliy topshiriqlar",i:"flask",k:"acc",d:"Hayotiy masalalar",
+          intro:"Matematikani o‘lchash va hisoblash orqali hayotda qo‘llash.",
+          items:[
+            {t:"Sinf xonasi yuzini o‘lchash · 5–6-sinf",b:"<ol><li>Ruletka bilan xonaning uzunligi va kengligini o‘lchang.</li><li>Yuzani S = a·b formulasi bilan hisoblang.</li><li>Perimetrni ham toping.</li><li>Natijani jadvalga yozing.</li></ol>"},
+            {t:"Oilaviy xarajatlar foizi · 6–7-sinf",b:"<ol><li>Oy davomidagi asosiy xarajatlarni yozing.</li><li>Har bir xarajatning jami summadagi foizini hisoblang.</li><li>Eng katta xarajat qaysi ekanini aniqlang.</li></ol>"},
+            {t:"π ni o‘zingiz toping · 6–7-sinf",b:"<ol><li>Bir nechta dumaloq buyum (qopqoq, krujka) tanlang.</li><li>Ip bilan aylana uzunligini, o‘lchagich bilan diametrni o‘lchang.</li><li>Aylana uzunligini diametrga bo‘ling.</li><li>Natijalar taxminan 3,14 ga yaqin bo‘lishini tekshiring.</li></ol>"},
+            {t:"Sinfdagi bo‘ylarning o‘rtachasi · 7–8-sinf",b:"<ol><li>Kamida 10 ta o‘quvchining bo‘yini yozing.</li><li>O‘rta arifmetik qiymatni hisoblang.</li><li>Eng baland va eng past bo‘yning farqini toping.</li></ol>"}
+          ]},
+        {id:"oyinlar",t:"O‘yinlar",i:"game",k:"games",d:"Tezkor hisob o‘yini"},
+        {id:"qiziqarli",t:"Qiziqarli matematika",i:"spark",k:"acc",d:"Tarix va qiziq faktlar",
+          intro:"Matematika tarixidan va sonlar olamidan qiziqarli ma’lumotlar.",
+          items:[
+            {t:"Al-Xorazmiy va “algoritm” so‘zi",b:"<p>“Algoritm” so‘zi buyuk bobokalonimiz Al-Xorazmiy ismining lotincha shaklidan kelib chiqqan. “Algebra” so‘zi esa uning “al-jabr” asariga borib taqaladi.</p>"},
+            {t:"π soni",b:"<p>Har qanday aylana uzunligining diametriga nisbati bir xil, bu π ≈ 3,14159. U cheksiz va takrorlanmaydigan o‘nli kasr, ya’ni irratsional son.</p>"},
+            {t:"Fibonachchi ketma-ketligi",b:"<p>1, 1, 2, 3, 5, 8, 13, 21… Har bir keyingi son oldingi ikkitasining yig‘indisiga teng.</p>"},
+            {t:"Mirzo Ulug‘bek",b:"<p>Mirzo Ulug‘bek Samarqandda rasadxona qurdi va yulduzlar jadvalini tuzdi. U astronomiya va matematikada katta ahamiyatga ega.</p>"}
+          ]}
+      ],
+      quiz:[
+        {g:[1,2],q:"8 + 5 nechaga teng?",o:["12","13","14","15"],a:1,e:"8 + 2 = 10, yana 3 qo‘shsak 13."},
+        {g:[1,4],q:"6 × 4 nechaga teng?",o:["20","22","24","28"],a:2,e:"6 × 4 = 24."},
+        {g:[3,5],q:"Tomoni 5 sm bo‘lgan kvadratning perimetri qancha?",o:["10 sm","15 sm","20 sm","25 sm"],a:2,e:"Perimetr = 4 · 5 = 20 sm."},
+        {g:[5,6],q:"1/2 + 1/4 nechaga teng?",o:["2/6","3/4","1/6","2/4"],a:1,e:"1/2 = 2/4, shuning uchun 2/4 + 1/4 = 3/4."},
+        {g:[6,8],q:"3x + 2 = 11 tenglamada x nechaga teng?",o:["2","3","4","5"],a:1,e:"3x = 9, demak x = 3."},
+        {g:[7,9],q:"Katetlari 3 va 4 bo‘lgan to‘g‘ri burchakli uchburchakning gipotenuzasi nechaga teng?",o:["5","6","7","12"],a:0,e:"3² + 4² = 25, ildizi 5."},
+        {g:[8,10],q:"x² = 49 tenglamaning musbat yechimi qaysi?",o:["6","7","8","9"],a:1,e:"7 · 7 = 49."},
+        {g:[9,11],q:"Arifmetik progressiyada a₁ = 2, d = 3 bo‘lsa, a₄ nechaga teng?",o:["8","9","11","14"],a:2,e:"a₄ = 2 + 3·3 = 11."},
+        {g:[10,11],q:"sin 30° nechaga teng?",o:["1/2","√3/2","1","0"],a:0,e:"sin 30° = 1/2."},
+        {g:[11,11],q:"f(x) = x² funksiyaning hosilasi qaysi?",o:["x","2x","x²","2"],a:1,e:"(xⁿ)′ = n·xⁿ⁻¹, shuning uchun (x²)′ = 2x."}
+      ],
+      gameName:"Tezkor hisob",
+      gameText:"30 soniya ichida iloji boricha ko‘p misolni yeching. Savollar sinfingizga moslanadi.",
+      methodEx:{
+        "Aqliy hujum":"“Bu masalani necha xil usulda yechish mumkin?” savoliga guruhlar tez g‘oyalar yozadi.",
+        "Klaster":"“Kasr” so‘zi markazga yoziladi, atrofiga surat, maxraj, qisqartirish, taqqoslash ulanadi.",
+        "Venn diagrammasi":"Kvadrat va to‘g‘ri to‘rtburchakning umumiy va farqli xossalari doiralarda yoziladi.",
+        "Zig-zag (jigsaw)":"Har guruh bitta teorema isbotini o‘rganib, keyin boshqa guruhlarga tushuntiradi.",
+        "T-jadval":"Tenglamani yechishning grafik va algebraik usullari ikki ustunda solishtiriladi."
+      }
+    }
+  };
+  D.ict.tea=TEA;D.math.tea=TEA;
+  D.ict.topics={
+    1:["Kompyuter bilan tanishuv","Sichqoncha bilan ishlash","Kompyuter oldida xavfsiz o‘tirish","Oddiy rasm chizish"],
+    2:["Klaviatura tugmalari","Fayl va papka nima","Matn terish","Kompyuter o‘yinlarida xavfsizlik"],
+    3:["Axborot nima","Kompyuterning qismlari","Chizma dasturi","Oddiy algoritm"],
+    4:["Matn muharriri","Jadval yaratish","Taqdimot bilan tanishuv","Scratch’ga kirish"],
+    5:["1-dars. Matnli hujjat bilan ishlashni boshlash","2-dars. Sichqonchadan va klaviaturadan foydalanish","3-dars. Matnni belgilash va tahrirlash","4-dars. Matnni o‘chirish. Amaliy mashg‘ulot","5-dars. Matnni ko‘chirish. Amaliy mashg‘ulot","6-dars. Asosiy tugmalarni tanlash. Hujjatni chop etish","7-dars. Nazorat ishi","8-dars. Matnni tekshirish","9-dars. Save tugmasi va hujjatni qulay nom bilan saqlash","10-dars. Tasvirlar bilan ishlashni boshlash. Line uskunasidan foydalanish","11-dars. Pencil va Brush uskunalaridan foydalanish","12-dars. Chiziqning qalinligi va rangini o‘zgartirish.","13-dars. Shakllar chizish","14-dars. Tasvir qismlaridan nusxa olish, kesib tashlash yoki joylashtirishdan foydalanish","15-dars. Nazorat ishi","16-dars. Eraser uskunasi. Tasvirni saqlash","17-dars. Diagrammalar bilan ishlashni boshlash. Axborotni guruhlash","18-dars. Axborotni qiymatini hisoblash. Piktogramma yaratish","19-dars. Jadvallar yaratishda Microsoft Excel dasturidan foydalanish. Grafika. Diagramma va unga ma‘lumotlar kiritish","20-dars. Diagramma turini tanlash. Diagrammaga x-o‘qi, y-o‘qi hamda diagramma nomini joylash","21-dars. Diagrammadan xulosa chiqarish","22-dars. Ustunli diagramma ustunlari rangini o‘zgartirish","23-dars. Nazorat ishi","24-dars. Blok-sxema yaratish. Burchaklar bilan ishlash.","25-dars. Spraytlarni oldinga va turli yo‘nalishlarga harakatlantirish","26-dars. Dasturlashni boshlash. Robotni labirint bo‘ylab harakatlantirish","27-dars. Takrorlash","28-dars. Qidiruv tizimlarida ishlashni boshlash. Qidiruv tizimlari.","29-dars. Veb-brauzerlar.","30-dars. Elektron pochtada ishlash. Elektron pochta. Yangi elektron xat yozish.","31-dars. Qabul qiluvchining manzilini kiritish. Xatni o‘qish va unga javob qaytarish.","32-dars. Elektron pochtada xabarlarni uzatish va formatlash","33-dars. Nazorat ishi","34-dars. Takrorlash"],
+    6:["1-dars. Matn qo‘shish, o‘zgartrish va ko‘chirish","2-dars. Shrift turi, o‘lchami va rangini o‘zgartrish. Matnni tekislash","3-dars. Hujjatga tasvir va hoshiya qo‘shish","4-dars. Hujjatlarni auditoriya uchun moslash","5-dars. Loyiha ishi. Amaliy mashg‘ulot","6-dars. Tasvirni import qilish","7-dars. Ishning boshlang‘ich nusxalari.","8-dars. Tasvirlarni aylantirish, teskari o‘girish. Tasvirni o‘lchamlarini o‘zgartish","9-dars. Nazorat ishi","10-dars. Elektron jadval tushunchasi. Ma‘lumotlarni elektron jadvalga kiritish","11-dars. Sodda formulalarni kiritishda katak manzilidan foydalanish. Formulalarni nusxalash","12-dars. Grafik yaratish.","13-dars. Amaliy mashg‘ulot","14-dars. Ma‘lumotlar turlari va bazasi, maydonlarni aniqlash","15-dars. Nazorat ishi","16-dars. Ma‘lumotlar bazasidan harakatlanish va teng sharti bilan query yaratish. Query-ma‘lumotlar bazasidan aniq ma‘lumotni qidirish uskunasi","17-dars. Takrorlash algoritmi","18-dars. Takrorlash algoritmidan foydalanib blok-sxemalar yaratish","19-dars. Scratch dasturida takrorlash amaliyotidan foydalanish","20-dars. Scratch dasturida PEN uskunasidan foydalanish","21-dars. Scratch dasturida shakllar bilan ishlash","22-dars. Scratch dasturida takrorlash bloki yordamida yangi shakl chizish","23-dars. Takrorlash blokidan foydalanib dastur natijasini taxmin qilish","24-dars. Scratch dasturida protseduralar bilan ishlash","25-dars. Dekompozitsiyadan foydalanish. Kichik masala yechimi orqali katta masalaga o‘tish","26-dars. Nazorat ishi","27-dars. Web manzillar haqida tushuncha. Qidirish tizimini ishlash tamoyili va axborotning ishonchliligi.","28-dars. Axborotni filtrlash. Web-sahifa, web-sayt, URL manzilidagi matnlarni saqlash","29-dars. Elektron xatni yozish, tahrirlash, o‘qish, javob berish va matn bilan ishlash uskunalari. Foydalanuvchi manzillarini qo‘shish","30-dars. Ilova qilingan hujjatlarni ochish, elektron xatga hujjat ilova qilish","31-dars. Elektron pochta papkalarini boshqarish. Loyiha ishi","32-dars. Taqdimotni yaratish rejasi. Maketni tanlash va slaydga matn, tasvir, ovoz qo‘shish","33-dars. Nazorat ishi","34-dars. Takrorlash"],
+    7:["1-dars. Matn stillarini sozlash va ulardan foydalanish","2-dars. Wrap text sozlamalaridan foydalanish. Tasvirni qirqish va o‘lchamini o‘zgartirish","3-dars. Jadval o‘rnatish","4-dars. Belgili ro‘yxat yaratish","5-dars. Hujjatga Header va Footer maydonlarini qo‘shish","6-dars. Matnni ustunlarga bo‘lish","7-dars. Sahifani formatlash buyruqlaridan foydalanish. Print preview buyrug‘idan foydalanish","8-dars. Amaliy mashg‘ulot: Internetdan foydalanish jarayonida xavfsizlikni ta‘minlash","9-dars. Nazorat ishi","10-dars. Loyiha xususiyatini ishlab chiqish","11-dars. Slaydga o‘tish effektlarini qo‘shish.","12-dars. Slaydlarga vaqt va audio qo‘shish","13-dars. Animatsiya effektini qo‘shish","14-dars. Animatsiya va vaqtni moslash","15-dars. Nazorat ishi","16-dars. Auditoriya va maqsadni bilish","17-dars. Elektron jadvalni loyihalash. Dizayn shakllantirish","18-dars. Formulani kiritish. Elektron jadvalni sinovdan o‘tkazish","19-dars. Modellashtirish","20-dars. Ma‘lumotlarni to‘plash shaklini tuzish","21-dars. Elektron jadvalni formatlash","22-dars. Elektron jadvalni baholash","23-dars. Elektron jadval natijalarini diagramma sifatida taqdim etish","24-dars. Shartli formatlash va maqsadni qidirish vositalaridan foydalanish","25-dars. Nazorat ishi","26-dars. Takrorlash","27-dars. Ma‘lumotlar bazasi uchun maqsadni aniqlash. Ma‘lumotlar bazasi uchun maydon tanlash","28-dars. Ma‘lumot turlari. Ma‘lumotlar bazasi jadvalini yaratish.","29-dars. Ochiladigan ro‘yxatni yaratish. Ma‘lumot kiritish formasini yaratish (Form).","30-dars. Ma‘lumotlar bazasini sinovdan o‘tkazish. Ma‘lumotlar xavfsizligi.","31-dars. Ma‘lumotlarni matn bilan ishlash dasturiga yuborish.","32-dars. Ma‘lumotlarni jadval bilan ishlash dasturiga yuborish.","33-dars. Nazorat ishi","34-dars. Takrorlash"],
+    8:["1-dars. Kirish. Dasturlashning asosiy tushunchalari","2-dars. Amaliy mashg‘ulot","3-dars. O‘zgaruvchilar va ularni boshqarish.","4-dars. Amaliy mashg‘ulot. Spraytni bosilganda ochko oshib boruvchi o‘yin yaratish","5-dars. Shartli dasturlash. To‘qnashuvlar asosidagi ssenariy.","6-dars. Ma‘lumotlar validatsiyasi. Yosh va bo‘yni so‘rab oluvchi dastur","7-dars. Sprayt kostyumlari va vaqt bilan ishlash.","8-dars. Dasturni sinovdan o‘tkazish va debaglash.","9-dars. Nazorat ishi","10-dars. HTML tushunchasi va veb-sahifani sozlash","11-dars. Veb-sahifada matn joylashtirish va ularni boshqarish.","12-dars. Link joylashtirish","13-dars. Veb-sahifada tasvirlar joylashtirish va ularni boshqarish.","14-dars. Veb-sahifa dizaynini tanlash ularni boshqarish. Ranglar","15-dars. Nazorat ishi","16-dars. Veb-saytni internetda joylashtirish","17-dars. Kompyuter tarmoqlari. Asosiy tushunchalar","18-dars. Tarmoq komponentlari.","19-dars. Amaliy mashg‘ulot. Kabel, jek, Hub, Swich, Router, modem","20-dars. Tarmoqni loyihalash","21-dars. Tarmoq boshqaruvi. Boshqarish vazifalarini aniqlash","22-dars. Tarmoq xavfsizligi","23-dars. Amaliy mashg‘ulot: maktab kompyuter tarmog‘ini loyihalash","24-dars. Nazorat ishi","25-dars. Video va animatsiyalardan foydalanish. Asosiy tushunchalar","26-dars. Animatsiya yaratish. Pencil2D dasturidan foydalanish","27-dars. Takrorlash","28-dars. Adobe Spark dasturida yangi video yaratish","29-dars. Animatsiya yoki videoga saundtrek yoki ovozli sharh (Narration) qo‘shish","30-dars. Auditoriya talablarini inobatga olish.","31-dars. Mahsulotni reklama qilish","32-dars. Audacity dasturida ishlash","33-dars. Nazorat ishi","34-dars. Takrorlash"],
+    9:["1-dars. Kompyuter qurilmalari va dasturiy ta‘minot. Kompyuter tizimining asosiy komponentlari","2-dars. Operatsion tizimlar","3-dars. Kompyuter turlari","4-dars. Yangi texnologiyalarning ta‘siri","5-dars. Kiritish qurilmalari va ularning qo‘llanishi","6-dars. Ma‘lumotni bevosita kiritishda foydalaniladigan qurilmalar.","7-dars. Chiqarish qurilmalari va ulardan foydalanish","8-dars. Xotira qurilmalari va ma‘lumot almashish vositalari","9-dars. Turli xotira qurilmalarining afzallik va kamchiliklari","10-dars. Xotira hajmiga bog‘liq masalalarni yechish","11-dars. Nazorat ishi","12-dars. Kompyuter tarmoqlari qurilmalari","13-dars. Brauzerdan foydalanish. Kompyuter tarmoqlari dasturiy jihati.","14-dars. Tarmoq muammolari va kommunikatsiya","15-dars. Axborot texnologiyasining bandlikka ta‘siri","16-dars. Axborot texnologiyasi (AT) ning tashkilotlar ish uslubiga ta‘siri. Mikroprotsessorli uy qurilmalari","17-dars. Nazorat ishi","18-dars. Axborot texnologiyasi (AT) jihozlaridan uzoq muddat foydalanishning sog‘liqqa ta‘siri","19-dars. Kommunikatsiya dasturlari qamrovi. Ma‘lumotlarni boshqarish dasturlari","20-dars. O‘lchov dasturlari. Boshqaruv dasturlaridagi mikroprotsessorlar","21-dars. Modellashtirish dasturlari. Boshqaruv, ta‘lim, sog‘liqni saqlash, savdo va autentifikatsiyada kompyuter tizimlari","22-dars. Tahlil va loyihalash","23-dars. Ishlab chiqish, sinash va joriy qilish","24-dars. Hujjatlashtirish, baholash va texnik xizmat ko‘rsatish","25-dars. Nazorat ishi","26-dars. Xavfsizlik muammolari. Elektron xavfsizlik. Ma‘lumotlar xavfsizligi","27-dars. Axborot himoyasi protokoli. Antiviruslar va fayervol","28-dars. Auditoriyani huquqiy, ma‘naviy, axloqiy va madaniy jihatdan baho berish","29-dars. Mualliflik huquqi va uning turlari. Mualliflik huquqi himoyasi","30-dars. AKT foydalanuvchisi bilan elektron xat orqali muloqot qilish. Spam tushunchasi","31-dars. Nazorat ishi","32-dars. Internetdan samarali foydalanish. Internetdan topilgan axborotning ishonchliligini baholash","33-dars. Fayl kengaytmasi va ularni samarali boshqarish","34-dars. Saqlash yoki uzatish uchun fayl hajmini kamaytirish","35-dars. Tasvirlarni joylashtirish va tahrirlash uchun dastur uskunalaridan foydalanish","36-dars. Tasvirni aniq joylashtirish. Tasvirning tomonlar nisbatini o‘zgartirish","37-dars. Tasvirni qirqish va aylantirish","38-dars. Tasvir rangi, yorqinligi, kontrasti va aniqligi boshqarish","39-dars. Sahifa maketi. Maqsad va auditoriyaga mos hujjat yaratish uchun dasturiy uskunalardan foydalanish","40-dars. Hujjatga obyektlarni joylashtirish","41-dars. Header va Footer maydonlarini yaratish","42-dars. Nazorat ishi","43-dars. Korporativ brend va unga xos stil. Korporativ brendga xos stilga muvofiq hujjat tayyorlash","44-dars. Sahifa/slayd izchilligini ta‘minlash","45-dars. Yangi stil yaratish","46-dars. Xatolarni tekshirish uchun dasturlardan foydalanish","47-dars. Xatolarni tekshirish usullari","48-dars. Verifikatsiya va validatsiya tuhsunchalari","49-dars. Grafik yoki diagramma yaratish. Diagramma turlari","50-dars. Tayyorlangan diagrammani boshqarish va o‘zgartirish","51-dars. Nazorat ishi","52-dars. Takrorlash","53-dars. Matn va sahifa maketini formatlash","54-dars. Dastur uskunalari yordamida jadvallarni tahrirlash","55-dars. Ma‘lumot manbasi bilan hujjatni birlashtirib, pochta orqali yuborish","56-dars. Ma‘lumotlar bazasi tuzilmasini yaratish. Ma‘lumotlarni boshqarish va taqdim etish","57-dars. Ob‘yektlarni to‘g‘ri joylash. Taqdimot slaydlarini yaratish uchun mos dastur imkoniyatlaridan foydalanish","58-dars. Taqdimotga elektron jadvaldan diagrammalarni import qilish","59-dars. Nazorat ishi","60-dars. Ma‘lumotlar modelini yaratish. Nisbiy va absolyut murojaat.","61-dars. Formula va funksiyalar hamda ulardan foydalanish","62-dars. Ma‘lumotlar modelini sinovdan o‘tkazish. Ma‘lumotlarni boshqarish","63-dars. Ma‘lumotlarni taqdim etish","64-dars. Veb dasturlashning uch qatlami. Veb sahifa yaratish","65-dars. Linklar, bookmarklar va ankor. Absolyut va nisbiy fayl manzillari","66-dars. Stil jadvallaridan foydalanish. Veb saytni sinash va publikatsiya qilish","67-dars. Nazorat ishi","68-dars. Takrorlash"],
+    10:["1-dars. Ma‘lumot, axborot va bilimlar bazasi. Ma‘lumot manbasi. Bevosita va bilvosita manbalardan ma‘lumot to‘plashning afzallik hamda kamchiliklari. Axborotning sifati","2-dars. Kod berish, kodlash va shifrlash. Ma‘lumotlarni kodlashning afzallik va kamchiliklari. Simmetrik va asimmetrik shifrlash usullari.","3-dars. Ma‘lumotlarning to‘g‘riligini tekshirish.","4-dars. Vizual tekshirish va ma‘lumotlanri ikki marta kiritish.","5-dars. Apparat ta‘minot. Ichki va tashqi qurilmalar","6-dars. Xotira qurilmalari. Tizimli dasturiy ta‘minot. Drayverlar.","7-dars. Amaliy dasturiy ta‘minot. Fotosuratni tahrirlash dasturiy ta‘minoti","8-dars. Video tahrirlash dasturiy ta‘minoti. Veb sahifa ishlab chiqish dasturiy ta‘minoti","9-dars. Foydalanuvchi interfeysi dizaynidagi boshqaruv elementlari. Utilit dasturlar. Buyurtma yoki tayyor dasturiy ta‘minot.","10-dars. Loyiha (amaliy) ishi","11-dars. Nazorat ishi","12-dars. Sensorlar. Harakat va bosim sensorlari, Namlik, harorat va yorug‘lik sensorlari","13-dars. Elektron xavfsizlik tushunchasi.","14-dars. Phishing, Pharming, Vishing, Troyan, Worm, Spyware, Rootkit, Adware, Ransomware tushunchalari va xavfsizlikni ta‘minlash.","15-dars. Salomatlik va xavfsizlik.","16-dars. Raqamli tengsizlik tushunchasi va sabablari, Sanoati rivojlangan va rivojlanmagan hududlar, Ijtimoiy-iqtisodiy guruhlar.","17-dars. Nazorat ishi","18-dars. Samarasi yuqori va past bo‘lgan texnologiyalar. Turli davlatlardagi holatlarni o‘rganish","19-dars. Tarmoq kompyuterlari. Lokal hududiy (Local area networks) va global hududiy tarmoq (Wide area networks).","20-dars. Kliyent-server va peer-to-peer tarmoqlari.","21-dars. Virtual shaxsiy tarmoq (VPN)","22-dars. Intranet va ekstranet. Internet va uning xususiyatlari","23-dars. Internetda muloqot qilish. Mobil tarmoqlar","24-dars. Video va veb konferensiya. Videokonferensiyaning jamiyatga ta‘siri","25-dars. Nazorat ishi","26-dars. Ekspert tizim haqida","27-dars. Bilimlar bazasi va yakunlovchi mexanizm","28-dars. Foydalanuvchi interfeysi","29-dars. Ekspert tizimlardan foydalanish","30-dars. Ma‘lumotlarni qayta ishlash tizimlari","31-dars. Nazorat ishi","32-dars. Real vaqt rejimida qayta ishlash tizimi","33-dars. Elektron jadval yaratish. Qatorlar va ustunlarni boshqarish","34-dars. Elektron jadval xavfsizligi","35-dars. Panel va oynalarni interfeysga mahkamlash","36-dars. Elektron jadvalni formatlash. Shartli formatlash","37-dars. Formula va funksiyalarni yaratish. Katakka absolyut va nisbiy murojaat","38-dars. Nomlangan katak va diapazon","39-dars. Yaxlitlash funksiyalari","40-dars. Sana va vaqtga oid funksiyalar. Shartli funksiyalar. Qidirish funksiyalari","41-dars. INDEX va MATCH funksiyalari","42-dars. Shartli statistik funksiyalar","43-dars. Nazorat ishi","44-dars. Validatsiya qoidalari","45-dars. Elektron jadvalga qo‘llanadigan validatsiya","46-dars. Ma‘lumotlar kiritilishini tekshirish","47-dars. Ma‘lumotlarni filtrlash va saralash","48-dars. Jamlovchi jadvallar va diagrammalar","49-dars. Ma‘lumotlarni import va eksport qilish","50-dars. Grafik va diagrammalar. Modellashtirish. Simulyatorlar","51-dars. Nazorat ishi","52-dars. Takrorlash","53-dars. Ma‘lumotlar bazasini yaratish. Ma‘lumot turlari va katak hajmlari. Uch tomonlama bog‘lanish.","54-dars. Birga-bir va birga-ko‘p bog‘lanish. Ko‘pga-ko‘p bog‘lanish. Bog‘lanishlar yaratish va foydalanish","55-dars. Oddiy yozuvli va relyatsion ma‘lumotlar bazasi o‘rtasidagi farq","56-dars. Ma‘lumotlarni import qilish. Relyatsion ma‘lumotlar bazasini yaratish.","57-dars. Kalitlar. Murakkab kalit. Tashqi kalit.","58-dars. Bog‘lanishlar yaxlitligi. Ma‘lumotlar validatsiyasi va verifikatsiyasi","59-dars. Qidirish amallari. Murakkab querylar. Ichki va jamlanma querylar.","60-dars. Statik va dinamik parametrlar. Ma‘lumotlar bazasi doirasida hisoblashlarni amalga oshirish.","61-dars. Nazorat ishi","62-dars. Ma‘lumotlarni saralash. Ma‘lumot kiritish formalari.","63-dars. Hisobotlar. Ma‘lumotlarni eksport qilish.","64-dars. Formni normallashtirish. Ma‘lumotlar bazasini 3NFga normallashtirish.","65-dars. Ma‘lumotlar lug‘ati. Ma‘lumot turlari. Fayl va ma‘lumotlarni boshqarish.","66-dars. Bevosita fayldan foydalanish. Boshqaruv axborot tizimlari.","67-dars. Nazorat ishi","68-dars. Takrorlash"],
+    11:["1-dars. Videoni tahrirlash dasturi. Mutanosiblikni belgilash.","2-dars. Videoklipni montaj qilish va kliplarni birlashtirish.","3-dars. Matnli slayd va titr yaratish. Izoh va subtitr qo‘shish. Animatsiya va effektlar qo‘shish.","4-dars. Videoklipdan tasvir hosil qilish. Videoklipga ovozli ma‘lumot qo‘shish va o‘chirish.","5-dars. Videoklip tezligini o‘zgartirish. Videoklipni turli fayl formatlarida eksport qilish.","6-dars. Audioni tahrirlash dasturlari","7-dars. Audiokliplarni kesish va kliplarni birlashtirish","8-dars. Audioklipning ovoz sozlamalarini tahrirlash","9-dars. Audioklipning tezligini va ovoz balandligini sozlash. Reverberatsiya effektini qo‘shish yoki uni sozlash.","10-dars. Audiokliplarni turli fayl formatlarida eksport qilish.","11-dars. Nazorat ishi","12-dars. Texnologiya va bizning turmush tarzimiz. Uch o‘lchamli printer. To‘rtinchi va beshinchi avlod uyali aloqasi.","13-dars. Sun‘iy intellekt. Boyitilgan reallik. Biometrik axborot. Bulutli texnologiyalar.","14-dars. Avtomatlashtirilgan tarjima. Golografik tasvirlash. Robototexnika.","15-dars. QR kodlar. Taqiladigan hisoblash qurilmalari.","16-dars. Ultra yuqori aniqlik darajasidagi televideniye. Ko‘rish qobiliyatini yaxshilash. Virtual reallik.","17-dars. Nazorat ishi","18-dars. Takrorlash darsi","19-dars. Elektron tijorat va internet banking nima?","20-dars. Elektron pul o‘tkazmalari. Zaxiralarni avtomatik boshqarish","21-dars. Ma‘lumotlarni intellektual tahlillash","22-dars. Ijtimoiy tarmoq va videokonferensiyalar","23-dars. Masofadan ishlash. Sport va tibbiyotda texnologiyalar","24-dars. Ishlab chiqarish va ta‘limda texnologiyalar","25-dars. Nazorat ishi","26-dars. Kompyuter tarmoqlari komponentlari","27-dars. Simsiz ulanish nuqtasi","28-dars. Shlyuz, Bridj va Fayervol. Bit oqimini uzatish","29-dars. Kanalli va paketli kommutatsiyalash. Xabarli kommutatsiyalash","30-dars. Optik usulda ma‘lumot almashish. Simsiz aloqa/uzatish usullari","31-dars. Nazorat ishi","32-dars. Takrorlash darsi","33-dars. Ma‘lumotlarni uzatishda polosa kengligi va bit tezligining ahamiyati. BitTorrent protokoli","34-dars. Tarmoq xavfsizligi muammolari. Xavfsizlik usullari","35-dars. Ma‘lumotlarni himoya qilish haqidagi qonun tamoyillari","36-dars. Sun‘iy yo‘ldosh aloqa tizimlari","37-dars. Loyiha boshqaruvining bosqichlari. Konsepsiya va boshlash","38-dars. Loyiha boshqaruvi uchun foydalaniladigan dasturiy ta‘minot turlari","39-dars. Kritik bosqichlarni tahlil qilish. Gantt diagrammalari","40-dars. Amaliy mashg‘ulot","41-dars. Avariya/falokatdan keyingi tiklanishni boshqarish","42-dars. Prototiplash","43-dars. Kompyuter yordamida dizayn yaratish va ishlab chiqarish","44-dars. Nazorat ishi","45-dars. Tahlil. Hujjatlar tahlili usuli","46-dars. Dizayn. Ma‘lumotlar oqimi diagrammasi. Tizim blok-sxemasi. Ekran formasi","47-dars. Yangi tizim uchun texnik va dasturiy ta‘minot","48-dars. Ishlab chiqish va sinovdan o‘tkazish. Qora quti va oq quti strategiyasi sinovlari","49-dars. Alfa sinov va beta sinov","50-dars. Installyatsiya va hujjatlashtirish. Tahlil va texnik xizmat ko‘rsatish","51-dars. Nazorat ishi","52-dars. Takrorlash darsi","53-dars. Vektorli va rastrli tasvirlar","54-dars. Guruhlash va biriktirish. Elementni burchak bo‘ylab aylantirish va joylashtirish. Transformatsiya uskunalari. Tanlash uskunalari.","55-dars. Tasvirni saqlash va hajmini kichraytirish. Matn uchun maydon yaratish. Rastrli tasvirlar. Qizil ko‘zni olib tashlash.","56-dars. Animatsiya asoslari. Niqoblovchi qatlam.","57-dars. Elektron xatlarni birlashtirish. Master hujjatni manba faylga biriktirish.","58-dars. Prompt matni yaratish. Kerakli yozuvlarni avtomatik belgilash. O‘zgaruvchi maydonlar.","59-dars. Nazorat ishi","60-dars. Ma‘lumotlarni chiqarish. HTML elementlari.","61-dars. O‘zgaruvchilar bilan ishlash. Ma‘lumot turlari.","62-dars. Operatorlar. Stringlarni boshqarish.","63-dars. Array. Shartli buyruqlar.","64-dars. Luplar.","65-dars. Funksiyalar.","66-dars. HTML shakllari va boshqaruv hodisalari. Pop-up oynalar.","67-dars. Nazorat ishi","68-dars. Takrorlash darsi"],
+  };
+  D.math.topics={
+    1:["1 dan 20 gacha sanoq","Qo‘shish va ayirish","Geometrik shakllar","Uzunlik o‘lchovlari"],
+    2:["100 ichida amallar","Ko‘paytirish jadvali","Masala yechish","Vaqt va pul"],
+    3:["Ko‘paytirish va bo‘lish","Ko‘p xonali sonlar","Perimetr","Kasr tushunchasi"],
+    4:["Katta sonlar","Burchaklar","Yuza","Tezlik, vaqt va masofa"],
+    5:["1-dars. Takrorlash. 100 000 gacha bo‘lgan sonlar","2-dars. 1 milliongacha bo‘lgan sonlar","3-dars. 1 milliongacha bo‘lgan sonlar","4-dars. 10 milliongacha bo‘lgan sonlar","5-dars. 10 milliongacha bo‘lgan sonlar","6-dars. Nazorat ishi 1","7-dars. O‘ylab ko‘ring. Muammoli topshiriq","8-dars. Sonni 10, 100 va 1000 ga ko‘paytirish","9-dars. Sonni o‘nlik, yuzlik va mingliklarga ko‘paytirish","10-dars. Sonni 10, 100 va 1000 ga bo‘lish","11-dars. Sonni o‘nlik, yuzlik va mingliklarga bo‘lish","12-dars. Sonni o‘nlik, yuzlik va mingliklarga bo‘lish","13-dars. Qavssiz ifodalarda amallarni bajarish tartibi","14-dars. Qavssiz ifodalarda amallarni bajarish tartibi","15-dars. Qavsli ifodalarda amallarni bajarish tartibi","16-dars. Qavsli ifodalarda amallarni bajarish tartibi","17-dars. Matnli masalalar","18-dars. Matnli masalalar","19-dars. Nazorat ishi 2","20-dars. O‘ylab ko‘ring. Muammoli topshiriq","21-dars. Sonlarni bo‘lishni kasr ko‘rinishida ifodalash","22-dars. Oddiy kasrni o‘nli kasrga aylantirish","23-dars. Oddiy kasrni o‘nli kasrga aylantirish","24-dars. Takrorlash: kasrlarni o‘qish va ayirish","25-dars. Aralash sonlarni qo‘shish va ayirish","26-dars. Aralash sonlarni qo‘shish va ayirish","27-dars. Takrorlash: to‘plamning qismi","28-dars. To‘g‘ri kasrni natural songa ko‘paytirish","29-dars. To‘g‘ri kasrni natural songa ko‘paytirish","30-dars. Ikkita to‘g‘ri kasrni ko‘paytirish","31-dars. Ikkita to‘g‘ri kasrni ko‘paytirish","32-dars. To‘g‘ri va noto‘g‘ri kasrlarni ko‘paytirish","33-dars. To‘g‘ri va noto‘g‘ri kasrlarni ko‘paytirish","34-dars. Ikkita noto‘g‘ri kasrni ko‘paytirish","35-dars. Ikkita noto‘g‘ri kasrni ko‘paytirish","36-dars. Aralash sonlarni natural songa ko‘paytirish","37-dars. Aralash sonlarni natural songa ko‘paytirish","38-dars. Qolgan qismning qismi","39-dars. Qolgan qismning qismi","40-dars. Matnli masalalar","41-dars. Matnli masalalar","42-dars. O‘ylab ko‘ring. Muammoli topshiriq","43-dars. Takrorlash","44-dars. Nazorat ishi 3","45-dars. Takrorlash","46-dars. Takrorlash: Kvadrat va to‘g‘ri  to‘rtburchaklar","47-dars. Uchburchakning asosi va balandligi","48-dars. Uchburchakning asosi va balandligi","49-dars. Uchburchakning yuzini topish","50-dars. Uchburchakning yuzini topish","51-dars. To‘g‘ri to‘rtburchak va uchburchaklardan tuzilgan murakkab shakllarning yuzi","52-dars. To‘g‘ri to‘rtburchak va uchburchaklardan tuzilgan murakkab shakllarning yuzi.","53-dars. Nazorat ishi 4","54-dars. O‘ylab ko‘ring. Muammoli topshiriq","55-dars. Takrorlash: Kub, kuboid, hajm va sig‘im","56-dars. Fazoviy jismlarning hajmi","57-dars. Uch o‘lchamli panjarada fazoviy jismlarni chizish","58-dars. Uch o‘lchamli panjarada fazoviy jismlarni chizish","59-dars. Kvadratli panjarada fazoviy jismlarning turli ko‘rinishlarini chizish","60-dars. Kvadratli panjarada fazoviy jismlarning turli ko‘rinishlarini chizish","61-dars. Hajmni santimetr kub va metr kubda o‘lchash","62-dars. Hajmni santimetr kub va metr kubda o‘lchash","63-dars. Kuboid va kubning hajmini topish","64-dars. Kuboid va kubning hajmini topish","65-dars. Suyuqliklar hajmini santimetr kub va metr kubda o‘lchash","66-dars. Suyuqliklar hajmini santimetr kub va metr kubda o‘lchash","67-dars. Matnli masalalar","68-dars. Matnli masalalar","69-dars. Nazorat ishi 5","70-dars. O‘ylab ko‘ring. Muammoli topshiriq","71-dars. Nisbat tushunchasi","72-dars. Teng kuchli nisbatlar","73-dars. Teng kuchli nisbatlar","74-dars. Berilgan miqdor va nisbatga ko‘ra boshqa miqdorni topish","75-dars. Berilgan miqdor va nisbatga ko‘ra boshqa miqdorni topish","76-dars. Berilgan jami miqdor va nisbatga ko‘ra uning qismlarini topish","77-dars. Berilgan jami miqdor va nisbatga ko‘ra uning qismlarini topish","78-dars. Ikkita miqdorning nisbatiga doir matnli masalalar","79-dars. Ikkita miqdorning nisbatiga doir matnli masalalar","80-dars. Uchta miqdorning nisbati","81-dars. Uchta miqdorning nisbati","82-dars. Uchta miqdorning nisbatiga doir matnli masalalar","83-dars. Uchta miqdorning nisbatiga doir matnli masalalar","84-dars. O‘ylab ko‘ring. Muammoli topshiriq","85-dars. Takrorlash","86-dars. Takrorlash","87-dars. Nazorat ishi 6","88-dars. Takrorlash","89-dars. Takrorlash: O‘nli kasrlar","90-dars. O‘nli kasrni 10, 100 va 1000 ga ko‘paytirish","91-dars. O‘nli kasrni 10, 100 va 1000 ga ko‘paytirish","92-dars. O‘nli kasrni o‘nlik, yuzlik va mingliklarga ko‘paytirish","93-dars. O‘nli kasrni o‘nlik, yuzlik va mingliklarga ko‘paytirish","94-dars. O‘nli kasrni 10, 100 va 1000 ga bo‘lish","95-dars. O‘nli kasrni 10, 100 va 1000 ga bo‘lish","96-dars. O‘nli kasrni o‘nliklar, yuzliklar va mingliklarga bo‘lish","97-dars. O‘nli kasrni o‘nliklar, yuzliklar va mingliklarga bo‘lish","98-dars. Takrorlash: Uzunlik, massa, sig‘im va hajm o‘lchov birliklarini almashtirish","99-dars. O‘lchov birliklarini almashtirish","100-dars. O‘lchov birliklarini almashtirish","101-dars. Matnli masalalar","102-dars. Matnli masalalar","103-dars. Nazorat ishi 7","104-dars. Me‘yorni topish","105-dars. Me‘yorni topish","106-dars. Me‘yorga ko‘ra umumiy miqdorni topish","107-dars. Me‘yorga ko‘ra umumiy miqdorni topish","108-dars. Birliklar sonini topish","109-dars. Birliklar sonini topish","110-dars. Matnli masalalar","111-dars. Matnli masalalar","112-dars. Matnli masalalar","113-dars. Nazorat ishi 8","114-dars. O‘ylab ko‘ring. Muammoli topshiriq","115-dars. Takrorlash: butunning qismlari","116-dars. Foiz tushunchasi","117-dars. Foiz tushunchasi","118-dars. Oddiy kasr, o‘nli kasr va foizlar orasidagi munosabatlar","119-dars. Miqdorning foizi","120-dars. Miqdorning foizi","121-dars. Matnli masalalar","122-dars. Matnli masalalar","123-dars. Matnli masalalar","124-dars. QQS (qo‘shilgan qiymat solig‘i), chegirma va omonat foizi","125-dars. QQS (qo‘shilgan qiymat solig‘i), chegirma va omonat foizi","126-dars. Matnli masalalar","127-dars. Matnli masalalar","128-dars. Loyiha ishi taqdimoti va baholash","129-dars. Loyiha ishi taqdimoti va baholash","130-dars. O‘ylab ko‘ring. Muammoli topshiriq","131-dars. O‘rtacha qiymat tushunchasi","132-dars. O‘rtacha qiymat tushunchasi","133-dars. Miqdorlarning o‘rtacha va jami qiymati hamda soni","134-dars. Miqdorlarning o‘rtacha va jami qiymati hamda soni","135-dars. O‘ylab ko‘ring. Muammoli topshiriq","136-dars. Takrorlash: burchaklar","137-dars. To‘g‘ri chiziqdagi burchaklar","138-dars. To‘g‘ri chiziqdagi burchaklar","139-dars. Vertikal burchaklar","140-dars. Vertikal burchaklar","141-dars. Nuqta atrofidagi burchaklar","142-dars. Nuqta atrofidagi burchaklar","143-dars. Noma‘lum burchaklarni topish","144-dars. Noma‘lum burchaklarni topish","145-dars. Noma‘lum burchaklarni topish","146-dars. Noma‘lum burchaklarni topish","147-dars. Nazorat ishi 9","148-dars. O‘ylab ko‘ring. Muammoli topshiriq","149-dars. Uchburchakning turlari","150-dars. Uchburchakning turlari","151-dars. Uchburchaklarni chizish","152-dars. Uchburchaklarni chizish","153-dars. Uchburchaklarni chizish","154-dars. Uchburchakning burchaklari","155-dars. Uchburchakning burchaklari","156-dars. Uchburchakning burchaklari","157-dars. Nazorat ishi 10","158-dars. O‘ylab ko‘ring. Muammoli topshiriq","159-dars. Takrorlash: kvadrat va to‘g‘ri to‘rtburchakning xossalari","160-dars. Parallelogramm, romb va trapetsiyaning xossalari","161-dars. Parallelogramm, romb va trapetsiyaning xossalari","162-dars. Parallelogramm, romb va trapetsiyaning xossalari","163-dars. To‘rtburchaklarni chizish","164-dars. To‘rtburchaklarni chizish","165-dars. To‘rtburchaklarni chizish","166-dars. To‘rtburchakning noma‘lum burchaklarini topish","167-dars. To‘rtburchakning noma‘lum burchaklarini topish","168-dars. To‘rtburchakning noma‘lum burchaklarini topish","169-dars. Nazorat ishi 11","170-dars. O‘ylab ko‘ring. Muammoli topshiriq"],
+    6:["Bo‘linish belgilari","Proporsiya","Butun sonlar","Koordinatalar tekisligi"],
+    7:["Algebraik ifodalar","Chiziqli tenglama","Funksiya grafigi","Uchburchaklar"],
+    8:["Kvadrat ildiz","Kvadrat tenglama","To‘rtburchaklar","Pifagor teoremasi"],
+    9:["Tengsizliklar","Progressiyalar","Aylana va doira","Ehtimollik asoslari"],
+    10:["Trigonometriya","Daraja va logarifm","Vektorlar","Stereometriya asoslari"],
+    11:["Hosila","Integral","Ko‘pyoqlar va aylanish jismlari","Yakuniy imtihonga tayyorgarlik"]
+  };
+
+  var METHODS={
+    "Aqliy hujum":"Qisqa vaqtda ko‘p g‘oya to‘plash usuli. Baho berish keyinroq, avval g‘oyalar yig‘iladi.",
+    "Klaster":"Markaziy tushuncha atrofida bog‘liq tushunchalarni shoxlantirib yozish.",
+    "Venn diagrammasi":"Ikki yoki uch tushunchaning umumiy va farqli tomonlarini kesishuvchi doiralarda ko‘rsatish.",
+    "Zig-zag (jigsaw)":"Mavzu qismlarga bo‘linadi, har guruh o‘z qismini o‘rganib, boshqalarga o‘rgatadi.",
+    "T-jadval":"Ikki tomonlama taqqoslash: afzallik va kamchilik, sabab va oqibat."
+  };
+  var ATT=[
+    "Amaldagi attestatsiya tartibi va muddatlarini rasmiy hujjatdan o‘qib chiqish",
+    "Fan bo‘yicha nazariy savollarni takrorlash",
+    "Pedagogika va psixologiya asoslarini takrorlash",
+    "Metodik savollarga javob rejasini tayyorlash",
+    "Portfolioni yig‘ish: yutuqlar, sertifikatlar, dars ishlanmalari",
+    "Ochiq dars rejasini tayyorlab, sinab ko‘rish",
+    "Sinov testlarini yechib, xatolar ustida ishlash"
+  ];
+
+  function store(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+  function rnd(a,b){return a+Math.floor(Math.random()*(b-a+1))}
+  function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=rnd(0,i),t=a[i];a[i]=a[j];a[j]=t}return a}
+  function $(s,r){return (r||app).querySelector(s)}
+  function $$(s,r){return Array.prototype.slice.call((r||app).querySelectorAll(s))}
+  function stopTimer(){if(timer){clearInterval(timer);timer=null}}
+  function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+  function fr(s){return String(s).replace(/(\d+) (\d+)\/(\d+)/g,'<span class="mx">$1</span><span class="fr"><span>$2</span><span>$3</span></span>').replace(/(\d+)\/(\d+)/g,'<span class="fr"><span>$1</span><span>$2</span></span>')}
+  function efr(s){return fr(esc(s))}
+  var AUD={oquvchi:"O‘quvchi",oqituvchi:"O‘qituvchi"};
+
+  /* ---------- Hisob va ketma-ket ochilish ---------- */
+  var PASS=1; /* 1 = test 100% to'g'ri bo'lishi shart */
+  var me=null,authReady=false,afterLogin=null,registering=false,credHtml=null;
+  function isStu(){return !!(me&&me.role==="student")}
+  function slugT(t){var x=String(t).toLowerCase().replace(/[ʻʼ‘’`'´]/g,"").replace(/[^a-z0-9]+/g,"_").replace(/^_+|_+$/g,"");return x||"t"}
+  function tkey(d,g,i){return d.key+"-"+g+"-"+slugT(d.topics[g][i])}
+  function pr(){return (me&&me.profile&&me.profile.progress)||{}}
+  function passedK(prog,d,g,i){var x=prog[tkey(d,g,i)];return !!(x&&x.passed)}
+  function passed(d,g,i){return passedK(pr(),d,g,i)}
+  function unlocked(d,g,i){
+    if(!isStu())return true;
+    for(var j=0;j<i;j++)if(!passed(d,g,j))return false;
+    return true;
+  }
+  function stateOf(d,g,i){
+    if(!findTopic(d,g,d.topics[g][i]))return "soon";
+    if(passed(d,g,i))return "done";
+    return unlocked(d,g,i)?"open":"locked";
+  }
+  function saveProg(d,g,i,patch){
+    if(!isStu())return;
+    var p=me.profile.progress||(me.profile.progress={}),k=tkey(d,g,i),x=p[k]||(p[k]={});
+    Object.keys(patch).forEach(function(a){x[a]=patch[a]});
+    UB.saveProgress(p,k).catch(function(){toast("Natijani saqlab bo‘lmadi. Internetni tekshiring.")});
+  }
+  function toast(msg){
+    var t=document.getElementById("toast");
+    if(!t){t=document.createElement("div");t.id="toast";t.className="toast";t.setAttribute("role","status");document.body.appendChild(t)}
+    t.textContent=msg;t.hidden=false;clearTimeout(t._h);t._h=setTimeout(function(){t.hidden=true},2600);
+  }
+  function copyText(txt){
+    function fallback(){
+      try{var ta=document.createElement("textarea");ta.value=txt;ta.setAttribute("readonly","");ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();var ok=document.execCommand("copy");document.body.removeChild(ta);toast(ok?"Nusxa olindi":"Nusxa olib bo‘lmadi, qo‘lda belgilang")}catch(e){toast("Nusxa olib bo‘lmadi, qo‘lda belgilang")}
+    }
+    try{navigator.clipboard.writeText(txt).then(function(){toast("Nusxa olindi")},fallback)}catch(e){fallback()}
+  }
+  function go(h){location.hash=h.charAt(0)==="#"?h.slice(1):h}
+  function fmt(ms){if(!ms)return "—";var d=new Date(ms),p=function(n){return (n<10?"0":"")+n};return p(d.getDate())+"."+p(d.getMonth()+1)+"."+d.getFullYear()+" "+p(d.getHours())+":"+p(d.getMinutes())}
+  function demoBanner(){return UB.mode==="demo"?'<p class="demo">Demo rejim: server hali ulanmagan, ma’lumotlar faqat shu qurilmada saqlanadi.</p>':''}
+  function gradeOpts(sel){var h="";for(var g=1;g<=11;g++)h+='<option value="'+g+'"'+(sel==g?' selected':'')+'>'+g+'-sinf</option>';return h}
+  function doneCount(d,g,prog){var n=0;for(var i=0;i<d.topics[g].length;i++)if(passedK(prog,d,g,i))n++;return n}
+  function updateAcct(){
+    var a=document.getElementById("acctlink");if(!a)return;
+    if(!me){a.textContent="Kirish";a.setAttribute("href","#kirish")}
+    else if(me.role==="teacher"){a.textContent="Panel";a.setAttribute("href","#panel")}
+    else{a.textContent="Kabinet";a.setAttribute("href","#kabinet")}
+  }
+
+  /* ---------- Pages ---------- */
+  function cta(){
+    if(!me)return '<div class="row"><a class="btn primary" href="#royxat">Ro‘yxatdan o‘tish</a><a class="btn" href="#kirish">Kirish</a></div>';
+    if(me.role==="teacher")return '<div class="row"><a class="btn primary" href="#panel">O‘qituvchi paneli</a></div>';
+    return '<div class="row"><a class="btn primary" href="#kabinet">Mening kabinetim</a></div>';
+  }
+
+  function home(){
+    app.removeAttribute("data-div");
+    function panel(d){return '<div class="panel" data-div="'+d.key+'">'+
+      '<span class="big">'+d.name+'</span><h3>'+d.full+'</h3><p>'+d.intro+'</p>'+
+      '<div class="row"><a class="btn primary sm" href="#'+d.path+'-oquvchi">O‘quvchi bo‘limi</a>'+
+      '<a class="btn sm" href="#'+d.path+'-oqituvchi">O‘qituvchi bo‘limi</a></div></div>'}
+    app.innerHTML='<div class="hero"><p class="eyebrow" style="color:var(--ict)">ustozbek.uz</p>'+
+      '<h1>Dars, test va o‘yin <em>bir joyda</em></h1>'+
+      '<p class="lead">Informatika va matematika bo‘yicha 1–11-sinf o‘quvchilari hamda o‘qituvchilari uchun ta’lim platformasi.</p>'+cta()+'</div>'+
+      '<div class="divs">'+panel(D.ict)+panel(D.math)+'</div>'+
+      '<section><div class="head"><h2>Kim nimani topadi</h2></div><div class="two">'+
+      '<div class="card" data-div="ict"><span class="path">/oquvchi</span><h3>O‘quvchilar uchun</h3><ul><li>1–11-sinf mavzulari bo‘yicha darslar</li><li>Sinfga mos testlar</li><li>Amaliy topshiriqlar va o‘yinlar</li></ul></div>'+
+      '<div class="card" data-div="math"><span class="path">/oqituvchi</span><h3>O‘qituvchilar uchun</h3><ul><li>Dars rejasi yaratuvchi</li><li>Interfaol metodlar</li><li>Attestatsiyaga tayyorlov</li></ul></div>'+
+      '</div></section>';
+  }
+
+  function division(d){
+    app.setAttribute("data-div",d.key);
+    function aud(a,title,txt,list,primary){
+      var h='<a class="card" href="#'+d.path+'-'+a+'"><span class="path">/'+a+'</span><h3>'+title+'</h3><p>'+txt+'</p><div class="soon" style="margin-top:4px">';
+      list.forEach(function(s){h+='<span>'+s.t+'</span>'});
+      return h+'</div><span class="btn'+(primary?' primary':'')+' sm" style="align-self:flex-start;margin-top:8px">Kirish</span></a>';
+    }
+    app.innerHTML='<div class="page"><p class="crumbs"><a href="#home">Bosh sahifa</a><span>/</span><span>'+d.name+'</span></p>'+
+      '<p class="eyebrow">'+d.fan+'</p><h1>'+d.name+'</h1><p class="lead" style="margin-bottom:32px">'+d.intro+'</p>'+
+      '<div class="two">'+aud("oquvchi","O‘quvchi bo‘limi","1–11-sinf uchun darslar, testlar va o‘yinlar.",d.stu,true)+
+      aud("oqituvchi","O‘qituvchi bo‘limi","Dars rejasi, metodlar va attestatsiyaga tayyorlov.",d.tea,false)+'</div></div>';
+  }
+
+  function hub(d,a){
+    app.setAttribute("data-div",d.key);
+    var list=a==="oquvchi"?d.stu:d.tea,t="";
+    list.forEach(function(s){
+      t+='<a class="tile" href="#'+d.path+'-'+a+'-'+s.id+'">'+icon(s.i)+'<b>'+s.t+'</b><span class="d">'+s.d+'</span>'+(s.k==="soon"?'<span class="soon-t">Tez orada</span>':'')+'</a>';
+    });
+    app.innerHTML='<div class="page"><p class="crumbs"><a href="#home">Bosh sahifa</a><span>/</span><a href="#'+d.path+'">'+d.name+'</a><span>/</span><span>'+AUD[a]+'</span></p>'+
+      '<div class="hub"><div class="hub-h"><span class="big">'+d.name+'</span><span class="pill">'+AUD[a]+' bo‘limi</span></div>'+
+      '<div class="tiles">'+t+'</div></div></div>';
+  }
+
+  function sectionPage(d,a,sec){
+    app.setAttribute("data-div",d.key);
+    app.innerHTML='<div class="page"><p class="crumbs"><a href="#home">Bosh sahifa</a><span>/</span><a href="#'+d.path+'">'+d.name+'</a><span>/</span><a href="#'+d.path+'-'+a+'">'+AUD[a]+'</a><span>/</span><span>'+sec.t+'</span></p>'+
+      '<p class="eyebrow">'+d.name+' · '+AUD[a].toLowerCase()+'</p><h2 style="margin-bottom:24px">'+sec.t+'</h2><div id="body"></div></div>';
+    var b=$("#body"),st=S[d.key]||(S[d.key]={grade:5});
+    if(sec.k==="grade")withGrade(b,st,function(p,g){guide(d,g,p)});
+    else if(sec.k==="quiz")withGrade(b,st,function(p,g){quiz(d,g,p)});
+    else if(sec.k==="games")withGrade(b,st,function(p,g){games(d,g,p)});
+    else if(sec.k==="acc")accordion(sec,b);
+    else if(sec.k==="key")answerKey(d,b);
+    else if(sec.k==="deck")deckPage(d,b);
+    else if(sec.k==="plan")planTool(d,b);
+    else if(sec.k==="methods")methods(d,b);
+    else if(sec.k==="attest")attest(d,b);
+    else soon(sec,b);
+  }
+
+  function answerKey(d,b){
+    var st=S[d.key]||(S[d.key]={grade:5});
+    withGrade(b,st,function(p,g){
+      var tp=topicData(d,g);
+      if(!tp.length){p.innerHTML='<p class="note">Bu sinf uchun mavzu testlari hali tayyorlanmagan.</p>';return}
+      var h='<p class="sub" style="margin-bottom:14px">'+g+'-sinf: '+tp.length+' ta mavzu. To‘g‘ri javob <b>✓</b> belgisi bilan ko‘rsatilgan.</p><div class="row" style="margin-bottom:16px"><button class="btn sm" id="ako" type="button">Hammasini ochish</button><button class="btn sm" id="akc" type="button">Yopish</button></div><div class="keys">';
+      tp.forEach(function(c){
+        h+='<details class="key"><summary><b>'+esc(c.t)+'</b><span class="tag">'+c.quiz.length+' savol</span></summary><ol class="kq">';
+        c.quiz.forEach(function(q){
+          h+='<li><p class="kqt">'+efr(q.q)+'</p><ul class="ko">';
+          q.o.forEach(function(t,k){h+='<li'+(k===q.a?' class="kok"':'')+'>'+(k===q.a?'<b>✓</b> ':'')+efr(t)+'</li>'});
+          h+='</ul><p class="ke">'+efr(q.e)+'</p></li>';
+        });
+        h+='</ol></details>';
+      });
+      p.innerHTML=h+'</div>';
+      $("#ako",p).addEventListener("click",function(){$$("details.key",p).forEach(function(x){x.open=true})});
+      $("#akc",p).addEventListener("click",function(){$$("details.key",p).forEach(function(x){x.open=false})});
+    });
+  }
+
+
+  /* ---------- Tezislar va taqdimotlar (darslardan avtomatik tuziladi) ---------- */
+  function lessonSecs(html){
+    var w=document.createElement("div");w.innerHTML=html;
+    var secs=[],cur={h:null,blocks:[]};
+    Array.prototype.slice.call(w.children).forEach(function(el){
+      if(el.tagName==="H4"){secs.push(cur);cur={h:el.textContent.trim(),blocks:[]}}else cur.blocks.push(el)});
+    secs.push(cur);
+    return secs.filter(function(s,i){return s.blocks.length||s.h});
+  }
+  function isRecap(h){return h&&/eslab qoling/i.test(h)}
+  function chunk(arr,n){var o=[];for(var i=0;i<arr.length;i+=n)o.push(arr.slice(i,i+n));return o}
+  function blk(el){return el.tagName==="TABLE"?'<div class="tw">'+el.outerHTML+'</div>':el.outerHTML}
+  function firstSentence(t){t=t.replace(/\s+/g," ").trim();var m=t.match(/^.{20,}?[.!?](\s|$)/);t=m?m[0].trim():t;return t.length>190?t.slice(0,187)+"…":t}
+  function makeSlides(d,g,c){
+    var secs=lessonSecs(c.lesson),sl=[],content=[],recap=null,names=[];
+    secs.forEach(function(s){
+      if(isRecap(s.h)){recap=s;return}
+      var hasOl=s.blocks.some(function(b){return b.tagName==="OL"});
+      var title=s.h||(content.length?"Davomi":"Asosiy tushuncha");
+      if(hasOl&&!/amaliy/i.test(title))title="Amaliy ish: "+title.toLowerCase();
+      var parts=chunk(s.blocks,hasOl?4:3);
+      parts.forEach(function(p,i){content.push({title:title+(parts.length>1?" ("+(i+1)+"/"+parts.length+")":""),html:p.map(blk).join("")})});
+      if(s.h)names.push(s.h);
+    });
+    if(!content.length)content.push({title:"Mavzu",html:"<p>"+esc(c.t)+"</p>"});
+    var plan=["Mavzuni tushuntirish"].concat(names.slice(0,5)).concat(["Savollar bilan mustahkamlash","Xulosa va uyga vazifa"]);
+    sl.push({cover:true,title:c.t,sub:d.fan+" · "+g+"-sinf"});
+    sl.push({title:"Dars rejasi",html:"<ol>"+plan.map(function(x){return"<li>"+esc(x)+"</li>"}).join("")+"</ol>"});
+    content.forEach(function(x){sl.push(x)});
+    var qs=c.quiz.filter(function(q,i){return i%3===0}).slice(0,3);
+    if(qs.length<3)qs=c.quiz.slice(0,3);
+    sl.push({title:"Mustahkamlash savollari",html:'<ol class="dq">'+qs.map(function(q){return'<li><p>'+efr(q.q)+'</p><ul class="dl">'+q.o.map(function(t,k){return'<li><b>'+"ABCD"[k]+')</b> '+efr(t)+'</li>'}).join("")+'</ul></li>'}).join("")+"</ol>"});
+    sl.push({title:"Javoblar va izohlar",html:'<ol class="dq">'+qs.map(function(q){return'<li><p>'+efr(q.q)+'</p><p class="da"><b>Javob: '+"ABCD"[q.a]+') '+efr(q.o[q.a])+'</b></p><p class="de">'+efr(q.e)+'</p></li>'}).join("")+"</ol>"});
+    var xh=recap?recap.blocks.map(blk).join(""):"<ul>"+(names.length?names:[c.t]).slice(0,6).map(function(x){return"<li>"+esc(x)+"</li>"}).join("")+"</ul>";
+    sl.push({title:"Xulosa"+(recap?": eslab qoling":""),html:xh+'<p class="dhw"><b>Uyga vazifa:</b> mavzuni takrorlang va saytdagi mavzu testini ishlang ('+c.quiz.length+' savol).</p>'});
+    return sl;
+  }
+  function makeTheses(c){
+    var secs=lessonSecs(c.lesson),h="",recap=null,steps=null,intro="",terms=[];
+    secs.forEach(function(s){
+      if(isRecap(s.h))recap=s;
+      s.blocks.forEach(function(b){if(b.tagName==="OL"&&!steps)steps=b});
+    });
+    var f=secs[0]&&secs[0].blocks.filter(function(b){return b.tagName==="P"})[0];
+    if(f)intro=firstSentence(f.textContent);
+    var th=[];
+    secs.forEach(function(s){
+      if(!s.h||isRecap(s.h))return;
+      var p=s.blocks.filter(function(b){return b.tagName==="P"})[0],li=s.blocks.filter(function(b){return b.tagName==="UL"})[0];
+      var tx=p?firstSentence(p.textContent):(li?firstSentence(li.textContent):"");
+      th.push("<li><b>"+esc(s.h)+".</b> "+esc(tx)+"</li>");
+    });
+    var w=document.createElement("div");w.innerHTML=c.lesson;
+    Array.prototype.slice.call(w.querySelectorAll("b")).forEach(function(b){
+      var t=b.textContent.trim().replace(/[.:]$/,"");
+      if(t.length>2&&t.length<42&&!/^(masala|misol|javob|eslab|maslahat|nazorat)/i.test(t)&&terms.indexOf(t)<0&&!/^\d+$/.test(t))terms.push(t)});
+    if(intro)h+='<h5>Asosiy g‘oya</h5><p>'+esc(intro)+'</p>';
+    if(th.length)h+='<h5>Tezislar</h5><ul>'+th.join("")+'</ul>';
+    if(terms.length)h+='<h5>Kalit atamalar</h5><p class="terms">'+terms.slice(0,12).map(function(t){return'<span class="tag">'+esc(t)+'</span>'}).join(" ")+'</p>';
+    if(steps)h+='<h5>Amaliy ish qadamlari</h5>'+steps.outerHTML;
+    if(recap)h+='<h5>Eslab qoling</h5>'+recap.blocks.map(blk).join("");
+    return fr(h||"<p>"+esc(c.t)+"</p>");
+  }
+  window.__makeSlides=function(g,i,key){var d=D[key||"math"];return makeSlides(d,g,topicData(d,g)[i])};
+  function openDeck(d,g,c){
+    var sl=makeSlides(d,g,c),i=0,ov=document.createElement("div");
+    ov.className="deck";ov.setAttribute("role","dialog");ov.setAttribute("aria-label","Taqdimot");
+    ov.setAttribute("data-div",d.key);
+    ov.innerHTML='<div class="dbar"><span class="dtt"></span><span class="dct"></span><button type="button" class="btn sm" id="dfs">To‘liq ekran</button><button type="button" class="btn sm" id="dx" aria-label="Yopish">✕ Yopish</button></div><div class="dstage"></div><div class="dnav"><button type="button" class="btn sm" id="dp">← Oldingi</button><div class="ddots"></div><button type="button" class="btn primary sm" id="dn">Keyingi →</button></div>';
+    document.body.appendChild(ov);document.body.style.overflow="hidden";
+    var st=ov.querySelector(".dstage");
+    ov.querySelector(".ddots").innerHTML=sl.map(function(_,k){return'<i data-k="'+k+'"></i>'}).join("");
+    function show(){
+      var s=sl[i];
+      st.className="dstage"+(s.cover?" cover":"");
+      st.innerHTML=s.cover?'<p class="dsub">'+esc(s.sub)+'</p><h2 class="dh">'+fr(esc(s.title))+'</h2><p class="dsub">Ustozbek.uz</p>':'<h3 class="dh2">'+fr(esc(s.title))+'</h3><div class="dbody">'+fr(s.html)+'</div>';
+      ov.querySelector(".dct").textContent=(i+1)+" / "+sl.length;
+      ov.querySelector(".dtt").textContent=c.t;
+      Array.prototype.forEach.call(ov.querySelectorAll(".ddots i"),function(x,k){x.className=k===i?"on":""});
+      ov.querySelector("#dp").disabled=i===0;ov.querySelector("#dn").disabled=i===sl.length-1;
+      st.scrollTop=0;
+    }
+    function go(n){i=Math.max(0,Math.min(sl.length-1,n));show()}
+    function close(){document.removeEventListener("keydown",key);document.body.style.overflow="";try{if(document.fullscreenElement)document.exitFullscreen()}catch(e){}ov.remove()}
+    function key(e){
+      if(e.key==="ArrowRight"||e.key==="PageDown"||e.key===" "){e.preventDefault();go(i+1)}
+      else if(e.key==="ArrowLeft"||e.key==="PageUp"){e.preventDefault();go(i-1)}
+      else if(e.key==="Escape")close();
+      else if(e.key==="Home")go(0);else if(e.key==="End")go(sl.length-1);
+    }
+    document.addEventListener("keydown",key);
+    ov.querySelector("#dp").addEventListener("click",function(){go(i-1)});
+    ov.querySelector("#dn").addEventListener("click",function(){go(i+1)});
+    ov.querySelector("#dx").addEventListener("click",close);
+    ov.querySelector("#dfs").addEventListener("click",function(){try{if(document.fullscreenElement)document.exitFullscreen();else ov.requestFullscreen()}catch(e){}});
+    ov.querySelector(".ddots").addEventListener("click",function(e){var k=e.target.getAttribute&&e.target.getAttribute("data-k");if(k!=null)go(+k)});
+    var tx=0;ov.addEventListener("touchstart",function(e){tx=e.touches[0].clientX},{passive:true});
+    ov.addEventListener("touchend",function(e){var dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>60)go(i+(dx<0?1:-1))},{passive:true});
+    show();ov.querySelector("#dn").focus();
+  }
+  function deckPage(d,b){
+    var st=S[d.key]||(S[d.key]={grade:5});
+    withGrade(b,st,function(p,g){
+      var tp=topicData(d,g);
+      if(!tp.length){p.innerHTML='<p class="note">Bu sinf uchun darslar hali tayyorlanmagan, shuning uchun tezis va taqdimotlar ham yo‘q.</p>';return}
+      var h='<p class="sub" style="margin-bottom:14px">'+g+'-sinf: '+tp.length+' ta mavzu. Har mavzu uchun tezislar va kamida 5 slaydli taqdimot (nazariya, amaliy ish, mustahkamlash savollari va javoblari) bor. Taqdimotda ← → tugmalari yoki barmoq bilan siljitish ishlaydi.</p><div class="keys">';
+      tp.forEach(function(c,i){
+        h+='<details class="key" data-i="'+i+'"><summary><b>'+esc(c.t)+'</b><span class="tag">tezis + taqdimot</span></summary><div class="thes" data-lz="1"></div><div class="row" style="margin:8px 0 14px"><button class="btn primary sm" type="button" data-deck="'+i+'">▶ Taqdimotni ochish</button></div></details>';
+      });
+      p.innerHTML=h+'</div>';
+      $$("details.key",p).forEach(function(x){x.addEventListener("toggle",function(){
+        if(!x.open)return;var z=$(".thes",x);if(z.dataset.lz){z.innerHTML=makeTheses(tp[+x.dataset.i]);delete z.dataset.lz}})});
+      $$("[data-deck]",p).forEach(function(x){x.addEventListener("click",function(){openDeck(d,g,tp[+x.dataset.deck])})});
+    });
+  }
+
+  function withGrade(b,st,fn){
+    if(isStu()){
+      var sg=me.profile.grade;stopTimer();
+      b.innerHTML='<p class="lbl">'+sg+'-sinf</p><div id="pnl"></div>';
+      fn($("#pnl",b),sg);return;
+    }
+    b.innerHTML='<p class="lbl">Sinfni tanlang</p><div class="chips" id="chips" role="group" aria-label="Sinf"></div><div id="pnl" style="margin-top:28px"></div>';
+    var chips=$("#chips",b);
+    for(var g=1;g<=11;g++){(function(g){
+      var x=document.createElement("button");x.className="chip";x.type="button";x.textContent=g;x.dataset.g=g;
+      x.setAttribute("aria-label",g+"-sinf");
+      x.addEventListener("click",function(){st.grade=g;draw()});chips.appendChild(x)})(g)}
+    function draw(){
+      stopTimer();
+      $$(".chip",b).forEach(function(x){x.setAttribute("aria-pressed",String(+x.dataset.g===st.grade))});
+      fn($("#pnl",b),st.grade);
+    }
+    draw();
+  }
+
+  function topicData(d,g){var c=window.CONTENT&&window.CONTENT[d.key]&&window.CONTENT[d.key][g];return c||[]}
+  function findTopic(d,g,name){var a=topicData(d,g);for(var i=0;i<a.length;i++)if(a[i].t===name)return a[i];return null}
+
+  function guide(d,g,p){
+    var n=d.topics[g].length,done=0,h='';
+    for(var i=0;i<n;i++)if(passed(d,g,i))done++;
+    if(isStu())h+='<div class="sum"><span class="lbl" style="margin:0">Bajarildi</span><b>'+done+' / '+n+'</b><div class="bar"><i style="width:'+(n?done/n*100:0)+'%"></i></div></div>';
+    h+='<p class="lbl">'+g+'-sinf · '+d.fan.toLowerCase()+' mavzulari</p><ul class="topics">';
+    var ready=0;
+    d.topics[g].forEach(function(t,i){
+      var st=stateOf(d,g,i);
+      if(st==="soon")h+='<li>'+t+'<span class="tag">tez orada</span></li>';
+      else if(st==="locked")h+='<li class="lk"><span class="lkt">'+t+'</span><span class="tag">qulflangan: oldingi mavzuni 100% bajaring</span></li>';
+      else{ready++;h+='<li><button type="button" class="tl" data-i="'+i+'">'+t+'</button><span class="tag ok">'+(st==="done"?"bajarildi":(isStu()?"ochiq":"dars va test"))+'</span></li>'}
+    });
+    p.innerHTML=h+'</ul><p class="note">'+(ready?'Mavzuni bosib, darsni oching.':'Bu sinf uchun darslar tayyorlanmoqda.')+'</p>';
+    $$(".tl",p).forEach(function(b){b.addEventListener("click",function(){var i=+b.dataset.i;lesson(d,g,i,findTopic(d,g,d.topics[g][i]),p)})});
+  }
+
+  function lesson(d,g,i,c,p){
+    if(!unlocked(d,g,i)){guide(d,g,p);return}
+    if(isStu()&&!(pr()[tkey(d,g,i)]||{}).read)saveProg(d,g,i,{read:true});
+    p.innerHTML='<button class="btn sm" type="button" id="bk">← Mavzular</button>'+
+      '<div class="lesson"><p class="lbl">'+g+'-sinf · '+d.fan.toLowerCase()+' darsi</p><h3 class="lt">'+c.t+'</h3>'+fr(c.lesson)+
+      '<div class="row" style="margin-top:24px"><button class="btn primary" type="button" id="tt">Mavzu testini boshlash ('+c.quiz.length+' savol)</button></div></div>';
+    $("#bk",p).addEventListener("click",function(){guide(d,g,p)});
+    $("#tt",p).addEventListener("click",function(){topicTest(d,g,i,c,p,function(){guide(d,g,p)})});
+    window.scrollTo(0,0);
+  }
+
+  function topicTest(d,g,i,c,p,back){
+    runQuiz(shuffle(c.quiz),g+'-sinf · '+c.t,p,back,"Mavzular ro‘yxati",function(score,total){
+      if(!isStu())return "";
+      var prev=pr()[tkey(d,g,i)]||{},ok=score>=total*PASS;
+      saveProg(d,g,i,{read:true,best:Math.max(prev.best||0,score),total:total,tries:(prev.tries||0)+1,passed:!!(prev.passed||ok)});
+      if(ok){var nxt=i+1<d.topics[g].length&&findTopic(d,g,d.topics[g][i+1]);return '<p class="sub okm">Mavzu 100% bajarildi.'+(nxt?' Keyingi mavzu ochildi.':'')+'</p>'}
+      return '<p class="sub">Keyingi mavzuga o‘tish uchun barcha savollarga to‘g‘ri javob bering. Darsni qayta o‘qib, yana urinib ko‘ring.</p>';
+    });
+  }
+
+  function accordion(sec,b){
+    var h=sec.intro?'<p class="sub" style="margin-bottom:20px">'+sec.intro+'</p>':'';
+    sec.items.forEach(function(it){h+='<details><summary>'+it.t+'</summary><div>'+it.b+'</div></details>'});
+    b.innerHTML=h;
+  }
+
+  function soon(sec,b){
+    var h='<p class="sub" style="margin-bottom:20px">Bu bo‘lim tayyorlanmoqda. Unda quyidagilar bo‘ladi:</p><div class="soon">';
+    (SOON[sec.id]||[]).forEach(function(s){h+='<span>'+s+'</span>'});
+    b.innerHTML=h+'</div>';
+  }
+
+  function runQuiz(qs,label,p,onBack,backText,onFinish){
+    var i=0,score=0,done=false;
+    function render(){
+      if(i>=qs.length){
+        var extra=onFinish?onFinish(score,qs.length):"";
+        p.innerHTML='<div class="q"><p class="lbl">Natija · '+esc(label)+'</p><div class="big-score">'+score+' / '+qs.length+'</div>'+
+          '<p class="sub" style="margin-bottom:12px">'+(score===qs.length?"Ajoyib natija!":score>=qs.length/2?"Yaxshi, yana mashq qiling.":"Mavzuni takrorlab, qayta urinib ko‘ring.")+'</p>'+extra+
+          '<div class="row" style="margin-top:12px"><button class="btn primary sm" id="again" type="button">Qayta boshlash</button><button class="btn sm" id="back" type="button">'+(backText||"Orqaga")+'</button></div></div>';
+        $("#again",p).addEventListener("click",function(){runQuiz(shuffle(qs),label,p,onBack,backText,onFinish)});
+        $("#back",p).addEventListener("click",onBack);return;
+      }
+      var c=qs[i];done=false;
+      var h='<div class="q"><p class="lbl">'+esc(label)+' · savol '+(i+1)+' / '+qs.length+'</p><p class="qt">'+efr(c.q)+'</p><div class="opts">';
+      c.o.forEach(function(t,k){h+='<button class="opt" type="button" data-k="'+k+'">'+efr(t)+'</button>'});
+      p.innerHTML=h+'</div><p class="fb" aria-live="polite"></p><button class="btn primary sm" id="nx" type="button" hidden>Keyingi</button></div>';
+      $$(".opt",p).forEach(function(x){x.addEventListener("click",function(){
+        if(done)return;done=true;var k=+x.dataset.k;
+        $$(".opt",p)[c.a].classList.add("ok");
+        if(k!==c.a)x.classList.add("no");else score++;
+        $(".fb",p).innerHTML=efr((k===c.a?"To‘g‘ri. ":"Noto‘g‘ri. ")+c.e);
+        var nx=$("#nx",p);nx.textContent=i===qs.length-1?"Natijani ko‘rish":"Keyingi";nx.hidden=false;
+      })});
+      $("#nx",p).addEventListener("click",function(){i++;render()});
+    }
+    render();
+  }
+
+  function quiz(d,g,p){
+    var pool=d.quiz.filter(function(q){return g>=q.g[0]&&g<=q.g[1]});
+    if(pool.length<3)pool=d.quiz.filter(function(q){return Math.abs(g-(q.g[0]+q.g[1])/2)<=3});
+    d.topics[g].forEach(function(t,i){var c=findTopic(d,g,t);if(c&&(!isStu()||passed(d,g,i)))pool=pool.concat(c.quiz)});
+    function menu(){
+      var h='<p class="lbl">'+g+'-sinf · test turini tanlang</p><ul class="topics">'+
+        '<li><button type="button" class="tl" id="mix">Aralash test</button><span class="tag">'+Math.min(10,pool.length)+' savol</span></li>';
+      d.topics[g].forEach(function(t,i){
+        var st=stateOf(d,g,i),c=findTopic(d,g,t);
+        if(st==="soon")h+='<li>'+t+'<span class="tag">tez orada</span></li>';
+        else if(st==="locked")h+='<li class="lk"><span class="lkt">'+t+'</span><span class="tag">qulflangan: oldingi mavzuni 100% bajaring</span></li>';
+        else h+='<li><button type="button" class="tl" data-i="'+i+'">'+t+'</button><span class="tag ok">'+(st==="done"?"bajarildi · ":"")+c.quiz.length+' savol</span></li>';
+      });
+      p.innerHTML=h+'</ul>'+(isStu()?'<p class="note">Aralash testga faqat bajarilgan mavzular savollari qo‘shiladi.</p>':'');
+      $("#mix",p).addEventListener("click",function(){
+        runQuiz(shuffle(pool).slice(0,10),g+'-sinf · aralash test',p,menu,"Testlar ro‘yxati");
+      });
+      $$("[data-i]",p).forEach(function(b){b.addEventListener("click",function(){
+        var i=+b.dataset.i;topicTest(d,g,i,findTopic(d,g,d.topics[g][i]),p,menu);
+      })});
+    }
+    menu();
+  }
+
+  function games(d,g,p){
+    p.innerHTML='<p class="lbl">'+d.gameName+'</p><p class="sub" style="margin-bottom:16px">'+d.gameText+'</p><div class="game" id="g"></div>'+
+      '<p class="lbl" style="margin-top:28px">Tez orada</p><div class="soon"><span>Xotira kartalari</span><span>Krossvord</span><span>'+(d.key==="ict"?"Klaviatura tezligi":"Sonlar jumbog‘i")+'</span></div>';
+    if(d.key==="ict")binaryGame($("#g",p),g);else mathGame($("#g",p),g);
+  }
+
+  function binaryGame(el,grade){
+    var max=grade<=5?15:grade<=8?63:255,target,bits,score=0;
+    function newRound(){target=rnd(1,max);bits=[0,0,0,0,0,0,0,0];draw()}
+    function val(){var s=0;for(var i=0;i<8;i++)s+=bits[i]*(128>>i);return s}
+    function draw(){
+      var h='<div class="stat"><span>Ball: <b>'+score+'</b></span><span>Hozir: <b id="cur">'+val()+'</b></span></div>'+
+        '<div class="target" aria-label="Berilgan son">'+target+'</div><div class="bits">';
+      for(var i=0;i<8;i++)h+='<div class="bit"><button type="button" data-i="'+i+'" aria-pressed="'+(bits[i]?"true":"false")+'" aria-label="'+(128>>i)+' o‘rni">'+bits[i]+'</button><span>'+(128>>i)+'</span></div>';
+      h+='</div><p class="fb" id="gfb" aria-live="polite">Bitlarning yig‘indisi berilgan songa teng bo‘lsin.</p><div class="row"><button class="btn sm" id="skip" type="button">Boshqa son</button></div>';
+      el.innerHTML=h;
+      $$("[data-i]",el).forEach(function(x){x.addEventListener("click",function(){
+        var i=+x.dataset.i;bits[i]=bits[i]?0:1;
+        x.textContent=bits[i];x.setAttribute("aria-pressed",String(!!bits[i]));
+        $("#cur",el).textContent=val();
+        if(val()===target){score++;$("#gfb",el).textContent="To‘g‘ri! "+target+" = "+bits.join("");setTimeout(newRound,900)}
+      })});
+      $("#skip",el).addEventListener("click",newRound);
+    }
+    newRound();
+  }
+
+  function mathGame(el,grade){
+    var key="ustozbek-best-"+grade,best=+store(key)||0,score=0,left=30,cur=null;
+    function make(){
+      var a,b,c,q,ans;
+      if(grade<=2){a=rnd(1,grade===1?10:50);b=rnd(1,grade===1?10:30);if(Math.random()<.5||a<b){q=a+" + "+b;ans=a+b}else{q=a+" − "+b;ans=a-b}}
+      else if(grade<=4){if(Math.random()<.6){a=rnd(2,9);b=rnd(2,9);q=a+" × "+b;ans=a*b}else{a=rnd(10,99);b=rnd(10,99);q=a+" + "+b;ans=a+b}}
+      else if(grade<=8){if(Math.random()<.5){a=rnd(6,15);b=rnd(6,15);q=a+" × "+b;ans=a*b}else{a=rnd(3,12);b=rnd(3,12);c=rnd(1,30);q=a+" × "+b+" + "+c;ans=a*b+c}}
+      else{if(Math.random()<.5){a=rnd(11,25);q=a+"²";ans=a*a}else{a=rnd(3,15);b=rnd(3,15);c=rnd(2,9);var e=rnd(2,9);q=a+" × "+b+" − "+c+" × "+e;ans=a*b-c*e}}
+      return {q:q,a:ans};
+    }
+    function intro(){
+      el.innerHTML='<div class="stat"><span>Eng yaxshi natija ('+grade+'-sinf): <b>'+best+'</b></span></div><div class="row"><button class="btn primary" id="go" type="button">Boshlash</button></div>';
+      $("#go",el).addEventListener("click",start);
+    }
+    function start(){
+      score=0;left=30;
+      el.innerHTML='<div class="stat"><span>Ball: <b id="sc">0</b></span><span>Vaqt: <b id="tm">30</b> s</span></div><div class="bar"><i id="pb" style="width:100%"></i></div>'+
+        '<div class="mq" id="mq"></div><input class="inp" id="in" inputmode="numeric" autocomplete="off" aria-label="Javob"><p class="fb" id="gfb" aria-live="polite">Javobni yozib Enter bosing.</p>';
+      var inp=$("#in",el);
+      function nextQ(){cur=make();$("#mq",el).textContent=cur.q+" = ?";inp.value="";}
+      nextQ();inp.focus();
+      inp.addEventListener("keydown",function(ev){
+        if(ev.key!=="Enter")return;
+        var v=parseInt(inp.value,10);
+        if(v===cur.a){score++;$("#sc",el).textContent=score;$("#gfb",el).textContent="To‘g‘ri!"}
+        else $("#gfb",el).textContent="Noto‘g‘ri edi: "+cur.q+" = "+cur.a;
+        nextQ();
+      });
+      stopTimer();
+      timer=setInterval(function(){
+        left--;$("#tm",el).textContent=left;$("#pb",el).style.width=(left/30*100)+"%";
+        if(left<=0){stopTimer();finish()}
+      },1000);
+    }
+    function finish(){
+      var rec=score>best;if(rec){best=score;store(key,String(best))}
+      el.innerHTML='<p class="lbl">Vaqt tugadi</p><div class="big-score">'+score+'</div><p class="sub">'+(rec?"Yangi rekord!":"Eng yaxshi natija: "+best)+'</p><div class="row"><button class="btn primary" id="go" type="button">Yana o‘ynash</button></div>';
+      $("#go",el).addEventListener("click",start);
+    }
+    intro();
+  }
+
+  function planTool(d,b){
+    var gopts="";for(var g=1;g<=11;g++)gopts+='<option value="'+g+'">'+g+'-sinf</option>';
+    b.innerHTML='<p class="sub" style="margin-bottom:20px">Sinf va mavzuni tanlang, 45 daqiqalik dars rejasi shabloni tayyor bo‘ladi.</p>'+
+      '<div class="tool"><div class="sel"><select id="sg" aria-label="Sinf">'+gopts+'</select><select id="st" aria-label="Mavzu"></select></div>'+
+      '<pre class="plan" id="plan"></pre><div class="row"><button class="btn primary sm" id="cp" type="button">Nusxa olish</button><span class="fb" id="cpf" style="margin:0;align-self:center"></span></div></div>';
+    var sg=$("#sg",b),stp=$("#st",b);
+    function topics(){
+      var g=+sg.value;stp.innerHTML="";
+      d.topics[g].forEach(function(t,i){var o=document.createElement("option");o.value=i;o.textContent=t;stp.appendChild(o)});
+      plan();
+    }
+    function plan(){
+      var g=+sg.value,t=d.topics[g][+stp.value||0];
+      $("#plan",b).textContent=
+"Fan: "+d.fan+"\nSinf: "+g+"-sinf\nMavzu: "+t+"\nDavomiyligi: 45 daqiqa\n\n"+
+"Maqsad:\n- Ta’limiy: mavzu bo‘yicha asosiy tushunchalarni o‘zlashtirish\n- Rivojlantiruvchi: mustaqil fikrlash va amaliy ko‘nikma\n- Tarbiyaviy: mas’uliyat va hamkorlik\n\n"+
+"Jihozlar: doska, proyektor, tarqatma materiallar\n\n"+
+"Dars bosqichlari:\n1. Tashkiliy qism — 3 daqiqa\n2. O‘tilganlarni takrorlash — 7 daqiqa\n3. Yangi mavzu bayoni — 15 daqiqa\n4. Mustahkamlash (amaliy mashq yoki guruh ishi) — 14 daqiqa\n5. Baholash va uy vazifasi — 6 daqiqa";
+    }
+    sg.value=5;sg.addEventListener("change",topics);stp.addEventListener("change",plan);topics();
+    $("#cp",b).addEventListener("click",function(){
+      var f=$("#cpf",b),txt=$("#plan",b).textContent;
+      function sel(){var r=document.createRange();r.selectNodeContents($("#plan",b));var s=getSelection();s.removeAllRanges();s.addRange(r);f.textContent="Belgilandi, nusxa oling."}
+      try{navigator.clipboard.writeText(txt).then(function(){f.textContent="Nusxa olindi."},sel)}catch(e){sel()}
+    });
+  }
+
+  function methods(d,b){
+    var h='<p class="sub" style="margin-bottom:20px">Har bir metod uchun '+d.fan.toLowerCase()+' fanidan misol keltirilgan.</p>';
+    Object.keys(METHODS).forEach(function(k){
+      h+='<details><summary>'+k+'</summary><div><p><b>Mohiyati:</b> '+METHODS[k]+'</p><p style="margin:0"><b>'+d.fan+'da:</b> '+d.methodEx[k]+'</p></div></details>';
+    });
+    b.innerHTML=h;
+  }
+
+  function attest(d,b){
+    var ck="";ATT.forEach(function(t,i){ck+='<label class="check"><input type="checkbox" data-i="'+i+'"><span>'+t+'</span></label>'});
+    b.innerHTML='<p class="sub" style="margin-bottom:20px">Namunaviy tayyorgarlik rejasi. Belgilangan bandlar shu qurilmada saqlanadi.</p>'+
+      '<div class="tool"><div class="bar"><i id="ap"></i></div><p class="lbl" id="al" style="margin:0"></p><div class="checks">'+ck+'</div>'+
+      '<p class="note" style="margin:0">Attestatsiya tartibi o‘zgarishi mumkin, amaldagi qoidalarni rasmiy hujjatlardan tekshiring.</p></div>';
+    var key="ustozbek-att-"+d.key,saved={};
+    try{saved=JSON.parse(store(key)||"{}")||{}}catch(e){saved={}}
+    var boxes=$$(".check input",b);
+    function prog(){
+      var n=boxes.filter(function(x){return x.checked}).length;
+      $("#ap",b).style.width=(n/boxes.length*100)+"%";
+      $("#al",b).textContent=n+" / "+boxes.length+" band bajarildi";
+    }
+    boxes.forEach(function(x){
+      x.checked=!!saved[x.dataset.i];
+      x.addEventListener("change",function(){saved[x.dataset.i]=x.checked?1:0;store(key,JSON.stringify(saved));prog()});
+    });
+    prog();
+  }
+
+  /* ---------- Hisob sahifalari ---------- */
+  function loginPage(){
+    if(me){go(me.role==="teacher"?"#panel":"#kabinet");return}
+    app.removeAttribute("data-div");
+    app.innerHTML='<div class="page"><p class="eyebrow" style="color:var(--ict)">Kirish</p><h2 style="margin-bottom:20px">Hisobingizga kiring</h2>'+demoBanner()+
+      '<form class="form" id="lf" novalidate>'+
+      '<div class="fld"><label for="lg">LOGIN</label><input id="lg" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false"></div>'+
+      '<div class="fld"><label for="pw">PAROL</label><input id="pw" type="password" autocomplete="current-password" autocapitalize="none"></div>'+
+      '<p class="err" id="er" role="alert"></p><button class="btn primary" type="submit" id="sb">Kirish</button></form>'+
+      '<p class="sub" style="margin-top:20px">Hisobingiz yo‘qmi? <a href="#royxat"><b>Ro‘yxatdan o‘ting</b></a>.<br>O‘qituvchimisiz? <a href="#panel"><b>Panelga kiring</b></a>.</p></div>';
+    $("#lf").addEventListener("submit",function(ev){
+      ev.preventDefault();var er=$("#er"),sb=$("#sb");er.textContent="";sb.disabled=true;sb.textContent="Tekshirilmoqda…";
+      UB.login($("#lg").value,$("#pw").value).then(function(){var t=afterLogin||"#kabinet";afterLogin=null;go(t)})
+        .catch(function(e){er.textContent=e.message||"Kirib bo‘lmadi";sb.disabled=false;sb.textContent="Kirish"});
+    });
+  }
+
+  function registerPage(){
+    if(registering)return;
+    app.removeAttribute("data-div");
+    if(credHtml){showCreds();return}
+    if(me){go(me.role==="teacher"?"#panel":"#kabinet");return}
+    app.innerHTML='<div class="page"><p class="eyebrow" style="color:var(--ict)">Ro‘yxatdan o‘tish</p><h2 style="margin-bottom:8px">Yangi o‘quvchi</h2>'+
+      '<p class="sub" style="margin-bottom:20px">Tasdiqlash kodini o‘qituvchingizdan oling. Login va parol ro‘yxatdan o‘tgach avtomatik beriladi.</p>'+demoBanner()+
+      '<form class="form" id="rf" novalidate>'+
+      '<div class="fld"><label for="ism">ISM</label><input id="ism" autocomplete="given-name" maxlength="60"></div>'+
+      '<div class="fld"><label for="fam">FAMILIYA</label><input id="fam" autocomplete="family-name" maxlength="60"></div>'+
+      '<div class="fld"><label for="mk">MAKTAB</label><input id="mk" placeholder="Masalan, 25-maktab, Toshkent" maxlength="100"></div>'+
+      '<div class="fld"><label for="sn">SINF</label><select id="sn"><option value="">Sinfni tanlang</option>'+gradeOpts(0)+'</select></div>'+
+      '<div class="fld"><label for="kd">TASDIQLASH KODI</label><input id="kd" class="up" autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false" maxlength="12"></div>'+
+      '<p class="err" id="er" role="alert"></p><button class="btn primary" type="submit" id="sb">Ro‘yxatdan o‘tish</button></form>'+
+      '<p class="sub" style="margin-top:20px">Hisobingiz bormi? <a href="#kirish"><b>Kirish</b></a></p></div>';
+    $("#rf").addEventListener("submit",function(ev){
+      ev.preventDefault();var er=$("#er"),sb=$("#sb");er.textContent="";sb.disabled=true;sb.textContent="Tekshirilmoqda…";
+      registering=true;
+      UB.register({ism:$("#ism").value,familiya:$("#fam").value,maktab:$("#mk").value,sinf:$("#sn").value,code:$("#kd").value})
+        .then(function(r){registering=false;credHtml={login:r.login,password:r.password};showCreds()})
+        .catch(function(e){registering=false;er.textContent=e.message||"Ro‘yxatdan o‘tib bo‘lmadi";sb.disabled=false;sb.textContent="Ro‘yxatdan o‘tish"});
+    });
+  }
+  function showCreds(){
+    var c=credHtml;
+    app.innerHTML='<div class="page"><p class="eyebrow" style="color:var(--ict)">Ro‘yxatdan o‘tdingiz</p><h2 style="margin-bottom:20px">Hisobingiz tayyor</h2>'+
+      '<div class="cred"><div class="kv"><span>LOGIN</span><b>'+esc(c.login)+'</b></div><div class="kv"><span>PAROL</span><b>'+esc(c.password)+'</b></div>'+
+      '<p class="sub" style="margin:0">Login va parolni hozir saqlab oling: nusxa oling yoki ekranni rasmga tushiring. Parolni keyinroq ko‘rib bo‘lmaydi.</p>'+
+      '<div class="row"><button class="btn sm" type="button" id="cc">Nusxa olish</button><button class="btn primary sm" type="button" id="gk">Kabinetga o‘tish</button></div></div></div>';
+    $("#cc").addEventListener("click",function(){copyText("Ustozbek\nLogin: "+c.login+"\nParol: "+c.password)});
+    $("#gk").addEventListener("click",function(){credHtml=null;go("#kabinet")});
+  }
+
+  function cabinet(){
+    if(!me){afterLogin="kabinet";go("#kirish");return}
+    if(me.role==="teacher"){go("#panel");return}
+    app.removeAttribute("data-div");
+    var pf=me.profile,g=pf.grade;
+    function card(d){
+      var n=d.topics[g].length,done=doneCount(d,g,pr()),ready=topicData(d,g).length;
+      return '<div class="panel" data-div="'+d.key+'"><span class="big">'+d.name+'</span>'+
+        '<p>'+g+'-sinf · '+done+' / '+n+' mavzu bajarildi'+(ready?'':' (darslar tayyorlanmoqda)')+'</p>'+
+        '<div class="bar"><i style="width:'+(n?done/n*100:0)+'%"></i></div>'+
+        '<div class="row"><a class="btn primary sm" href="#'+d.path+'-oquvchi-darslar">Darslarni davom ettirish</a><a class="btn sm" href="#'+d.path+'-oquvchi">Barcha bo‘limlar</a></div></div>';
+    }
+    app.innerHTML='<div class="page"><div class="me-card"><div><h2>'+esc(pf.ism)+' '+esc(pf.familiya)+'</h2><p>'+esc(pf.maktab)+' · '+g+'-sinf · login: <b>'+esc(pf.login)+'</b></p></div><button class="btn sm" type="button" id="lo">Chiqish</button></div>'+
+      '<div class="divs">'+card(D.ict)+card(D.math)+'</div>'+
+      '<p class="note">Keyingi mavzu oldingi mavzuning dars va testi 100% bajarilgach ochiladi.</p></div>';
+    $("#lo").addEventListener("click",function(){UB.logout().then(function(){go("#home")})});
+  }
+
+  var PS={tab:"codes",cg:"all",cs:"all",sg:"all",sq:""};
+  function panel(){
+    app.removeAttribute("data-div");
+    if(me&&me.role==="student"){go("#kabinet");return}
+    if(!me){
+      app.innerHTML='<div class="page"><p class="eyebrow" style="color:var(--ict)">O‘qituvchi</p><h2 style="margin-bottom:12px">O‘qituvchi paneli</h2>'+demoBanner()+
+        '<p class="sub" style="margin-bottom:20px">Kodlar yaratish va o‘quvchilar natijalarini ko‘rish uchun '+(UB.mode==="demo"?'demo rejimda kiring.':'Google hisobingiz bilan kiring.')+'</p>'+
+        '<button class="btn primary" type="button" id="tl">'+(UB.mode==="demo"?"Demo kirish":"Google bilan kirish")+'</button><p class="err" id="er" role="alert" style="margin-top:12px"></p>'+
+        '<p class="note">Telegram ichidagi oynada Google orqali kirish ishlamasligi mumkin. Brauzerda oching.</p></div>';
+      $("#tl").addEventListener("click",function(){
+        var er=$("#er");er.textContent="";
+        UB.teacherLogin().catch(function(e){er.textContent=e.message||"Kirib bo‘lmadi"});
+      });
+      return;
+    }
+    app.innerHTML='<div class="page"><div class="me-card"><div><h2>O‘qituvchi paneli</h2><p>'+esc(me.name||"")+'</p></div><button class="btn sm" type="button" id="lo">Chiqish</button></div>'+demoBanner()+
+      '<div class="ptabs" role="tablist"><button class="ptab" role="tab" data-t="codes">Kodlar</button><button class="ptab" role="tab" data-t="students">O‘quvchilar</button></div><div id="pb"></div></div>';
+    $("#lo").addEventListener("click",function(){UB.logout().then(function(){go("#home")})});
+    $$(".ptab").forEach(function(b){b.addEventListener("click",function(){PS.tab=b.dataset.t;drawTab()})});
+    function drawTab(){
+      $$(".ptab").forEach(function(b){b.setAttribute("aria-selected",String(b.dataset.t===PS.tab))});
+      if(PS.tab==="codes")codesTab($("#pb"));else studentsTab($("#pb"));
+    }
+    drawTab();
+  }
+
+  function codesTab(b){
+    b.innerHTML='<div class="frow"><div class="fld"><label for="cg">SINF</label><select id="cg">'+gradeOpts(5)+'</select></div>'+
+      '<div class="fld"><label for="cn">SONI</label><input id="cn" type="number" min="1" max="50" value="10" inputmode="numeric"></div>'+
+      '<div class="fld"><label for="cm">IZOH (IXTIYORIY)</label><input id="cm" maxlength="80" placeholder="Masalan, 5-A sinf"></div>'+
+      '<button class="btn primary sm" type="button" id="mk">Kodlar yaratish</button></div>'+
+      '<p class="err" id="er" role="alert"></p><div id="newc"></div>'+
+      '<div class="frow"><div class="fld"><label for="fg">SINF BO‘YICHA</label><select id="fg"><option value="all">Hammasi</option>'+gradeOpts(0)+'</select></div>'+
+      '<div class="fld"><label for="fs">HOLATI</label><select id="fs"><option value="all">Hammasi</option><option value="free">Bo‘sh</option><option value="used">Ishlatilgan</option></select></div>'+
+      '<button class="btn sm" type="button" id="cf">Bo‘shlarini nusxalash</button></div><div id="cl"><p class="sub">Yuklanmoqda…</p></div>';
+    $("#fg").value=PS.cg;$("#fs").value=PS.cs;
+    var codes=[],names={};
+    function load(){
+      Promise.all([UB.listCodes(),UB.listStudents().catch(function(){return []})]).then(function(r){
+        codes=r[0];names={};r[1].forEach(function(x){names[x.uid]=x.ism+" "+x.familiya});draw();
+      }).catch(function(){$("#cl").innerHTML='<p class="err">Kodlarni yuklab bo‘lmadi.</p>'});
+    }
+    function filtered(){return codes.filter(function(c){return (PS.cg==="all"||+PS.cg===+c.grade)&&(PS.cs==="all"||(PS.cs==="free"?!c.used:c.used))})}
+    function draw(){
+      var l=filtered();
+      if(!l.length){$("#cl").innerHTML='<p class="sub">Kod topilmadi. Yuqorida yangi kodlar yarating.</p>';return}
+      var h='<div class="twx"><table class="tbl"><tr><th>Kod</th><th>Sinf</th><th>Holati</th><th>Izoh</th><th></th></tr>';
+      l.forEach(function(c){
+        h+='<tr><td class="mono"><b>'+esc(c.code)+'</b></td><td>'+c.grade+'</td><td>'+(c.used?'<span class="chipst on">'+esc(names[c.usedBy]||"ishlatilgan")+'</span>':'<span class="chipst">bo‘sh</span>')+'</td><td>'+esc(c.note)+'</td><td>'+(c.used?'':'<button class="btn xs" type="button" data-del="'+esc(c.code)+'">O‘chirish</button>')+'</td></tr>';
+      });
+      $("#cl").innerHTML=h+'</table></div>';
+      $$("[data-del]",b).forEach(function(x){x.addEventListener("click",function(){
+        UB.deleteCode(x.dataset.del).then(function(){codes=codes.filter(function(c){return c.code!==x.dataset.del});draw()}).catch(function(){toast("O‘chirib bo‘lmadi")});
+      })});
+    }
+    $("#fg").addEventListener("change",function(){PS.cg=this.value;draw()});
+    $("#fs").addEventListener("change",function(){PS.cs=this.value;draw()});
+    $("#cf").addEventListener("click",function(){
+      var l=filtered().filter(function(c){return !c.used});
+      if(!l.length){toast("Bo‘sh kod yo‘q");return}
+      copyText(l.map(function(c){return c.code+" ("+c.grade+"-sinf"+(c.note?", "+c.note:"")+")"}).join("\n"));
+    });
+    $("#mk").addEventListener("click",function(){
+      var er=$("#er"),btn=this;er.textContent="";btn.disabled=true;
+      UB.createCodes($("#cg").value,$("#cn").value,$("#cm").value).then(function(list){
+        btn.disabled=false;
+        $("#newc").innerHTML='<p class="lbl">Yangi kodlar · '+$("#cg").value+'-sinf</p><div class="codes-new">'+list.map(function(c){return '<span>'+esc(c)+'</span>'}).join("")+'</div><button class="btn sm" type="button" id="cp" style="margin-bottom:20px">Hammasini nusxalash</button>';
+        $("#cp").addEventListener("click",function(){copyText(list.join("\n"))});
+        load();
+      }).catch(function(e){btn.disabled=false;er.textContent=e.message||"Kodlarni yaratib bo‘lmadi"});
+    });
+    load();
+  }
+
+  function studentsTab(b){
+    b.innerHTML='<div class="frow"><div class="fld"><label for="sg">SINF</label><select id="sg"><option value="all">Hammasi</option>'+gradeOpts(0)+'</select></div>'+
+      '<div class="fld"><label for="sq">QIDIRISH</label><input id="sq" placeholder="Ism, familiya yoki maktab"></div>'+
+      '<button class="btn sm" type="button" id="cx">Jadvalni nusxalash</button></div><div id="sl"><p class="sub">Yuklanmoqda…</p></div>';
+    $("#sg").value=PS.sg;$("#sq").value=PS.sq;
+    var list=[];
+    function rows(){
+      var q=PS.sq.trim().toLowerCase();
+      return list.filter(function(x){return (PS.sg==="all"||+PS.sg===+x.grade)&&(!q||(x.ism+" "+x.familiya+" "+x.maktab).toLowerCase().indexOf(q)>=0)})
+        .sort(function(a,b2){return a.grade-b2.grade||String(a.familiya).localeCompare(String(b2.familiya))});
+    }
+    function pText(d,x){return doneCount(d,x.grade,x.progress)+" / "+d.topics[x.grade].length}
+    function draw(){
+      var l=rows();
+      if(!l.length){$("#sl").innerHTML='<p class="sub">'+(list.length?"Mos o‘quvchi topilmadi.":"Hali o‘quvchilar ro‘yxatdan o‘tmagan.")+'</p>';return}
+      var h='<p class="lbl">'+l.length+' ta o‘quvchi</p><div class="twx"><table class="tbl"><tr><th>O‘quvchi</th><th>Maktab</th><th>Sinf</th><th>Login</th><th>ICTBEK</th><th>MATHBEK</th><th>Oxirgi faollik</th></tr>';
+      l.forEach(function(x){
+        h+='<tr><td>'+esc(x.ism)+' '+esc(x.familiya)+'</td><td>'+esc(x.maktab)+'</td><td>'+x.grade+'</td><td class="mono">'+esc(x.login)+'</td><td>'+pText(D.ict,x)+'</td><td>'+pText(D.math,x)+'</td><td>'+fmt(x.lastSeen)+'</td></tr>';
+      });
+      $("#sl").innerHTML=h+'</table></div>';unlockUI();
+    }
+    function unlockUI(){
+      var l=rows();
+      var h='<div class="unl"><p class="lbl">Mavzuni ochib berish</p><p class="sub" style="margin-bottom:10px">Savolda xato topilsa yoki o‘quvchi qotib qolsa, mavzuni "bajarildi" deb belgilang. Keyingi mavzu ochiladi.</p><div class="frow"><div class="fld"><label for="us">O‘QUVCHI</label><select id="us">'+
+        l.map(function(x,i){return'<option value="'+i+'">'+esc(x.ism+" "+x.familiya)+' ('+x.grade+'-sinf)</option>'}).join("")+'</select></div>'+
+        '<div class="fld"><label for="ud">FAN</label><select id="ud"><option value="ict">ICTBEK</option><option value="math">MATHBEK</option></select></div>'+
+        '<div class="fld"><label for="ut">MAVZU</label><select id="ut"></select></div><button class="btn primary sm" type="button" id="uk">Ochib berish</button></div><p class="sub" id="um"></p></div>';
+      $("#sl").insertAdjacentHTML("beforeend",h);
+      function fill(){
+        var x=l[+$("#us").value],d=D[$("#ud").value],o="";
+        if(x)d.topics[x.grade].forEach(function(t,i){if(findTopic(d,x.grade,t))o+='<option value="'+i+'">'+esc(t)+(passedK(x.progress||{},d,x.grade,i)?" ✓":"")+'</option>'});
+        $("#ut").innerHTML=o||'<option value="">Bu sinfda mavzu yo‘q</option>';
+      }
+      $("#us").addEventListener("change",fill);$("#ud").addEventListener("change",fill);fill();
+      $("#uk").addEventListener("click",function(){
+        var x=l[+$("#us").value],d=D[$("#ud").value],i=$("#ut").value;
+        if(!x||i==="")return;var key=tkey(d,x.grade,+i);
+        UB.unlockTopic(x.uid,key).then(function(){
+          (x.progress||(x.progress={}))[key]={read:true,passed:true,byTeacher:true};
+          $("#um").textContent=x.ism+" "+x.familiya+": mavzu ochildi.";fill();
+        }).catch(function(){$("#um").textContent="Ochib bo‘lmadi. Internet yoki ruxsatni (Firestore qoidalarini) tekshiring."});
+      });
+    }
+    $("#sg").addEventListener("change",function(){PS.sg=this.value;draw()});
+    $("#sq").addEventListener("input",function(){PS.sq=this.value;draw()});
+    $("#cx").addEventListener("click",function(){
+      var l=rows();if(!l.length){toast("Nusxalash uchun ma’lumot yo‘q");return}
+      copyText(["Ism\tFamiliya\tMaktab\tSinf\tLogin\tICTBEK\tMATHBEK"].concat(l.map(function(x){return [x.ism,x.familiya,x.maktab,x.grade,x.login,pText(D.ict,x),pText(D.math,x)].join("\t")})).join("\n"));
+    });
+    UB.listStudents().then(function(r){list=r;draw()}).catch(function(){$("#sl").innerHTML='<p class="err">O‘quvchilarni yuklab bo‘lmadi.</p>'});
+  }
+
+  /* ---------- Router ---------- */
+  function route(){
+    stopTimer();
+    var h=(location.hash||"#home").slice(1),
+        m=h.match(/^(ict|math)bek(?:-(oquvchi|oqituvchi)(?:-([a-z]+))?)?$/),cur="home";
+    var isAuthPage=/^(kirish|royxat|kabinet|panel)$/.test(h);
+    if(h!=="royxat")credHtml=null;
+    if(((m&&m[2]==="oquvchi")||isAuthPage)&&!authReady){
+      app.removeAttribute("data-div");app.innerHTML='<div class="page"><p class="sub">Yuklanmoqda…</p></div>';return;
+    }
+    if(m&&m[2]==="oquvchi"&&!me){afterLogin=h;go("#kirish");return}
+    if(isAuthPage){
+      cur="acct";
+      if(h==="kirish")loginPage();else if(h==="royxat")registerPage();else if(h==="kabinet")cabinet();else panel();
+    }else if(m){
+      var d=D[m[1]];cur=m[1];
+      if(!m[2])division(d);
+      else if(!m[3])hub(d,m[2]);
+      else{
+        var list=m[2]==="oquvchi"?d.stu:d.tea,sec=null;
+        list.forEach(function(s){if(s.id===m[3])sec=s});
+        if(sec)sectionPage(d,m[2],sec);else hub(d,m[2]);
+      }
+    }else home();
+    $$("[data-nav]",document).forEach(function(a){a.classList.toggle("on",a.dataset.nav===cur);
+      if(a.dataset.nav===cur)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
+    window.scrollTo(0,0);
+  }
+  window.addEventListener("hashchange",route);
+  UB.onAuth(function(u){me=u;authReady=true;updateAcct();route()});
+  route();
+})();
+</script>
+<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}</script>
+<script>
+(function(){
+  var z=1,K='ub_zoom';
+  try{var s=parseFloat(localStorage.getItem(K));if(s>=.7&&s<=1.8)z=s}catch(e){}
+  function ap(){document.documentElement.style.setProperty('--z',z);var v=document.getElementById('zv');if(v)v.textContent=Math.round(z*100)+'%';try{localStorage.setItem(K,z)}catch(e){}}
+  function set(n){z=Math.min(1.8,Math.max(.7,Math.round(n*10)/10));ap()}
+  document.getElementById('zm').onclick=function(){set(z-.1)};
+  document.getElementById('zp').onclick=function(){set(z+.1)};
+  document.getElementById('zv').onclick=function(){set(1)};
+  ap();
+  try{var t=window.Telegram&&Telegram.WebApp;if(t){t.ready();t.expand();if(t.disableVerticalSwipes)t.disableVerticalSwipes()}}catch(e){}
+})();
+</script>
+</body>
+</html>
