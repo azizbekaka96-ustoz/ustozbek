@@ -182,6 +182,43 @@ details>div b{color:var(--fg);font-weight:600}
 .lesson table{border-collapse:collapse;width:100%;font-size:15px}
 .lesson th,.lesson td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
 .lesson th{background:var(--surface);font-weight:600}
+
+.sum{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:20px;max-width:520px}
+.sum b{font:800 20px/1 var(--f-display);justify-self:end}
+.sum .bar{grid-column:1/-1}
+.okm{color:var(--accent);font-weight:600}
+.topics li.lk{opacity:.75}
+.topics .lkt{color:var(--muted);font-weight:500}
+.demo{border:1px dashed var(--mark);background:var(--surface);border-radius:10px;padding:10px 14px;font-size:14px;color:var(--muted);margin:0 0 20px;max-width:520px}
+.form{display:grid;gap:14px;max-width:460px}
+.fld{display:grid;gap:6px}
+.fld label{font:500 13px/1.2 var(--f-mono);color:var(--muted);letter-spacing:.04em}
+.fld input,.fld select{font:500 16px/1.3 var(--f-body);padding:13px 14px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);color:var(--fg);width:100%;min-width:0}
+.fld input.up{text-transform:uppercase;letter-spacing:.12em;font-family:var(--f-mono)}
+.err{color:var(--bad);font-size:14px;min-height:20px;margin:0}
+.cred{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;display:grid;gap:14px;max-width:460px}
+.cred .kv{display:flex;justify-content:space-between;gap:12px;align-items:baseline;flex-wrap:wrap}
+.cred .kv span{font:500 13px/1 var(--f-mono);color:var(--muted);letter-spacing:.06em}
+.cred .kv b{font:600 22px/1.2 var(--f-mono);overflow-wrap:anywhere}
+.me-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 20px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:center;margin-bottom:20px}
+.me-card h2{font-size:clamp(22px,4vw,30px)}
+.me-card p{margin:4px 0 0;color:var(--muted);font-size:14px}
+.ptabs{display:flex;gap:6px;border-bottom:1px solid var(--line);margin:8px 0 22px;overflow-x:auto}
+.ptab{padding:12px 16px;border:0;background:transparent;color:var(--muted);font:600 15px/1 var(--f-body);cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap}
+.ptab[aria-selected="true"]{color:var(--fg);border-bottom-color:var(--ict)}
+.frow{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin-bottom:16px}
+.frow .fld{min-width:110px;flex:1 1 130px}
+.twx{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table.tbl{border-collapse:collapse;width:100%;font-size:14px;min-width:560px}
+.tbl th,.tbl td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl th{font:500 12px/1 var(--f-mono);color:var(--muted);letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
+.tbl tr:last-child td{border-bottom:0}
+.tbl .mono{font-family:var(--f-mono)}
+.chipst{font:400 12px/1 var(--f-mono);padding:4px 7px;border-radius:6px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.chipst.on{color:var(--accent);border-color:var(--accent)}
+.codes-new{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:18px;font:500 15px/1.8 var(--f-mono);display:flex;flex-wrap:wrap;gap:6px 18px}
+.btn.xs{padding:7px 10px;font-size:13px;border-width:1.5px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:14px;z-index:30;max-width:90vw}
 footer{border-top:1px solid var(--line);padding-block:28px 36px;color:var(--muted);font-size:14px;margin-top:24px}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 
@@ -267,6 +304,7 @@ details.key[open] summary{border-bottom:1px solid var(--line);margin-bottom:12px
 .ddots i{width:10px;height:10px;border-radius:50%;background:var(--line);cursor:pointer}.ddots i.on{background:var(--accent);transform:scale(1.25)}
 .dnav button:disabled{opacity:.4;cursor:default}
 @media (max-width:600px){#dfs{display:none}}
+.unl{margin-top:28px;padding:18px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
 </style>
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -280,6 +318,7 @@ details.key[open] summary{border-bottom:1px solid var(--line);margin-bottom:12px
         <li><a class="l" href="#home" data-nav="home">Bosh sahifa</a></li>
         <li><a class="l" href="#ictbek" data-nav="ict">ICTBEK</a></li>
         <li><a class="l" href="#mathbek" data-nav="math">MATHBEK</a></li>
+        <li><a class="l" id="acctlink" href="#kirish" data-nav="acct">Kirish</a></li>
       </ul>
     </nav>
   <div class="zoom" role="group" aria-label="Masshtab"><button type="button" id="zm" aria-label="Kichiklashtirish">−</button><button type="button" class="zv" id="zv" aria-label="Asl o‘lcham">100%</button><button type="button" id="zp" aria-label="Kattalashtirish">+</button></div>
@@ -295,6 +334,8 @@ details.key[open] summary{border-bottom:1px solid var(--line);margin-bottom:12px
   </div>
 </footer>
 
+<script src="firebase-config.js"></script>
+<script src="backend.js"></script>
 <script src="content.js"></script>
 <script src="content-math5.js"></script>
 <script src="content-ict11.js"></script>
@@ -531,7 +572,61 @@ details.key[open] summary{border-bottom:1px solid var(--line);margin-bottom:12px
   function efr(s){return fr(esc(s))}
   var AUD={oquvchi:"O‘quvchi",oqituvchi:"O‘qituvchi"};
 
+  /* ---------- Hisob va ketma-ket ochilish ---------- */
+  var PASS=1; /* 1 = test 100% to'g'ri bo'lishi shart */
+  var me=null,authReady=false,afterLogin=null,registering=false,credHtml=null;
+  function isStu(){return !!(me&&me.role==="student")}
+  function slugT(t){var x=String(t).toLowerCase().replace(/[ʻʼ‘’`'´]/g,"").replace(/[^a-z0-9]+/g,"_").replace(/^_+|_+$/g,"");return x||"t"}
+  function tkey(d,g,i){return d.key+"-"+g+"-"+slugT(d.topics[g][i])}
+  function pr(){return (me&&me.profile&&me.profile.progress)||{}}
+  function passedK(prog,d,g,i){var x=prog[tkey(d,g,i)];return !!(x&&x.passed)}
+  function passed(d,g,i){return passedK(pr(),d,g,i)}
+  function unlocked(d,g,i){
+    if(!isStu())return true;
+    for(var j=0;j<i;j++)if(!passed(d,g,j))return false;
+    return true;
+  }
+  function stateOf(d,g,i){
+    if(!findTopic(d,g,d.topics[g][i]))return "soon";
+    if(passed(d,g,i))return "done";
+    return unlocked(d,g,i)?"open":"locked";
+  }
+  function saveProg(d,g,i,patch){
+    if(!isStu())return;
+    var p=me.profile.progress||(me.profile.progress={}),k=tkey(d,g,i),x=p[k]||(p[k]={});
+    Object.keys(patch).forEach(function(a){x[a]=patch[a]});
+    UB.saveProgress(p,k).catch(function(){toast("Natijani saqlab bo‘lmadi. Internetni tekshiring.")});
+  }
+  function toast(msg){
+    var t=document.getElementById("toast");
+    if(!t){t=document.createElement("div");t.id="toast";t.className="toast";t.setAttribute("role","status");document.body.appendChild(t)}
+    t.textContent=msg;t.hidden=false;clearTimeout(t._h);t._h=setTimeout(function(){t.hidden=true},2600);
+  }
+  function copyText(txt){
+    function fallback(){
+      try{var ta=document.createElement("textarea");ta.value=txt;ta.setAttribute("readonly","");ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();var ok=document.execCommand("copy");document.body.removeChild(ta);toast(ok?"Nusxa olindi":"Nusxa olib bo‘lmadi, qo‘lda belgilang")}catch(e){toast("Nusxa olib bo‘lmadi, qo‘lda belgilang")}
+    }
+    try{navigator.clipboard.writeText(txt).then(function(){toast("Nusxa olindi")},fallback)}catch(e){fallback()}
+  }
+  function go(h){location.hash=h.charAt(0)==="#"?h.slice(1):h}
+  function fmt(ms){if(!ms)return "—";var d=new Date(ms),p=function(n){return (n<10?"0":"")+n};return p(d.getDate())+"."+p(d.getMonth()+1)+"."+d.getFullYear()+" "+p(d.getHours())+":"+p(d.getMinutes())}
+  function demoBanner(){return UB.mode==="demo"?'<p class="demo">Demo rejim: server hali ulanmagan, ma’lumotlar faqat shu qurilmada saqlanadi.</p>':''}
+  function gradeOpts(sel){var h="";for(var g=1;g<=11;g++)h+='<option value="'+g+'"'+(sel==g?' selected':'')+'>'+g+'-sinf</option>';return h}
+  function doneCount(d,g,prog){var n=0;for(var i=0;i<d.topics[g].length;i++)if(passedK(prog,d,g,i))n++;return n}
+  function updateAcct(){
+    var a=document.getElementById("acctlink");if(!a)return;
+    if(!me){a.textContent="Kirish";a.setAttribute("href","#kirish")}
+    else if(me.role==="teacher"){a.textContent="Panel";a.setAttribute("href","#panel")}
+    else{a.textContent="Kabinet";a.setAttribute("href","#kabinet")}
+  }
+
   /* ---------- Pages ---------- */
+  function cta(){
+    if(!me)return '<div class="row"><a class="btn primary" href="#royxat">Ro‘yxatdan o‘tish</a><a class="btn" href="#kirish">Kirish</a></div>';
+    if(me.role==="teacher")return '<div class="row"><a class="btn primary" href="#panel">O‘qituvchi paneli</a></div>';
+    return '<div class="row"><a class="btn primary" href="#kabinet">Mening kabinetim</a></div>';
+  }
+
   function home(){
     app.removeAttribute("data-div");
     function panel(d){return '<div class="panel" data-div="'+d.key+'">'+
@@ -540,7 +635,7 @@ details.key[open] summary{border-bottom:1px solid var(--line);margin-bottom:12px
       '<a class="btn sm" href="#'+d.path+'-oqituvchi">O‘qituvchi bo‘limi</a></div></div>'}
     app.innerHTML='<div class="hero"><p class="eyebrow" style="color:var(--ict)">ustozbek.uz</p>'+
       '<h1>Dars, test va o‘yin <em>bir joyda</em></h1>'+
-      '<p class="lead">Informatika va matematika bo‘yicha 1–11-sinf o‘quvchilari hamda o‘qituvchilari uchun ta’lim platformasi.</p></div>'+
+      '<p class="lead">Informatika va matematika bo‘yicha 1–11-sinf o‘quvchilari hamda o‘qituvchilari uchun ta’lim platformasi.</p>'+cta()+'</div>'+
       '<div class="divs">'+panel(D.ict)+panel(D.math)+'</div>'+
       '<section><div class="head"><h2>Kim nimani topadi</h2></div><div class="two">'+
       '<div class="card" data-div="ict"><span class="path">/oquvchi</span><h3>O‘quvchilar uchun</h3><ul><li>1–11-sinf mavzulari bo‘yicha darslar</li><li>Sinfga mos testlar</li><li>Amaliy topshiriqlar va o‘yinlar</li></ul></div>'+
@@ -728,6 +823,11 @@ details.key[open] summary{border-bottom:1px solid var(--line);margin-bottom:12px
   }
 
   function withGrade(b,st,fn){
+    if(isStu()){
+      var sg=me.profile.grade;stopTimer();
+      b.innerHTML='<p class="lbl">'+sg+'-sinf</p><div id="pnl"></div>';
+      fn($("#pnl",b),sg);return;
+    }
     b.innerHTML='<p class="lbl">Sinfni tanlang</p><div class="chips" id="chips" role="group" aria-label="Sinf"></div><div id="pnl" style="margin-top:28px"></div>';
     var chips=$("#chips",b);
     for(var g=1;g<=11;g++){(function(g){
@@ -746,25 +846,40 @@ details.key[open] summary{border-bottom:1px solid var(--line);margin-bottom:12px
   function findTopic(d,g,name){var a=topicData(d,g);for(var i=0;i<a.length;i++)if(a[i].t===name)return a[i];return null}
 
   function guide(d,g,p){
-    var h='<p class="lbl">'+g+'-sinf · '+d.fan.toLowerCase()+' mavzulari</p><ul class="topics">',ready=0;
+    var n=d.topics[g].length,done=0,h='';
+    for(var i=0;i<n;i++)if(passed(d,g,i))done++;
+    if(isStu())h+='<div class="sum"><span class="lbl" style="margin:0">Bajarildi</span><b>'+done+' / '+n+'</b><div class="bar"><i style="width:'+(n?done/n*100:0)+'%"></i></div></div>';
+    h+='<p class="lbl">'+g+'-sinf · '+d.fan.toLowerCase()+' mavzulari</p><ul class="topics">';
+    var ready=0;
     d.topics[g].forEach(function(t,i){
-      var c=findTopic(d,g,t);
-      if(c){ready++;h+='<li><button type="button" class="tl" data-i="'+i+'">'+t+'</button><span class="tag ok">dars va test</span></li>'}
-      else h+='<li>'+t+'<span class="tag">tez orada</span></li>';
+      var st=stateOf(d,g,i);
+      if(st==="soon")h+='<li>'+t+'<span class="tag">tez orada</span></li>';
+      else if(st==="locked")h+='<li class="lk"><span class="lkt">'+t+'</span><span class="tag">qulflangan: oldingi mavzuni 100% bajaring</span></li>';
+      else{ready++;h+='<li><button type="button" class="tl" data-i="'+i+'">'+t+'</button><span class="tag ok">'+(st==="done"?"bajarildi":(isStu()?"ochiq":"dars va test"))+'</span></li>'}
     });
     p.innerHTML=h+'</ul><p class="note">'+(ready?'Mavzuni bosib, darsni oching.':'Bu sinf uchun darslar tayyorlanmoqda.')+'</p>';
-    $$(".tl",p).forEach(function(b){b.addEventListener("click",function(){lesson(d,g,findTopic(d,g,d.topics[g][+b.dataset.i]),p)})});
+    $$(".tl",p).forEach(function(b){b.addEventListener("click",function(){var i=+b.dataset.i;lesson(d,g,i,findTopic(d,g,d.topics[g][i]),p)})});
   }
 
-  function lesson(d,g,c,p){
+  function lesson(d,g,i,c,p){
+    if(!unlocked(d,g,i)){guide(d,g,p);return}
+    if(isStu()&&!(pr()[tkey(d,g,i)]||{}).read)saveProg(d,g,i,{read:true});
     p.innerHTML='<button class="btn sm" type="button" id="bk">← Mavzular</button>'+
       '<div class="lesson"><p class="lbl">'+g+'-sinf · '+d.fan.toLowerCase()+' darsi</p><h3 class="lt">'+c.t+'</h3>'+fr(c.lesson)+
       '<div class="row" style="margin-top:24px"><button class="btn primary" type="button" id="tt">Mavzu testini boshlash ('+c.quiz.length+' savol)</button></div></div>';
     $("#bk",p).addEventListener("click",function(){guide(d,g,p)});
-    $("#tt",p).addEventListener("click",function(){
-      runQuiz(shuffle(c.quiz),g+'-sinf · '+c.t,p,function(){lesson(d,g,c,p)},function(){lesson(d,g,c,p)},"Darsga qaytish");
-    });
+    $("#tt",p).addEventListener("click",function(){topicTest(d,g,i,c,p,function(){guide(d,g,p)})});
     window.scrollTo(0,0);
+  }
+
+  function topicTest(d,g,i,c,p,back){
+    runQuiz(shuffle(c.quiz),g+'-sinf · '+c.t,p,back,"Mavzular ro‘yxati",function(score,total){
+      if(!isStu())return "";
+      var prev=pr()[tkey(d,g,i)]||{},ok=score>=total*PASS;
+      saveProg(d,g,i,{read:true,best:Math.max(prev.best||0,score),total:total,tries:(prev.tries||0)+1,passed:!!(prev.passed||ok)});
+      if(ok){var nxt=i+1<d.topics[g].length&&findTopic(d,g,d.topics[g][i+1]);return '<p class="sub okm">Mavzu 100% bajarildi.'+(nxt?' Keyingi mavzu ochildi.':'')+'</p>'}
+      return '<p class="sub">Keyingi mavzuga o‘tish uchun barcha savollarga to‘g‘ri javob bering. Darsni qayta o‘qib, yana urinib ko‘ring.</p>';
+    });
   }
 
   function accordion(sec,b){
@@ -779,14 +894,15 @@ details.key[open] summary{border-bottom:1px solid var(--line);margin-bottom:12px
     b.innerHTML=h+'</div>';
   }
 
-  function runQuiz(qs,label,p,onAgain,onBack,backText){
+  function runQuiz(qs,label,p,onBack,backText,onFinish){
     var i=0,score=0,done=false;
     function render(){
       if(i>=qs.length){
+        var extra=onFinish?onFinish(score,qs.length):"";
         p.innerHTML='<div class="q"><p class="lbl">Natija · '+esc(label)+'</p><div class="big-score">'+score+' / '+qs.length+'</div>'+
-          '<p class="sub" style="margin-bottom:16px">'+(score===qs.length?"Ajoyib natija!":score>=qs.length/2?"Yaxshi, yana mashq qiling.":"Mavzuni takrorlab, qayta urinib ko‘ring.")+'</p>'+
-          '<div class="row"><button class="btn primary sm" id="again" type="button">Qayta boshlash</button><button class="btn sm" id="back" type="button">'+(backText||"Orqaga")+'</button></div></div>';
-        $("#again",p).addEventListener("click",function(){runQuiz(shuffle(qs),label,p,onAgain,onBack,backText)});
+          '<p class="sub" style="margin-bottom:12px">'+(score===qs.length?"Ajoyib natija!":score>=qs.length/2?"Yaxshi, yana mashq qiling.":"Mavzuni takrorlab, qayta urinib ko‘ring.")+'</p>'+extra+
+          '<div class="row" style="margin-top:12px"><button class="btn primary sm" id="again" type="button">Qayta boshlash</button><button class="btn sm" id="back" type="button">'+(backText||"Orqaga")+'</button></div></div>';
+        $("#again",p).addEventListener("click",function(){runQuiz(shuffle(qs),label,p,onBack,backText,onFinish)});
         $("#back",p).addEventListener("click",onBack);return;
       }
       var c=qs[i];done=false;
@@ -806,21 +922,24 @@ details.key[open] summary{border-bottom:1px solid var(--line);margin-bottom:12px
   }
 
   function quiz(d,g,p){
-    var tp=topicData(d,g);
     var pool=d.quiz.filter(function(q){return g>=q.g[0]&&g<=q.g[1]});
     if(pool.length<3)pool=d.quiz.filter(function(q){return Math.abs(g-(q.g[0]+q.g[1])/2)<=3});
-    tp.forEach(function(c){pool=pool.concat(c.quiz)});
+    d.topics[g].forEach(function(t,i){var c=findTopic(d,g,t);if(c&&(!isStu()||passed(d,g,i)))pool=pool.concat(c.quiz)});
     function menu(){
       var h='<p class="lbl">'+g+'-sinf · test turini tanlang</p><ul class="topics">'+
-        '<li><button type="button" class="tl" id="mix">Aralash test</button><span class="tag">10 savol</span></li>';
-      tp.forEach(function(c,i){h+='<li><button type="button" class="tl" data-i="'+i+'">'+c.t+'</button><span class="tag ok">'+c.quiz.length+' savol</span></li>'});
-      p.innerHTML=h+'</ul>'+(tp.length?'':'<p class="note">Mavzu testlari tayyorlanmoqda. Hozircha aralash test mavjud.</p>');
+        '<li><button type="button" class="tl" id="mix">Aralash test</button><span class="tag">'+Math.min(10,pool.length)+' savol</span></li>';
+      d.topics[g].forEach(function(t,i){
+        var st=stateOf(d,g,i),c=findTopic(d,g,t);
+        if(st==="soon")h+='<li>'+t+'<span class="tag">tez orada</span></li>';
+        else if(st==="locked")h+='<li class="lk"><span class="lkt">'+t+'</span><span class="tag">qulflangan: oldingi mavzuni 100% bajaring</span></li>';
+        else h+='<li><button type="button" class="tl" data-i="'+i+'">'+t+'</button><span class="tag ok">'+(st==="done"?"bajarildi · ":"")+c.quiz.length+' savol</span></li>';
+      });
+      p.innerHTML=h+'</ul>'+(isStu()?'<p class="note">Aralash testga faqat bajarilgan mavzular savollari qo‘shiladi.</p>':'');
       $("#mix",p).addEventListener("click",function(){
-        runQuiz(shuffle(pool).slice(0,10),g+'-sinf · aralash test',p,menu,menu,"Testlar ro‘yxati");
+        runQuiz(shuffle(pool).slice(0,10),g+'-sinf · aralash test',p,menu,"Testlar ro‘yxati");
       });
       $$("[data-i]",p).forEach(function(b){b.addEventListener("click",function(){
-        var c=tp[+b.dataset.i];
-        runQuiz(shuffle(c.quiz),g+'-sinf · '+c.t,p,menu,menu,"Testlar ro‘yxati");
+        var i=+b.dataset.i;topicTest(d,g,i,findTopic(d,g,d.topics[g][i]),p,menu);
       })});
     }
     menu();
@@ -950,12 +1069,215 @@ details.key[open] summary{border-bottom:1px solid var(--line);margin-bottom:12px
     prog();
   }
 
+  /* ---------- Hisob sahifalari ---------- */
+  function loginPage(){
+    if(me){go(me.role==="teacher"?"#panel":"#kabinet");return}
+    app.removeAttribute("data-div");
+    app.innerHTML='<div class="page"><p class="eyebrow" style="color:var(--ict)">Kirish</p><h2 style="margin-bottom:20px">Hisobingizga kiring</h2>'+demoBanner()+
+      '<form class="form" id="lf" novalidate>'+
+      '<div class="fld"><label for="lg">LOGIN</label><input id="lg" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false"></div>'+
+      '<div class="fld"><label for="pw">PAROL</label><input id="pw" type="password" autocomplete="current-password" autocapitalize="none"></div>'+
+      '<p class="err" id="er" role="alert"></p><button class="btn primary" type="submit" id="sb">Kirish</button></form>'+
+      '<p class="sub" style="margin-top:20px">Hisobingiz yo‘qmi? <a href="#royxat"><b>Ro‘yxatdan o‘ting</b></a>.<br>O‘qituvchimisiz? <a href="#panel"><b>Panelga kiring</b></a>.</p></div>';
+    $("#lf").addEventListener("submit",function(ev){
+      ev.preventDefault();var er=$("#er"),sb=$("#sb");er.textContent="";sb.disabled=true;sb.textContent="Tekshirilmoqda…";
+      UB.login($("#lg").value,$("#pw").value).then(function(){var t=afterLogin||"#kabinet";afterLogin=null;go(t)})
+        .catch(function(e){er.textContent=e.message||"Kirib bo‘lmadi";sb.disabled=false;sb.textContent="Kirish"});
+    });
+  }
+
+  function registerPage(){
+    if(registering)return;
+    app.removeAttribute("data-div");
+    if(credHtml){showCreds();return}
+    if(me){go(me.role==="teacher"?"#panel":"#kabinet");return}
+    app.innerHTML='<div class="page"><p class="eyebrow" style="color:var(--ict)">Ro‘yxatdan o‘tish</p><h2 style="margin-bottom:8px">Yangi o‘quvchi</h2>'+
+      '<p class="sub" style="margin-bottom:20px">Tasdiqlash kodini o‘qituvchingizdan oling. Login va parol ro‘yxatdan o‘tgach avtomatik beriladi.</p>'+demoBanner()+
+      '<form class="form" id="rf" novalidate>'+
+      '<div class="fld"><label for="ism">ISM</label><input id="ism" autocomplete="given-name" maxlength="60"></div>'+
+      '<div class="fld"><label for="fam">FAMILIYA</label><input id="fam" autocomplete="family-name" maxlength="60"></div>'+
+      '<div class="fld"><label for="mk">MAKTAB</label><input id="mk" placeholder="Masalan, 25-maktab, Toshkent" maxlength="100"></div>'+
+      '<div class="fld"><label for="sn">SINF</label><select id="sn"><option value="">Sinfni tanlang</option>'+gradeOpts(0)+'</select></div>'+
+      '<div class="fld"><label for="kd">TASDIQLASH KODI</label><input id="kd" class="up" autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false" maxlength="12"></div>'+
+      '<p class="err" id="er" role="alert"></p><button class="btn primary" type="submit" id="sb">Ro‘yxatdan o‘tish</button></form>'+
+      '<p class="sub" style="margin-top:20px">Hisobingiz bormi? <a href="#kirish"><b>Kirish</b></a></p></div>';
+    $("#rf").addEventListener("submit",function(ev){
+      ev.preventDefault();var er=$("#er"),sb=$("#sb");er.textContent="";sb.disabled=true;sb.textContent="Tekshirilmoqda…";
+      registering=true;
+      UB.register({ism:$("#ism").value,familiya:$("#fam").value,maktab:$("#mk").value,sinf:$("#sn").value,code:$("#kd").value})
+        .then(function(r){registering=false;credHtml={login:r.login,password:r.password};showCreds()})
+        .catch(function(e){registering=false;er.textContent=e.message||"Ro‘yxatdan o‘tib bo‘lmadi";sb.disabled=false;sb.textContent="Ro‘yxatdan o‘tish"});
+    });
+  }
+  function showCreds(){
+    var c=credHtml;
+    app.innerHTML='<div class="page"><p class="eyebrow" style="color:var(--ict)">Ro‘yxatdan o‘tdingiz</p><h2 style="margin-bottom:20px">Hisobingiz tayyor</h2>'+
+      '<div class="cred"><div class="kv"><span>LOGIN</span><b>'+esc(c.login)+'</b></div><div class="kv"><span>PAROL</span><b>'+esc(c.password)+'</b></div>'+
+      '<p class="sub" style="margin:0">Login va parolni hozir saqlab oling: nusxa oling yoki ekranni rasmga tushiring. Parolni keyinroq ko‘rib bo‘lmaydi.</p>'+
+      '<div class="row"><button class="btn sm" type="button" id="cc">Nusxa olish</button><button class="btn primary sm" type="button" id="gk">Kabinetga o‘tish</button></div></div></div>';
+    $("#cc").addEventListener("click",function(){copyText("Ustozbek\nLogin: "+c.login+"\nParol: "+c.password)});
+    $("#gk").addEventListener("click",function(){credHtml=null;go("#kabinet")});
+  }
+
+  function cabinet(){
+    if(!me){afterLogin="kabinet";go("#kirish");return}
+    if(me.role==="teacher"){go("#panel");return}
+    app.removeAttribute("data-div");
+    var pf=me.profile,g=pf.grade;
+    function card(d){
+      var n=d.topics[g].length,done=doneCount(d,g,pr()),ready=topicData(d,g).length;
+      return '<div class="panel" data-div="'+d.key+'"><span class="big">'+d.name+'</span>'+
+        '<p>'+g+'-sinf · '+done+' / '+n+' mavzu bajarildi'+(ready?'':' (darslar tayyorlanmoqda)')+'</p>'+
+        '<div class="bar"><i style="width:'+(n?done/n*100:0)+'%"></i></div>'+
+        '<div class="row"><a class="btn primary sm" href="#'+d.path+'-oquvchi-darslar">Darslarni davom ettirish</a><a class="btn sm" href="#'+d.path+'-oquvchi">Barcha bo‘limlar</a></div></div>';
+    }
+    app.innerHTML='<div class="page"><div class="me-card"><div><h2>'+esc(pf.ism)+' '+esc(pf.familiya)+'</h2><p>'+esc(pf.maktab)+' · '+g+'-sinf · login: <b>'+esc(pf.login)+'</b></p></div><button class="btn sm" type="button" id="lo">Chiqish</button></div>'+
+      '<div class="divs">'+card(D.ict)+card(D.math)+'</div>'+
+      '<p class="note">Keyingi mavzu oldingi mavzuning dars va testi 100% bajarilgach ochiladi.</p></div>';
+    $("#lo").addEventListener("click",function(){UB.logout().then(function(){go("#home")})});
+  }
+
+  var PS={tab:"codes",cg:"all",cs:"all",sg:"all",sq:""};
+  function panel(){
+    app.removeAttribute("data-div");
+    if(me&&me.role==="student"){go("#kabinet");return}
+    if(!me){
+      app.innerHTML='<div class="page"><p class="eyebrow" style="color:var(--ict)">O‘qituvchi</p><h2 style="margin-bottom:12px">O‘qituvchi paneli</h2>'+demoBanner()+
+        '<p class="sub" style="margin-bottom:20px">Kodlar yaratish va o‘quvchilar natijalarini ko‘rish uchun '+(UB.mode==="demo"?'demo rejimda kiring.':'Google hisobingiz bilan kiring.')+'</p>'+
+        '<button class="btn primary" type="button" id="tl">'+(UB.mode==="demo"?"Demo kirish":"Google bilan kirish")+'</button><p class="err" id="er" role="alert" style="margin-top:12px"></p>'+
+        '<p class="note">Telegram ichidagi oynada Google orqali kirish ishlamasligi mumkin. Brauzerda oching.</p></div>';
+      $("#tl").addEventListener("click",function(){
+        var er=$("#er");er.textContent="";
+        UB.teacherLogin().catch(function(e){er.textContent=e.message||"Kirib bo‘lmadi"});
+      });
+      return;
+    }
+    app.innerHTML='<div class="page"><div class="me-card"><div><h2>O‘qituvchi paneli</h2><p>'+esc(me.name||"")+'</p></div><button class="btn sm" type="button" id="lo">Chiqish</button></div>'+demoBanner()+
+      '<div class="ptabs" role="tablist"><button class="ptab" role="tab" data-t="codes">Kodlar</button><button class="ptab" role="tab" data-t="students">O‘quvchilar</button></div><div id="pb"></div></div>';
+    $("#lo").addEventListener("click",function(){UB.logout().then(function(){go("#home")})});
+    $$(".ptab").forEach(function(b){b.addEventListener("click",function(){PS.tab=b.dataset.t;drawTab()})});
+    function drawTab(){
+      $$(".ptab").forEach(function(b){b.setAttribute("aria-selected",String(b.dataset.t===PS.tab))});
+      if(PS.tab==="codes")codesTab($("#pb"));else studentsTab($("#pb"));
+    }
+    drawTab();
+  }
+
+  function codesTab(b){
+    b.innerHTML='<div class="frow"><div class="fld"><label for="cg">SINF</label><select id="cg">'+gradeOpts(5)+'</select></div>'+
+      '<div class="fld"><label for="cn">SONI</label><input id="cn" type="number" min="1" max="50" value="10" inputmode="numeric"></div>'+
+      '<div class="fld"><label for="cm">IZOH (IXTIYORIY)</label><input id="cm" maxlength="80" placeholder="Masalan, 5-A sinf"></div>'+
+      '<button class="btn primary sm" type="button" id="mk">Kodlar yaratish</button></div>'+
+      '<p class="err" id="er" role="alert"></p><div id="newc"></div>'+
+      '<div class="frow"><div class="fld"><label for="fg">SINF BO‘YICHA</label><select id="fg"><option value="all">Hammasi</option>'+gradeOpts(0)+'</select></div>'+
+      '<div class="fld"><label for="fs">HOLATI</label><select id="fs"><option value="all">Hammasi</option><option value="free">Bo‘sh</option><option value="used">Ishlatilgan</option></select></div>'+
+      '<button class="btn sm" type="button" id="cf">Bo‘shlarini nusxalash</button></div><div id="cl"><p class="sub">Yuklanmoqda…</p></div>';
+    $("#fg").value=PS.cg;$("#fs").value=PS.cs;
+    var codes=[],names={};
+    function load(){
+      Promise.all([UB.listCodes(),UB.listStudents().catch(function(){return []})]).then(function(r){
+        codes=r[0];names={};r[1].forEach(function(x){names[x.uid]=x.ism+" "+x.familiya});draw();
+      }).catch(function(){$("#cl").innerHTML='<p class="err">Kodlarni yuklab bo‘lmadi.</p>'});
+    }
+    function filtered(){return codes.filter(function(c){return (PS.cg==="all"||+PS.cg===+c.grade)&&(PS.cs==="all"||(PS.cs==="free"?!c.used:c.used))})}
+    function draw(){
+      var l=filtered();
+      if(!l.length){$("#cl").innerHTML='<p class="sub">Kod topilmadi. Yuqorida yangi kodlar yarating.</p>';return}
+      var h='<div class="twx"><table class="tbl"><tr><th>Kod</th><th>Sinf</th><th>Holati</th><th>Izoh</th><th></th></tr>';
+      l.forEach(function(c){
+        h+='<tr><td class="mono"><b>'+esc(c.code)+'</b></td><td>'+c.grade+'</td><td>'+(c.used?'<span class="chipst on">'+esc(names[c.usedBy]||"ishlatilgan")+'</span>':'<span class="chipst">bo‘sh</span>')+'</td><td>'+esc(c.note)+'</td><td>'+(c.used?'':'<button class="btn xs" type="button" data-del="'+esc(c.code)+'">O‘chirish</button>')+'</td></tr>';
+      });
+      $("#cl").innerHTML=h+'</table></div>';
+      $$("[data-del]",b).forEach(function(x){x.addEventListener("click",function(){
+        UB.deleteCode(x.dataset.del).then(function(){codes=codes.filter(function(c){return c.code!==x.dataset.del});draw()}).catch(function(){toast("O‘chirib bo‘lmadi")});
+      })});
+    }
+    $("#fg").addEventListener("change",function(){PS.cg=this.value;draw()});
+    $("#fs").addEventListener("change",function(){PS.cs=this.value;draw()});
+    $("#cf").addEventListener("click",function(){
+      var l=filtered().filter(function(c){return !c.used});
+      if(!l.length){toast("Bo‘sh kod yo‘q");return}
+      copyText(l.map(function(c){return c.code+" ("+c.grade+"-sinf"+(c.note?", "+c.note:"")+")"}).join("\n"));
+    });
+    $("#mk").addEventListener("click",function(){
+      var er=$("#er"),btn=this;er.textContent="";btn.disabled=true;
+      UB.createCodes($("#cg").value,$("#cn").value,$("#cm").value).then(function(list){
+        btn.disabled=false;
+        $("#newc").innerHTML='<p class="lbl">Yangi kodlar · '+$("#cg").value+'-sinf</p><div class="codes-new">'+list.map(function(c){return '<span>'+esc(c)+'</span>'}).join("")+'</div><button class="btn sm" type="button" id="cp" style="margin-bottom:20px">Hammasini nusxalash</button>';
+        $("#cp").addEventListener("click",function(){copyText(list.join("\n"))});
+        load();
+      }).catch(function(e){btn.disabled=false;er.textContent=e.message||"Kodlarni yaratib bo‘lmadi"});
+    });
+    load();
+  }
+
+  function studentsTab(b){
+    b.innerHTML='<div class="frow"><div class="fld"><label for="sg">SINF</label><select id="sg"><option value="all">Hammasi</option>'+gradeOpts(0)+'</select></div>'+
+      '<div class="fld"><label for="sq">QIDIRISH</label><input id="sq" placeholder="Ism, familiya yoki maktab"></div>'+
+      '<button class="btn sm" type="button" id="cx">Jadvalni nusxalash</button></div><div id="sl"><p class="sub">Yuklanmoqda…</p></div>';
+    $("#sg").value=PS.sg;$("#sq").value=PS.sq;
+    var list=[];
+    function rows(){
+      var q=PS.sq.trim().toLowerCase();
+      return list.filter(function(x){return (PS.sg==="all"||+PS.sg===+x.grade)&&(!q||(x.ism+" "+x.familiya+" "+x.maktab).toLowerCase().indexOf(q)>=0)})
+        .sort(function(a,b2){return a.grade-b2.grade||String(a.familiya).localeCompare(String(b2.familiya))});
+    }
+    function pText(d,x){return doneCount(d,x.grade,x.progress)+" / "+d.topics[x.grade].length}
+    function draw(){
+      var l=rows();
+      if(!l.length){$("#sl").innerHTML='<p class="sub">'+(list.length?"Mos o‘quvchi topilmadi.":"Hali o‘quvchilar ro‘yxatdan o‘tmagan.")+'</p>';return}
+      var h='<p class="lbl">'+l.length+' ta o‘quvchi</p><div class="twx"><table class="tbl"><tr><th>O‘quvchi</th><th>Maktab</th><th>Sinf</th><th>Login</th><th>ICTBEK</th><th>MATHBEK</th><th>Oxirgi faollik</th></tr>';
+      l.forEach(function(x){
+        h+='<tr><td>'+esc(x.ism)+' '+esc(x.familiya)+'</td><td>'+esc(x.maktab)+'</td><td>'+x.grade+'</td><td class="mono">'+esc(x.login)+'</td><td>'+pText(D.ict,x)+'</td><td>'+pText(D.math,x)+'</td><td>'+fmt(x.lastSeen)+'</td></tr>';
+      });
+      $("#sl").innerHTML=h+'</table></div>';unlockUI();
+    }
+    function unlockUI(){
+      var l=rows();
+      var h='<div class="unl"><p class="lbl">Mavzuni ochib berish</p><p class="sub" style="margin-bottom:10px">Savolda xato topilsa yoki o‘quvchi qotib qolsa, mavzuni "bajarildi" deb belgilang. Keyingi mavzu ochiladi.</p><div class="frow"><div class="fld"><label for="us">O‘QUVCHI</label><select id="us">'+
+        l.map(function(x,i){return'<option value="'+i+'">'+esc(x.ism+" "+x.familiya)+' ('+x.grade+'-sinf)</option>'}).join("")+'</select></div>'+
+        '<div class="fld"><label for="ud">FAN</label><select id="ud"><option value="ict">ICTBEK</option><option value="math">MATHBEK</option></select></div>'+
+        '<div class="fld"><label for="ut">MAVZU</label><select id="ut"></select></div><button class="btn primary sm" type="button" id="uk">Ochib berish</button></div><p class="sub" id="um"></p></div>';
+      $("#sl").insertAdjacentHTML("beforeend",h);
+      function fill(){
+        var x=l[+$("#us").value],d=D[$("#ud").value],o="";
+        if(x)d.topics[x.grade].forEach(function(t,i){if(findTopic(d,x.grade,t))o+='<option value="'+i+'">'+esc(t)+(passedK(x.progress||{},d,x.grade,i)?" ✓":"")+'</option>'});
+        $("#ut").innerHTML=o||'<option value="">Bu sinfda mavzu yo‘q</option>';
+      }
+      $("#us").addEventListener("change",fill);$("#ud").addEventListener("change",fill);fill();
+      $("#uk").addEventListener("click",function(){
+        var x=l[+$("#us").value],d=D[$("#ud").value],i=$("#ut").value;
+        if(!x||i==="")return;var key=tkey(d,x.grade,+i);
+        UB.unlockTopic(x.uid,key).then(function(){
+          (x.progress||(x.progress={}))[key]={read:true,passed:true,byTeacher:true};
+          $("#um").textContent=x.ism+" "+x.familiya+": mavzu ochildi.";fill();
+        }).catch(function(){$("#um").textContent="Ochib bo‘lmadi. Internet yoki ruxsatni (Firestore qoidalarini) tekshiring."});
+      });
+    }
+    $("#sg").addEventListener("change",function(){PS.sg=this.value;draw()});
+    $("#sq").addEventListener("input",function(){PS.sq=this.value;draw()});
+    $("#cx").addEventListener("click",function(){
+      var l=rows();if(!l.length){toast("Nusxalash uchun ma’lumot yo‘q");return}
+      copyText(["Ism\tFamiliya\tMaktab\tSinf\tLogin\tICTBEK\tMATHBEK"].concat(l.map(function(x){return [x.ism,x.familiya,x.maktab,x.grade,x.login,pText(D.ict,x),pText(D.math,x)].join("\t")})).join("\n"));
+    });
+    UB.listStudents().then(function(r){list=r;draw()}).catch(function(){$("#sl").innerHTML='<p class="err">O‘quvchilarni yuklab bo‘lmadi.</p>'});
+  }
+
   /* ---------- Router ---------- */
   function route(){
     stopTimer();
     var h=(location.hash||"#home").slice(1),
         m=h.match(/^(ict|math)bek(?:-(oquvchi|oqituvchi)(?:-([a-z]+))?)?$/),cur="home";
-    if(m){
+    var isAuthPage=/^(kirish|royxat|kabinet|panel)$/.test(h);
+    if(h!=="royxat")credHtml=null;
+    if(((m&&m[2]==="oquvchi")||isAuthPage)&&!authReady){
+      app.removeAttribute("data-div");app.innerHTML='<div class="page"><p class="sub">Yuklanmoqda…</p></div>';return;
+    }
+    if(m&&m[2]==="oquvchi"&&!me){afterLogin=h;go("#kirish");return}
+    if(isAuthPage){
+      cur="acct";
+      if(h==="kirish")loginPage();else if(h==="royxat")registerPage();else if(h==="kabinet")cabinet();else panel();
+    }else if(m){
       var d=D[m[1]];cur=m[1];
       if(!m[2])division(d);
       else if(!m[3])hub(d,m[2]);
@@ -970,6 +1292,7 @@ details.key[open] summary{border-bottom:1px solid var(--line);margin-bottom:12px
     window.scrollTo(0,0);
   }
   window.addEventListener("hashchange",route);
+  UB.onAuth(function(u){me=u;authReady=true;updateAcct();route()});
   route();
 })();
 </script>
